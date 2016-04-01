@@ -1,0 +1,6 @@
+$module: 'listing';
+
+.#{$module} {
+	@include full-screen();
+	overflow: scroll;
+}
