@@ -296,7 +296,7 @@
   position: absolute;
   bottom: 15px;
   width: 100%;
-  z-index: 99;
+  z-index: 75;
 }
 
 .unslider-nav ol {
