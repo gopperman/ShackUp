@@ -1,17 +1,16 @@
-$module: 'menu';
+$module: 'list';
 
 .#{$module} {
-	background: $white;
+	background: $gray-light;
 	bottom: 0;
-	left: -100%;
+	right: -100%;
 	position: absolute;
 	top: $nav-offset;
 	transition: all, .2s;
-	width: 80%;
-
-	z-index: $space;
+	width: 100%;
+	z-index: $high;
 
 	&-open {
-		left: 0;
+		right: 0;
 	}
 }

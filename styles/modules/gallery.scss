@@ -2,8 +2,8 @@ $module: 'listing__gallery';
 
 .#{$module} {
 	position: relative;
-	width: 100%;
-	height: 450px;
+	height: auto;
+	max-height: 450px;
 	overflow: hidden;
 
 	img {
@@ -14,6 +14,14 @@ $module: 'listing__gallery';
 		list-style-type: none;
 		margin: 0;
 		padding: 0;
+	}
+
+	&.stopped {
+		width: 500%;
+		li {
+			float: left;
+			width: 20%;
+		}
 	}
 }
 

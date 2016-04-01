@@ -6,7 +6,7 @@ $module: 'saved';
 	right: -100%;
 	position: absolute;
 	top: $nav-offset;
-	padding: 15px;
+  padding: 15px 15px 40px;
 	transition: all, .2s;
 	width: 100%;
 	z-index: $high;
@@ -18,7 +18,8 @@ $module: 'saved';
 	
 	&__list {
 		margin: 0;
-		padding: 0;
+    height: 100%;
+    padding: 0;
 	}
 
 	&__item {
@@ -56,7 +57,8 @@ $module: 'saved';
 	}
 
 	&__filters {
-		position: absolute;
+		display: none;
+		position: fixed;
 		bottom: 0;
 		left: 0;
 		right: 0;
@@ -78,6 +80,12 @@ $module: 'saved';
 	}
 }
 
+/**
+ *	---------------------
+ *	Tablet styles
+ *	---------------------
+ */
+
 @media ( min-width: 768px ) {
 	.#{$module} {
 
@@ -85,6 +93,4 @@ $module: 'saved';
 			width: 25%;
 		}
 	}
-
 }
-

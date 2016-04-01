@@ -17,7 +17,7 @@ $high: 75;
 $space: 99;
 
 /** Spacing **/
-$nav-offset: 56px;
+$nav-offset: 55px;
 
 /** Mixins **/
 @import 'modules/mixins';
@@ -27,9 +27,6 @@ $nav-offset: 56px;
 
 /** Navigation **/
 @import 'modules/nav';
-
-/** Home Screen **/
-@import 'modules/house';
 
 /** Listing **/
 @import 'modules/listing';
@@ -58,9 +55,17 @@ body {
 	height: 100%;
 	height: 100vh;
 	max-width: 768px;
-	overflow: scroll;
+	overflow-x: hidden;
+	overflow-y: scroll;
 	position:relative;
 	width: 100%;
+
+	&.panel-open {
+		overflow: hidden;
+		.saved__filters {
+			display: block;
+		}
+	}
 }
 .overlay {
 	@include full-screen();

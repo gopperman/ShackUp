@@ -9,7 +9,7 @@
   bottom: 0;
   left: -100%;
   position: absolute;
-  top: 0;
+  top: 55px;
   transition: all, .2s;
   width: 80%;
   z-index: 99;
@@ -26,18 +26,20 @@
   left: 0;
   list-style-type: none;
   margin: 0;
-  padding: 10px 20px;
+  padding: 0px 20px;
   position: absolute;
   text-align: center;
   top: 0;
   right: 0;
-  border-bottom: 1px solid #221F1F;
 }
 .nav li {
   display: inline-block;
-}
-.nav-button {
   padding: 10px 15px;
+}
+.nav li.active {
+  padding-bottom: 6px;
+  border-bottom: 4px solid #CF6428;
+  transition: all, 0.1s;
 }
 .nav-button:hover {
   cursor: hand;
@@ -54,41 +56,33 @@
   top: 0;
 }
 
-/** Home Screen **/
-/**
- * Styles for home screen
- */
-.house__container {
-  top: 60px;
+/** Listing **/
+.listing {
+  top: 65px;
   position: relative;
   width: 95%;
   margin: 0 auto;
-  bottom: 0;
-  height: 100%;
-  left: 0;
-  position: absolute;
-  top: 56px;
-  right: 0;
   bottom: initial;
   height: auto;
-  border-radius: 3px;
-  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  border: 2px solid #e5e5e5;
+  overflow: hidden;
 }
-.house__details-wrap {
+.listing__details-wrap {
   position: relative;
 }
-.house__details {
+.listing__details {
   width: calc( 100% - 80px );
   padding: 15px;
 }
-.house__sale-status {
+.listing__sale-status {
   display: none;
   text-transform: uppercase;
   font-size: 11px;
   margin: 0;
   color: #CF6428;
 }
-.house__price {
+.listing__price {
   margin: 0;
   padding: 0 0 5px 0;
   font-size: 30px;
@@ -97,33 +91,25 @@
   letter-spacing: 1px;
   border-bottom: 1px solid #e5e5e5;
 }
-.house__location {
+.listing__location {
   margin: 0;
   padding-bottom: 2px;
   font-size: 12px;
   color: #A0A09F;
   text-transform: uppercase;
 }
-.house__location--short {
+.listing__location--short {
   margin-top: 5px;
 }
-.house__location--full {
+.listing__location--full {
   display: none;
 }
-.house__image {
-  width: 100%;
-  cursor: pointer;
-}
-.house__image--wrap {
-  width: 100%;
-  line-height: 0;
-}
-.house__buttons-container {
+.listing__buttons-container {
   position: absolute;
-  top: -35px;
+  bottom: 8px;
   right: 10px;
 }
-.house__like-button {
+.listing__like-button {
   width: 70px;
   height: 70px;
   padding: 9px;
@@ -134,11 +120,11 @@
   font-size: 45px !important;
   border: 3px solid white;
 }
-.house__like-button i {
+.listing__like-button i {
   top: -6px;
   color: white;
 }
-.house__pass-button {
+.listing__pass-button {
   width: 50px;
   height: 50px;
   margin-left: 10px;
@@ -148,15 +134,15 @@
   background-color: #A0A09F;
   font-size: 35px !important;
 }
-.house__pass-button i {
+.listing__pass-button i {
   top: -10px;
   left: 1px;
   color: white;
 }
-.house__button-icon {
+.listing__button-icon {
   position: relative;
 }
-.house__description, .house__details-bar {
+.listing__description, .listing__details-bar {
   display: none;
 }
 
@@ -165,67 +151,63 @@
  *	DETAILED VIEW STYLES
  *	---------------------
  */
-.house__container--detailed .house__sale-status {
+.listing--detailed {
+  overflow: scroll;
+  border: 0;
+  margin: 0;
+  top: 55px;
+  width: 100%;
+}
+.listing--detailed .listing__sale-status {
   display: block;
 }
-.house__container--detailed .house__location--full {
+.listing--detailed .listing__location--full {
   display: block;
 }
-.house__container--detailed .house__location--short {
+.listing--detailed .listing__location--short {
   display: none;
 }
-.house__container--detailed .house__details {
+.listing--detailed .listing__details {
   width: 100%;
   padding: 15px 0;
   margin-bottom: 10px;
   border-bottom: 1px solid #e5e5e5;
 }
-.house__container--detailed .house__details-wrap {
+.listing--detailed .listing__details-wrap {
   padding: 0 15px;
 }
-.house__container--detailed .house__price {
+.listing--detailed .listing__price {
   border-bottom: none;
 }
-.house__container--detailed .house__description {
+.listing--detailed .listing__description {
   display: block;
   font-size: 12px;
 }
-.house__container--detailed .house__details-bar {
+.listing--detailed .listing__details-bar {
   display: block;
   overflow: auto;
   margin-bottom: 5px;
   padding: 0 0 10px 0;
   border-bottom: 1px solid #e5e5e5;
 }
-.house__container--detailed .house__details-bar-items {
+.listing--detailed .listing__details-bar-items {
   margin: 0;
   padding: 0;
   list-style-type: none;
 }
-.house__container--detailed .house__details-bar-items li {
+.listing--detailed .listing__details-bar-items li {
   width: 33%;
   float: left;
   font-size: 12px;
 }
-.house__container--detailed .house__details-bar-items li i {
+.listing--detailed .listing__details-bar-items li i {
   color: #CF6428;
-}
-
-/** Listing **/
-.listing {
-  bottom: 0;
-  height: 100%;
-  left: 0;
-  position: absolute;
-  top: 56px;
-  right: 0;
-  overflow: scroll;
 }
 
 .listing__gallery {
   position: relative;
-  width: 100%;
-  height: 450px;
+  height: auto;
+  max-height: 450px;
   overflow: hidden;
 }
 .listing__gallery img {
@@ -236,6 +218,13 @@
   list-style-type: none;
   margin: 0;
   padding: 0;
+}
+.listing__gallery.stopped {
+  width: 500%;
+}
+.listing__gallery.stopped li {
+  float: left;
+  width: 20%;
 }
 
 /** Unslider default CSS **/
@@ -334,8 +323,8 @@
   bottom: 0;
   right: -100%;
   position: absolute;
-  top: 56px;
-  padding: 15px;
+  top: 55px;
+  padding: 15px 15px 40px;
   transition: all, .2s;
   width: 100%;
   z-index: 75;
@@ -346,6 +335,7 @@
 }
 .saved__list {
   margin: 0;
+  height: 100%;
   padding: 0;
 }
 .saved__item {
@@ -378,7 +368,8 @@
   margin: 0 auto 5px;
 }
 .saved__filters {
-  position: absolute;
+  display: none;
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
@@ -397,6 +388,11 @@
   color: white;
 }
 
+/**
+ *	---------------------
+ *	Tablet styles
+ *	---------------------
+ */
 @media (min-width: 768px) {
   .saved__item {
     width: 25%;
@@ -422,9 +418,16 @@ body {
   height: 100%;
   height: 100vh;
   max-width: 768px;
-  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
   position: relative;
   width: 100%;
+}
+.container.panel-open {
+  overflow: hidden;
+}
+.container.panel-open .saved__filters {
+  display: block;
 }
 
 .overlay {
@@ -432,7 +435,7 @@ body {
   height: 100%;
   left: 0;
   position: absolute;
-  top: 56px;
+  top: 55px;
   right: 0;
   background: rgba(0, 0, 0, 0.7);
   display: none;
