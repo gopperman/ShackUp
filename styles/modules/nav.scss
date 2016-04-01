@@ -12,7 +12,6 @@ $module: 'nav';
 	text-align: center;
 	top: 0;
 	right: 0;
-	border-bottom: 1px solid $black;
 
 	li {
 		display: inline-block;
@@ -20,9 +19,16 @@ $module: 'nav';
 
 	&-button {
 		padding: 10px 15px;
+		
 		&:hover {
 			cursor: hand;
 			cursor: pointer;
+		}
+
+		&.active {
+			padding-bottom: 6px;
+			border-bottom: 4px solid $orange;
+			transition: all, .1s
 		}
 	}
 	&-menu {

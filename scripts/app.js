@@ -10,13 +10,18 @@ $(document).ready( function() {
 	// Click handlers
 	$('.nav-menu').click( function() {
 		$( '.menu' ).toggleClass ( 'menu-open' );
+		$( this ).toggleClass ( 'active' );
 		$( '.overlay' ).fadeToggle( 400, 'linear' );
 	});
+
 	$( '.nav-list' ).click( function() {
 		$( '.list' ).toggleClass ( 'list-open' );
+		$( this ).toggleClass ( 'active' );
 	});
+
 	$( '.overlay' ).click( function( event ) {
 		$( '.menu' ).removeClass( 'menu-open' );
+		$( '.nav-menu' ).removeClass ( 'active' );
 		$( '.overlay' ).fadeToggle( 200, 'linear' );
 	});
 

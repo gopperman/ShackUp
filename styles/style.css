@@ -31,7 +31,6 @@
   text-align: center;
   top: 0;
   right: 0;
-  border-bottom: 1px solid #221F1F;
 }
 .nav li {
   display: inline-block;
@@ -42,6 +41,11 @@
 .nav-button:hover {
   cursor: hand;
   cursor: pointer;
+}
+.nav-button.active {
+  padding-bottom: 6px;
+  border-bottom: 4px solid #CF6428;
+  transition: all, 0.1s;
 }
 .nav-menu {
   position: absolute;
@@ -309,7 +313,7 @@
   position: absolute;
   top: 56px;
   transition: all, .2s;
-  width: 80%;
+  width: 100%;
   z-index: 75;
 }
 .list-open {
