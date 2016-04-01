@@ -6,35 +6,42 @@
 
  .#{$module} {
  	&__container {
+		top: 60px; 		
  		position: relative;
- 		top: 80px;
- 		max-width: 400px;
+ 		width: 95%;
+ 		margin: 0 auto;
+ 		@include full-screen();
+ 		overflow-y: scroll;
+ 		bottom: initial;
+ 		height: auto;
+ 		border: 1px solid $gray-light;
  	}
 
  	&__details-wrap {
-		background-color: white;
-		overflow: auto;
+ 		position: relative;
  	}
 
  	&__details {
  		float: left;
-		width: calc( 100% - 120px );
-		margin: 0 10px;
+		width: calc( 100% - 80px );
+		padding: 15px;
 
-		&--lower {
-			padding: 10px 0;
+		&-lower {
+			padding: 10px 0 0 0;
 		}
  	}
 
  	&__sale-status {
+ 		display: none;
  		text-transform: uppercase;
  		font-size: 11px;
- 		margin: 5px 0 0;
+ 		margin: 0;
  		color: $orange;
  	}
 
  	&__price {
  		margin: 0;
+		padding: 0 0 5px 0;
  		font-size: 30px;
  		font-weight: 600;
  		color: $purple;
@@ -45,13 +52,19 @@
 
  	&__location {
  		margin: 0;
+ 		padding-bottom: 2px;
  		font-size: 12px;
- 		color: $black;
+ 		color: $gray-dark;
  		text-transform: uppercase;
+
+ 		&--full {
+ 			display: none;
+ 		}
  	}
 
  	&__image {
-		max-width: 100%;
+		width: 100%;
+		cursor: pointer;
  		&--wrap {
  			width: 100%;
  			line-height: 0;
@@ -60,19 +73,21 @@
 
  	&__buttons-container {
  		position: absolute;
-    top: -40px;
-    left: 10px;
-    position: relative;
+    top: -35px;
+    right: 10px;
  	}
 
  	&__like-button {
  		width: 70px;
  		height: 70px;
-    padding: 10px;
+    padding: 9px;
+    margin-bottom: 10px;
+    cursor: pointer;
 
 		border-radius: 50%;
 		background-color: $orange;
-    font-size: 50px !important;
+    font-size: 45px !important;
+    border: 3px solid white;
 
     i {
 			top: -6px;
@@ -81,18 +96,19 @@
 	}
 
 	&__pass-button {
-		width: 60px;
-		height: 60px;
-		margin-left: 5px;
+		width: 50px;
+		height: 50px;
+		margin-left: 10px;
     padding: 10px;
+    cursor: pointer;
 
 		border-radius: 50%;
 		background-color: #A0A09F;
-		font-size: 46px !important;
+		font-size: 35px !important;
 		
 		i {
-			top: -14px;
-    	left: 2px;
+			top: -10px;
+    	left: 1px;
 			color: white;
 		}
  	}
@@ -100,7 +116,43 @@
 	&__button-icon {
 		position: relative;
 	}
- }
+}
+
+/**
+ *	---------------------
+ *	DETAILED VIEW STYLES
+ *	---------------------
+ */
+
+.#{$module}__container--detailed {
+	.#{$module} {
+
+		&__sale-status {
+			display: block;
+		}
+
+		&__location{
+			&--full { display: block; }
+			&--short { display: none; }
+		}
+
+		&__details {
+			width: 100%;
+			padding: 15px 0;
+			border-bottom: 1px solid $gray-dark;
+
+			&-wrap {
+				padding: 0 15px;
+			}
+		}
+
+		&__price {
+ 			border-bottom: none;
+		}
+	}
+}
+
+
 
 
 

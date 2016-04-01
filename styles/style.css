@@ -59,30 +59,42 @@
  * Styles for home screen
  */
 .house__container {
+  top: 60px;
   position: relative;
-  top: 80px;
-  max-width: 400px;
+  width: 95%;
+  margin: 0 auto;
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 56px;
+  right: 0;
+  overflow-y: scroll;
+  bottom: initial;
+  height: auto;
+  border: 1px solid #e5e5e5;
 }
 .house__details-wrap {
-  background-color: white;
-  overflow: auto;
+  position: relative;
 }
 .house__details {
   float: left;
-  width: calc( 100% - 120px );
-  margin: 0 10px;
+  width: calc( 100% - 80px );
+  padding: 15px;
 }
-.house__details--lower {
-  padding: 10px 0;
+.house__details-lower {
+  padding: 10px 0 0 0;
 }
 .house__sale-status {
+  display: none;
   text-transform: uppercase;
   font-size: 11px;
-  margin: 5px 0 0;
+  margin: 0;
   color: #CF6428;
 }
 .house__price {
   margin: 0;
+  padding: 0 0 5px 0;
   font-size: 30px;
   font-weight: 600;
   color: #2F225F;
@@ -91,12 +103,17 @@
 }
 .house__location {
   margin: 0;
+  padding-bottom: 2px;
   font-size: 12px;
-  color: #221F1F;
+  color: #A0A09F;
   text-transform: uppercase;
 }
+.house__location--full {
+  display: none;
+}
 .house__image {
-  max-width: 100%;
+  width: 100%;
+  cursor: pointer;
 }
 .house__image--wrap {
   width: 100%;
@@ -104,38 +121,67 @@
 }
 .house__buttons-container {
   position: absolute;
-  top: -40px;
-  left: 10px;
-  position: relative;
+  top: -35px;
+  right: 10px;
 }
 .house__like-button {
   width: 70px;
   height: 70px;
-  padding: 10px;
+  padding: 9px;
+  margin-bottom: 10px;
+  cursor: pointer;
   border-radius: 50%;
   background-color: #CF6428;
-  font-size: 50px !important;
+  font-size: 45px !important;
+  border: 3px solid white;
 }
 .house__like-button i {
   top: -6px;
   color: white;
 }
 .house__pass-button {
-  width: 60px;
-  height: 60px;
-  margin-left: 5px;
+  width: 50px;
+  height: 50px;
+  margin-left: 10px;
   padding: 10px;
+  cursor: pointer;
   border-radius: 50%;
   background-color: #A0A09F;
-  font-size: 46px !important;
+  font-size: 35px !important;
 }
 .house__pass-button i {
-  top: -14px;
-  left: 2px;
+  top: -10px;
+  left: 1px;
   color: white;
 }
 .house__button-icon {
   position: relative;
+}
+
+/**
+ *	---------------------
+ *	DETAILED VIEW STYLES
+ *	---------------------
+ */
+.house__container--detailed .house__sale-status {
+  display: block;
+}
+.house__container--detailed .house__location--full {
+  display: block;
+}
+.house__container--detailed .house__location--short {
+  display: none;
+}
+.house__container--detailed .house__details {
+  width: 100%;
+  padding: 15px 0;
+  border-bottom: 1px solid #A0A09F;
+}
+.house__container--detailed .house__details-wrap {
+  padding: 0 15px;
+}
+.house__container--detailed .house__price {
+  border-bottom: none;
 }
 
 /** Listing **/
@@ -288,7 +334,7 @@ body {
   background: #fff;
   margin: 0 auto;
   height: 100%;
-  height: 100vw;
+  height: 100vh;
   max-width: 768px;
   overflow: hidden;
   position: relative;
