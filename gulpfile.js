@@ -36,6 +36,6 @@ gulp.task('clean', ['scripts'], function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch('styles/**/*.scss', ['styles']);
+  gulp.watch(['styles/**/*.scss', 'styles/modules/*.scss'], ['styles']);
   gulp.watch(['scripts/**/*.js', '!scripts/**/*.min.js', '!scripts/**/main.js'], ['scripts', 'clean']);
 });
