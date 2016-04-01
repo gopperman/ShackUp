@@ -13,12 +13,39 @@
 }
 
 /** Navigation **/
-.navigation {
-  position: absolute;
-  top: 0;
+.nav {
+  background: #2F225F;
+  color: #fff;
+  font-size: 1.6em;
   left: 0;
+  list-style-type: none;
+  margin: 0;
+  padding: 10px 20px;
+  position: absolute;
+  text-align: center;
+  top: 0;
   right: 0;
-  border-bottom: 1px solid #222;
+  border-bottom: 1px solid #221F1F;
+}
+.nav li {
+  display: inline-block;
+}
+.nav-button {
+  padding: 10px 15px;
+}
+.nav-button:hover {
+  cursor: hand;
+  cursor: pointer;
+}
+.nav-menu {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.nav-list {
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 /** Layout **/
@@ -29,7 +56,7 @@
 body {
   -ms-overflow-style: none;
   background: #fff;
-  color: #222;
+  color: #221F1F;
   font-family: 'Montserrat', sans-serif;
   margin: 0;
   overflow: hidden;

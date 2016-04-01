@@ -1,9 +1,38 @@
-$module: 'navigation';
+$module: 'nav';
 
 .#{$module} {
-	position: absolute;
-	top: 0;
+	background: $purple;
+	color: $white;
+	font-size: $font-lg;
 	left: 0;
+	list-style-type: none;
+	margin: 0;
+	padding: 10px 20px;
+	position: absolute;
+	text-align: center;
+	top: 0;
 	right: 0;
 	border-bottom: 1px solid $black;
+
+	li {
+		display: inline-block;
+	}
+
+	&-button {
+		padding: 10px 15px;
+		&:hover {
+			cursor: hand;
+			cursor: pointer;
+		}
+	}
+	&-menu {
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+	&-list {
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
 }

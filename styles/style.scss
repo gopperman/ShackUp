@@ -7,10 +7,7 @@ $font-xl: 2.2em;
 $font-xxl: 3.4em;
 
 /** Colors **/
-$black: #222;
-$blue: #1FC6CC;
-$pink: #FF0DAE;
-$white: #fff;
+@import 'modules/colors';
 
 /** Z-indexes **/
 $bottom: 0;
