@@ -13,7 +13,7 @@ $(document).ready( function() {
 		$( '.overlay' ).fadeToggle( 400, 'linear' );
 	});
 	$( '.nav-list' ).click( function() {
-		$( '.list' ).toggleClass ( 'list-open' );
+		$( '.saved' ).toggleClass ( 'saved-open' );
 	});
 	$( '.overlay' ).click( function( event ) {
 		$( '.menu' ).removeClass( 'menu-open' );
