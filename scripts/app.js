@@ -1,10 +1,10 @@
-function reTinder() {
+function shackUp() {
 	this.baseURI = document.URL;
 	this.pos = 0;
 	this.body = $('body');
 }
 
-var ret = ret || new reTinder();
+var shack = shack || new shackUp();
 
 $(document).ready( function() {
 	// Click handlers
@@ -19,13 +19,25 @@ $(document).ready( function() {
 		$( '.menu' ).removeClass( 'menu-open' );
 		$( '.overlay' ).fadeToggle( 200, 'linear' );
 	});
-	//Gallery
-	$('.listing__gallery').unslider({
-		speed: 500,               //  The speed to animate each slide (in milliseconds)
-		delay: 0,              //  The delay between slide animations (in milliseconds)
-		complete: function() {},  //  A function that gets called after every slide animation
-		keys: true,               //  Enable keyboard (left, right) arrow shortcuts
-		dots: true,               //  Display dot navigation
-		fluid: false              //  Support responsive design. May break non-responsive designs
+
+	// Gallery
+	$('.listing__gallery').click( function() {
+		// TODO: This should actually happen when the card is generated, then when the card is clicked, 
+		// use initKeys / destroyKeys / initSwipe / Destroyswipe
+		var self = $(this);
+		console.log(this);
+		if ( self.hasClass('stopped') ) {
+			self.removeClass('stopped');
+			self.unslider({
+				arrows: false,
+				autoplay: false,
+				speed: 500,
+				complete: function() {},
+				keys: true,               
+				nav: true,               
+				fluid: true
+			});
+		}
 	});
+
 });
