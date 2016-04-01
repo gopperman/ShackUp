@@ -20,14 +20,13 @@ $high: 75;
 $space: 99;
 
 /** Mixins **/
-@mixin full-screen() {
-	bottom: 0;
-	height: 100%;
-	left: 0;
-	position: absolute;
-	top: 0;
-	right: 0;
-}
+@import 'modules/mixins';
+
+/** Menu **/
+@import 'modules/menu';
+
+/** Navigation **/
+@import 'modules/nav';
 
 /** Layout **/
 * {
@@ -36,8 +35,8 @@ $space: 99;
 
 body {
 	-ms-overflow-style: none;
-	background: $black;
-	color: $white;
+	background: $white;
+	color: $black;
 	font-family: 'Montserrat', sans-serif;
 	margin: 0;
 	overflow: hidden;

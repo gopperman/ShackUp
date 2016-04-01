@@ -2,6 +2,25 @@
 /** Colors **/
 /** Z-indexes **/
 /** Mixins **/
+/** Menu **/
+.menu {
+  bottom: 0;
+  left: -100%;
+  position: absolute;
+  top: 0;
+  width: 80%;
+  width: 80vw;
+}
+
+/** Navigation **/
+.navigation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-bottom: 1px solid #222;
+}
+
 /** Layout **/
 * {
   box-sizing: border-box;
@@ -9,8 +28,8 @@
 
 body {
   -ms-overflow-style: none;
-  background: #222;
-  color: #fff;
+  background: #fff;
+  color: #222;
   font-family: 'Montserrat', sans-serif;
   margin: 0;
   overflow: hidden;
