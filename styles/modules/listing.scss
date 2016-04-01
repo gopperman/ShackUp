@@ -105,6 +105,11 @@ $module: 'listing';
 	&__details-bar {
 		display: none;
 	}
+
+	&__description {
+		font-size: 12px;
+		margin-right: 66px;
+	}
 }
 
 /**
@@ -121,7 +126,10 @@ $module: 'listing';
 	width: 100%;
 
 	.#{$module} {
-
+		&__buttons-container {
+			position: fixed;
+			
+		}
 		&__sale-status {
 			display: block;
 		}
@@ -148,7 +156,6 @@ $module: 'listing';
 
 		&__description {
 			display: block;
-			font-size: 12px;
 		}
 
 		&__details-bar {
