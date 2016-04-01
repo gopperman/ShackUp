@@ -55,9 +55,17 @@
 
 body {
   -ms-overflow-style: none;
-  background: #fff;
+  background: #221F1F;
   color: #221F1F;
   font-family: 'Montserrat', sans-serif;
   margin: 0;
   overflow: hidden;
+}
+
+.container {
+  margin: 0 auto;
+  height: 100%;
+  max-width: 768px;
+  position: relative;
+  width: 100%;
 }
