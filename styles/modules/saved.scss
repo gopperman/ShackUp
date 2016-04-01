@@ -62,6 +62,8 @@ $module: 'saved';
 		bottom: 0;
 		left: 0;
 		right: 0;
+		max-width: 768px;
+		margin: 0 auto;
 	}
 
 	&__filter {
