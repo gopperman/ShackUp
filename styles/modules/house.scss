@@ -7,13 +7,13 @@
  .#{$module} {
  	&__container {
  		position: relative;
- 		top: 80px;
- 		max-width: 400px;
+ 		top: 56px;
+ 		@include full-screen();
+ 		overflow: scroll;
  	}
 
  	&__details-wrap {
-		background-color: white;
-		overflow: auto;
+ 		position: relative;
  	}
 
  	&__details {
@@ -26,15 +26,16 @@
 		}
  	}
 
- 	&__sale-status {
- 		text-transform: uppercase;
- 		font-size: 11px;
- 		margin: 5px 0 0;
- 		color: $orange;
- 	}
+ 	// &__sale-status {
+ 	// 	text-transform: uppercase;
+ 	// 	font-size: 11px;
+ 	// 	margin: 5px 0 0;
+ 	// 	color: $orange;
+ 	// }
 
  	&__price {
  		margin: 0;
+ 		padding: 7px 0;
  		font-size: 30px;
  		font-weight: 600;
  		color: $purple;
@@ -45,13 +46,14 @@
 
  	&__location {
  		margin: 0;
+ 		padding-bottom: 2px;
  		font-size: 12px;
  		color: $black;
  		text-transform: uppercase;
  	}
 
  	&__image {
-		max-width: 100%;
+		width: 100%;
  		&--wrap {
  			width: 100%;
  			line-height: 0;
@@ -60,19 +62,20 @@
 
  	&__buttons-container {
  		position: absolute;
-    top: -40px;
-    left: 10px;
-    position: relative;
+    top: -35px;
+    right: 10px;
  	}
 
  	&__like-button {
  		width: 70px;
  		height: 70px;
-    padding: 10px;
+    padding: 9px;
+    margin-bottom: 10px;
 
 		border-radius: 50%;
 		background-color: $orange;
-    font-size: 50px !important;
+    font-size: 45px !important;
+    border: 3px solid white;
 
     i {
 			top: -6px;
@@ -81,18 +84,18 @@
 	}
 
 	&__pass-button {
-		width: 60px;
-		height: 60px;
-		margin-left: 5px;
+		width: 50px;
+		height: 50px;
+		margin-left: 10px;
     padding: 10px;
 
 		border-radius: 50%;
 		background-color: #A0A09F;
-		font-size: 46px !important;
+		font-size: 35px !important;
 		
 		i {
-			top: -14px;
-    	left: 2px;
+			top: -10px;
+    	left: 1px;
 			color: white;
 		}
  	}

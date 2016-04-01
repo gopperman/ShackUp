@@ -60,12 +60,17 @@
  */
 .house__container {
   position: relative;
-  top: 80px;
-  max-width: 400px;
+  top: 56px;
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  overflow: scroll;
 }
 .house__details-wrap {
-  background-color: white;
-  overflow: auto;
+  position: relative;
 }
 .house__details {
   float: left;
@@ -75,14 +80,9 @@
 .house__details--lower {
   padding: 10px 0;
 }
-.house__sale-status {
-  text-transform: uppercase;
-  font-size: 11px;
-  margin: 5px 0 0;
-  color: #CF6428;
-}
 .house__price {
   margin: 0;
+  padding: 7px 0;
   font-size: 30px;
   font-weight: 600;
   color: #2F225F;
@@ -91,12 +91,13 @@
 }
 .house__location {
   margin: 0;
+  padding-bottom: 2px;
   font-size: 12px;
   color: #221F1F;
   text-transform: uppercase;
 }
 .house__image {
-  max-width: 100%;
+  width: 100%;
 }
 .house__image--wrap {
   width: 100%;
@@ -104,34 +105,35 @@
 }
 .house__buttons-container {
   position: absolute;
-  top: -40px;
-  left: 10px;
-  position: relative;
+  top: -35px;
+  right: 10px;
 }
 .house__like-button {
   width: 70px;
   height: 70px;
-  padding: 10px;
+  padding: 9px;
+  margin-bottom: 10px;
   border-radius: 50%;
   background-color: #CF6428;
-  font-size: 50px !important;
+  font-size: 45px !important;
+  border: 3px solid white;
 }
 .house__like-button i {
   top: -6px;
   color: white;
 }
 .house__pass-button {
-  width: 60px;
-  height: 60px;
-  margin-left: 5px;
+  width: 50px;
+  height: 50px;
+  margin-left: 10px;
   padding: 10px;
   border-radius: 50%;
   background-color: #A0A09F;
-  font-size: 46px !important;
+  font-size: 35px !important;
 }
 .house__pass-button i {
-  top: -14px;
-  left: 2px;
+  top: -10px;
+  left: 1px;
   color: white;
 }
 .house__button-icon {
