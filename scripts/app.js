@@ -19,14 +19,25 @@ $(document).ready( function() {
 		$( '.menu' ).removeClass( 'menu-open' );
 		$( '.overlay' ).fadeToggle( 200, 'linear' );
 	});
-	//Gallery
-	$('.listing__gallery').unslider({
-		arrows: false,
-		autoplay: false,
-		speed: 500,
-		complete: function() {},
-		keys: true,               
-		nav: true,               
-		fluid: true
-	});          
+
+	// Gallery
+	$('.listing__gallery').click( function() {
+		// TODO: This should actually happen when the card is generated, then when the card is clicked, 
+		// use initKeys / destroyKeys / initSwipe / Destroyswipe
+		var self = $(this);
+		console.log(this);
+		if ( self.hasClass('stopped') ) {
+			self.removeClass('stopped');
+			self.unslider({
+				arrows: false,
+				autoplay: false,
+				speed: 500,
+				complete: function() {},
+				keys: true,               
+				nav: true,               
+				fluid: true
+			});
+		}
+	});
+
 });
