@@ -156,7 +156,6 @@
  *	---------------------
  */
 .listing--detailed {
-  overflow: scroll;
   border: 0;
   margin: 0;
   top: 55px;
