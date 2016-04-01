@@ -7,7 +7,7 @@ $module: 'nav';
 	left: 0;
 	list-style-type: none;
 	margin: 0;
-	padding: 10px 20px;
+	padding: 0px 20px;
 	position: absolute;
 	text-align: center;
 	top: 0;
@@ -15,20 +15,20 @@ $module: 'nav';
 
 	li {
 		display: inline-block;
-	}
-
-	&-button {
 		padding: 10px 15px;
-		
-		&:hover {
-			cursor: hand;
-			cursor: pointer;
-		}
 
 		&.active {
 			padding-bottom: 6px;
 			border-bottom: 4px solid $orange;
 			transition: all, .1s
+		}
+	}
+
+	&-button {
+
+		&:hover {
+			cursor: hand;
+			cursor: pointer;
 		}
 	}
 	&-menu {
