@@ -1,0 +1,48 @@
+/** Fonts **/
+$font-xs: .6em;
+$font-sm: .8em;
+$font-md: 1em;
+$font-lg: 1.6em;
+$font-xl: 2.2em;
+$font-xxl: 3.4em;
+
+/** Colors **/
+$black: #222;
+$blue: #1FC6CC;
+$pink: #FF0DAE;
+$white: #fff;
+
+/** Z-indexes **/
+$bottom: 0;
+$low: 25;
+$middle: 50;
+$high: 75;
+$space: 99;
+
+/** Mixins **/
+@mixin full-screen() {
+	bottom: 0;
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+/** Layout **/
+* {
+	box-sizing: border-box;
+}
+
+body {
+	-ms-overflow-style: none;
+	background: $black;
+	color: $white;
+	font-family: 'Montserrat', sans-serif;
+	margin: 0;
+	overflow: hidden;
+}
+
+@media (min-width: 768px) {
+
+}
