@@ -1,0 +1,16 @@
+$module: 'list';
+
+.#{$module} {
+	background: $gray-light;
+	bottom: 0;
+	right: -100%;
+	position: absolute;
+	top: $nav-offset;
+	transition: all, .2s;
+	width: 80%;
+	z-index: $high;
+
+	&-open {
+		right: 0;
+	}
+}

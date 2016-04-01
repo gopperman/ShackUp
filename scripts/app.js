@@ -7,5 +7,16 @@ function reTinder() {
 var ret = ret || new reTinder();
 
 $(document).ready( function() {
-	// Click handlers go here
+	// Click handlers
+	$('.nav-menu').click( function() {
+		$( '.menu' ).toggleClass ( 'menu-open' );
+		$( '.overlay' ).fadeToggle( 400, 'linear' );
+	});
+	$( '.nav-list' ).click( function() {
+		$( '.list' ).toggleClass ( 'list-open' );
+	});
+	$( '.overlay' ).click( function( event ) {
+		$( '.menu' ).removeClass( 'menu-open' );
+		$( '.overlay' ).fadeToggle( 200, 'linear' );
+	});
 });
