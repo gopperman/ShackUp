@@ -32,8 +32,8 @@ $nav-offset: 55px;
 @import 'modules/listing';
 @import 'modules/gallery';
 
-/** List **/
-@import 'modules/list';
+/** Saved Listings List **/
+@import 'modules/saved';
 
 /** Layout **/
 * {
@@ -59,6 +59,13 @@ body {
 	overflow-y: scroll;
 	position:relative;
 	width: 100%;
+
+	&.panel-open {
+		overflow: hidden;
+		.saved__filters {
+			display: block;
+		}
+	}
 }
 .overlay {
 	@include full-screen();

@@ -14,7 +14,8 @@ $(document).ready( function() {
 	});
 
 	$( '.nav-list' ).click( function() {
-		$( '.list' ).toggleClass ( 'list-open' );
+		$( '.saved' ).toggleClass ( 'saved-open' );
+		$( '.container' ).toggleClass( 'panel-open' );
 		$( '.nav-logo').toggleClass( 'active' );
 		$( this ).toggleClass ( 'active' );
 	});

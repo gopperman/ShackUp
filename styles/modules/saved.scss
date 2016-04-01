@@ -1,0 +1,96 @@
+$module: 'saved';
+
+.#{$module} {
+	background: $white;
+	bottom: 0;
+	right: -100%;
+	position: absolute;
+	top: $nav-offset;
+  padding: 15px 15px 40px;
+	transition: all, .2s;
+	width: 100%;
+	z-index: $high;
+	overflow-y: scroll;
+
+	&-open {
+		right: 0;
+	}
+	
+	&__list {
+		margin: 0;
+    height: 100%;
+    padding: 0;
+	}
+
+	&__item {
+		width: 33%;
+		float: left;
+		margin-bottom: 30px;
+	}
+
+	&__price {
+		margin: 0;
+		text-align: center;
+		font-size: 16px;
+		color: $purple;
+	}
+
+	&__location {
+		margin: 0;
+		text-align: center;
+		font-size: 12px;
+		color: $gray-dark;
+	}
+
+	&__img {
+		position: relative;
+    width: 140%;
+    top: -21px;
+
+		&-wrap {
+			width: 90px;
+			height: 90px;
+			border-radius: 50%;
+			overflow: hidden;
+			margin: 0 auto 5px;
+		}
+	}
+
+	&__filters {
+		display: none;
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
+
+	&__filter {
+		float: left;
+		width: 50%;
+		text-align: center;
+		background-color: $gray-light;
+		color: $gray-dark;
+		padding: 15px;
+		text-transform: uppercase;
+
+		&--active {
+			background-color: $orange;
+			color: white;
+		}
+	}
+}
+
+/**
+ *	---------------------
+ *	Tablet styles
+ *	---------------------
+ */
+
+@media ( min-width: 768px ) {
+	.#{$module} {
+
+		&__item {
+			width: 25%;
+		}
+	}
+}
