@@ -1,10 +1,10 @@
-function reTinder() {
+function shackUp() {
 	this.baseURI = document.URL;
 	this.pos = 0;
 	this.body = $('body');
 }
 
-var ret = ret || new reTinder();
+var shack = shack || new shackUp();
 
 $(document).ready( function() {
 	// Click handlers
