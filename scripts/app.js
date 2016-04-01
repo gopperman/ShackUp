@@ -24,23 +24,44 @@ $(document).ready( function() {
 		$( '.overlay' ).fadeToggle( 200, 'linear' );
 	});
 
-	// Gallery
-	$('.listing__gallery').click( function() {
+	// Listing magic
+	$('.listing').click( function() {
 		// TODO: This should actually happen when the card is generated, then when the card is clicked, 
 		// use initKeys / destroyKeys / initSwipe / Destroyswipe
-		var self = $(this);
-		console.log(this);
-		if ( self.hasClass('stopped') ) {
-			self.removeClass('stopped');
-			self.unslider({
-				arrows: false,
-				autoplay: false,
-				speed: 500,
-				complete: function() {},
-				keys: true,               
-				nav: true,               
-				fluid: true
-			});
+		var self = $( this );
+		var gallery = $( '.listing__gallery' );
+
+		if ( ! self.hasClass( 'listing--detailed' ) ) {
+			self.addClass( 'listing--detailed' );
+			gallery.removeClass( 'stopped' );
+			if ( ! gallery.hasClass( 'initialized' ) ) {
+				gallery.unslider({
+					arrows: false,
+					autoplay: false,
+					speed: 500,
+					complete: function() {},
+					keys: true,               
+					nav: true,               
+					fluid: true
+				});
+				gallery.addClass( 'initialized' );
+			} else {
+				console.log('ok');
+				gallery.unslider('initSwipe');
+				gallery.unslider('initKeys');
+				$('.unslider-nav').css( 'display', 'block' );
+			}
+		}
+	});
+	$('.listing__gallery').click( function( event ) {
+		var gallery = $( this );
+		var listing = $('.listing');
+		if ( listing.hasClass( 'listing--detailed') ) {
+			event.stopPropagation();
+			listing.removeClass('listing--detailed');
+			gallery.unslider('destroySwipe');
+			gallery.unslider('destroyKeys');
+			$('.unslider-nav').css( 'display', 'none');
 		}
 	});
 

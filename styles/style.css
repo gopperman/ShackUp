@@ -1,60 +1,371 @@
-/*
-Error: File to import not found or unreadable: modules/house.
-        on line 32 of styles/style.scss
+/** Fonts **/
+/** Colors **/
+/** Z-indexes **/
+/** Spacing **/
+/** Mixins **/
+/** Menu **/
+.menu {
+  background: #fff;
+  bottom: 0;
+  left: -100%;
+  position: absolute;
+  top: 55px;
+  transition: all, .2s;
+  width: 80%;
+  z-index: 99;
+}
+.menu-open {
+  left: 0;
+}
 
-27: 
-28: /** Navigation **\/
-29: @import 'modules/nav';
-30: 
-31: /** Home Screen **\/
-32: @import 'modules/house';
-33: 
-34: /** Listing **\/
-35: @import 'modules/listing';
-36: @import 'modules/gallery';
-37: 
+/** Navigation **/
+.nav {
+  background: #2F225F;
+  color: #fff;
+  font-size: 1.6em;
+  left: 0;
+  list-style-type: none;
+  margin: 0;
+  padding: 0px 20px;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  right: 0;
+}
+.nav li {
+  display: inline-block;
+  padding: 10px 15px;
+}
+.nav li.active {
+  padding-bottom: 6px;
+  border-bottom: 4px solid #CF6428;
+  transition: all, 0.1s;
+}
+.nav-button:hover {
+  cursor: hand;
+  cursor: pointer;
+}
+.nav-menu {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.nav-list {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
 
-Backtrace:
-styles/style.scss:32
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/tree/import_node.rb:67:in `rescue in import'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/tree/import_node.rb:45:in `import'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/tree/import_node.rb:28:in `imported_file'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/tree/import_node.rb:37:in `css_import?'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/tree/visitors/perform.rb:311:in `visit_import'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/tree/visitors/base.rb:36:in `visit'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/stack.rb:79:in `block in with_base'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/stack.rb:115:in `with_frame'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/stack.rb:79:in `with_base'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/tree/visitors/perform.rb:158:in `visit'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/tree/visitors/base.rb:52:in `map'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/tree/visitors/base.rb:52:in `visit_children'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/tree/visitors/base.rb:36:in `block in visit'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/tree/visitors/base.rb:36:in `visit'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/tree/visitors/perform.rb:157:in `visit'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/tree/visitors/perform.rb:8:in `visit'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/tree/root_node.rb:36:in `css_tree'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/tree/root_node.rb:20:in `render'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/engine.rb:278:in `render'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/plugin/compiler.rb:492:in `update_stylesheet'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/plugin/compiler.rb:209:in `each'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/plugin.rb:82:in `update_stylesheets'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/exec/sass_scss.rb:364:in `watch_or_update'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/exec/sass_scss.rb:51:in `process_result'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/exec/base.rb:52:in `parse'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/lib/sass/exec/base.rb:19:in `parse!'
-/usr/local/lib/ruby/gems/2.2.0/gems/sass-3.4.16/bin/sass:13:in `<top (required)>'
-/usr/local/bin/sass:23:in `load'
-/usr/local/bin/sass:23:in `<main>'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: File to import not found or unreadable: modules/house.\A         on line 32 of styles/style.scss\A \A 27: \A 28: /** Navigation **/\A 29: @import 'modules/nav';\A 30: \A 31: /** Home Screen **/\A 32: @import 'modules/house';\A 33: \A 34: /** Listing **/\A 35: @import 'modules/listing';\A 36: @import 'modules/gallery';\A 37: "; }
+/** Listing **/
+.listing {
+  top: 65px;
+  position: relative;
+  width: 95%;
+  margin: 0 auto;
+  bottom: initial;
+  height: auto;
+  border-radius: 8px;
+  border: 2px solid #e5e5e5;
+  overflow: hidden;
+}
+.listing__details-wrap {
+  position: relative;
+}
+.listing__details {
+  width: calc( 100% - 80px );
+  padding: 15px;
+}
+.listing__sale-status {
+  display: none;
+  text-transform: uppercase;
+  font-size: 11px;
+  margin: 0;
+  color: #CF6428;
+}
+.listing__price {
+  margin: 0;
+  padding: 0 0 5px 0;
+  font-size: 30px;
+  font-weight: 600;
+  color: #2F225F;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #e5e5e5;
+}
+.listing__location {
+  margin: 0;
+  padding-bottom: 2px;
+  font-size: 12px;
+  color: #A0A09F;
+  text-transform: uppercase;
+}
+.listing__location--short {
+  margin-top: 5px;
+}
+.listing__location--full {
+  display: none;
+}
+.listing__buttons-container {
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
+}
+.listing__like-button {
+  width: 70px;
+  height: 70px;
+  padding: 9px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: #CF6428;
+  font-size: 45px !important;
+  border: 3px solid white;
+}
+.listing__like-button i {
+  top: -6px;
+  color: white;
+}
+.listing__pass-button {
+  width: 50px;
+  height: 50px;
+  margin-left: 10px;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: #A0A09F;
+  font-size: 35px !important;
+}
+.listing__pass-button i {
+  top: -10px;
+  left: 1px;
+  color: white;
+}
+.listing__button-icon {
+  position: relative;
+}
+.listing__description, .listing__details-bar {
+  display: none;
+}
+
+/**
+ *	---------------------
+ *	DETAILED VIEW STYLES
+ *	---------------------
+ */
+.listing--detailed {
+  overflow: scroll;
+  border: 0;
+  margin: 0;
+  top: 55px;
+  width: 100%;
+}
+.listing--detailed .listing__sale-status {
+  display: block;
+}
+.listing--detailed .listing__location--full {
+  display: block;
+}
+.listing--detailed .listing__location--short {
+  display: none;
+}
+.listing--detailed .listing__details {
+  width: 100%;
+  padding: 15px 0;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #e5e5e5;
+}
+.listing--detailed .listing__details-wrap {
+  padding: 0 15px;
+}
+.listing--detailed .listing__price {
+  border-bottom: none;
+}
+.listing--detailed .listing__description {
+  display: block;
+  font-size: 12px;
+}
+.listing--detailed .listing__details-bar {
+  display: block;
+  overflow: auto;
+  margin-bottom: 5px;
+  padding: 0 0 10px 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+.listing--detailed .listing__details-bar-items {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.listing--detailed .listing__details-bar-items li {
+  width: 33%;
+  float: left;
+  font-size: 12px;
+}
+.listing--detailed .listing__details-bar-items li i {
+  color: #CF6428;
+}
+
+.listing__gallery {
+  position: relative;
+  height: auto;
+  max-height: 450px;
+  overflow: hidden;
+}
+.listing__gallery img {
+  width: 100%;
+  height: 100%;
+}
+.listing__gallery ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.listing__gallery.stopped {
+  width: 500%;
+}
+.listing__gallery.stopped li {
+  float: left;
+  width: 20%;
+}
+
+/** Unslider default CSS **/
+.unslider {
+  position: relative;
+  overflow: auto;
+  margin: 0;
+  padding: 0;
+}
+
+.unslider-wrap {
+  position: relative;
+}
+
+.unslider-wrap.unslider-carousel > li {
+  float: left;
+}
+
+.unslider-vertical > ul {
+  height: 100%;
+}
+
+.unslider-vertical li {
+  float: none;
+  width: 100%;
+}
+
+.unslider-fade {
+  position: relative;
+}
+
+.unslider-fade .unslider-wrap li {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: 8;
+}
+
+.unslider-fade .unslider-wrap li.unslider-active {
+  z-index: 10;
+}
+
+.unslider li, .unslider ol, .unslider ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.unslider-arrow {
+  position: absolute;
+  left: 20px;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.unslider-arrow.next {
+  left: auto;
+  right: 20px;
+}
+
+.unslider-nav {
+  position: absolute;
+  bottom: 15px;
+  width: 100%;
+  z-index: 99;
+}
+
+.unslider-nav ol {
+  list-style: none;
+  text-align: center;
+}
+
+.unslider-nav ol li {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 0 4px;
+  background: transparent;
+  border-radius: 5px;
+  overflow: hidden;
+  text-indent: -999em;
+  border: 2px solid #fff;
+  cursor: pointer;
+}
+
+.unslider-nav ol li.unslider-active {
+  background: #fff;
+  cursor: default;
+}
+
+/** List **/
+.list {
+  background: #e5e5e5;
+  bottom: 0;
+  right: -100%;
+  position: absolute;
+  top: 55px;
+  transition: all, .2s;
+  width: 100%;
+  z-index: 75;
+}
+.list-open {
+  right: 0;
+}
+
+/** Layout **/
+* {
+  box-sizing: border-box;
+}
+
+body {
+  -ms-overflow-style: none;
+  background: #221F1F;
+  color: #221F1F;
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  overflow: hidden;
+}
+
+.container {
+  background: #fff;
+  margin: 0 auto;
+  height: 100%;
+  height: 100vh;
+  max-width: 768px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  position: relative;
+  width: 100%;
+}
+
+.overlay {
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 55px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  z-index: 75;
+}

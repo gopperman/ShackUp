@@ -1,17 +1,14 @@
 $module: 'listing';
 
-$module: 'listing';
-
- .#{$module} {
-	top: 60px; 		
+.#{$module} {
+	top: $nav-offset + 10px; 		
 	position: relative;
 	width: 95%;
 	margin: 0 auto;
-	@include full-screen();
 	bottom: initial;
 	height: auto;
-	border-radius: 3px;
-	border: 1px solid $gray-light;
+	border-radius: 8px;
+	border: 2px solid $gray-light;
 	overflow: hidden;
 
  	&__details-wrap {
@@ -60,21 +57,21 @@ $module: 'listing';
 
  	&__buttons-container {
  		position: absolute;
-    top: -35px;
-    right: 10px;
+	    bottom: 8px;
+	    right: 10px;
  	}
 
  	&__like-button {
  		width: 70px;
  		height: 70px;
-    padding: 9px;
-    margin-bottom: 10px;
-    cursor: pointer;
+	    padding: 9px;
+	    margin-bottom: 10px;
+	    cursor: pointer;
 
 		border-radius: 50%;
 		background-color: $orange;
-    font-size: 45px !important;
-    border: 3px solid white;
+	    font-size: 45px !important;
+	    border: 3px solid white;
 
     i {
 			top: -6px;
@@ -117,6 +114,12 @@ $module: 'listing';
  */
 
 .#{$module}--detailed {
+	overflow: scroll;
+	border: 0;
+	margin: 0;
+	top: $nav-offset;
+	width: 100%;
+
 	.#{$module} {
 
 		&__sale-status {
