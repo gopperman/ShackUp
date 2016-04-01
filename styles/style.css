@@ -145,6 +145,10 @@
 .listing__description, .listing__details-bar {
   display: none;
 }
+.listing__description {
+  font-size: 12px;
+  margin-right: 66px;
+}
 
 /**
  *	---------------------
@@ -157,6 +161,9 @@
   margin: 0;
   top: 55px;
   width: 100%;
+}
+.listing--detailed .listing__buttons-container {
+  position: fixed;
 }
 .listing--detailed .listing__sale-status {
   display: block;
@@ -181,7 +188,6 @@
 }
 .listing--detailed .listing__description {
   display: block;
-  font-size: 12px;
 }
 .listing--detailed .listing__details-bar {
   display: block;
