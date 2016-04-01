@@ -138,6 +138,17 @@
   position: relative;
 }
 
+/** Listing **/
+.listing {
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 56px;
+  right: 0;
+  overflow: scroll;
+}
+
 /** List **/
 .list {
   background: #e5e5e5;
@@ -183,7 +194,7 @@ body {
   height: 100%;
   left: 0;
   position: absolute;
-  top: 0;
+  top: 56px;
   right: 0;
   background: rgba(0, 0, 0, 0.7);
   display: none;
