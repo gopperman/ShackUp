@@ -5,6 +5,7 @@ function shackUp() {
 	// App state
 	this.saved = [];
 	this.queue = listings;
+	this.searchForm = $( '.filters__form' );
 
 	this.init = function() {
 		this.refreshListings();
@@ -59,19 +60,28 @@ function shackUp() {
 		});
 	};
 
+	this.getQuery = function( event ) {
+		event.preventDefault();
+		var query = this.searchForm.serialize();
+		var proptypes = $('.filters__options--prop-type .filter--active');
+		var beds = $('.filters__options--beds .filter--active');
+		var baths = $('.filters__options--baths .filter--active');
+		console.log( beds, baths, proptypes );
+	};
+
 	this.registerClickHandlers = function() {
 		var love = $( '.listing__like-button' );
 		var hate = $( '.listing__pass-button' );
 		var about = $( '.listing__nav [data-type="about"]' );
 		var contact = $( '.listing__nav [data-type="contact"]' );
 		var searchFilter = $( '.filters__filter-option' );
+		
 
 		love.click( this.love );
 		hate.click( this.hate );
 		about.click( this.showAbout );
-		contact.click( this.showContact );
 		searchFilter.click( function() {$(event.target).toggleClass( 'filter--active' );});
-
+		this.searchForm.submit( this.getQuery.bind( this ) );
 	};
 
 	this.refreshListings = function() {
