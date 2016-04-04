@@ -31,10 +31,10 @@ function shackUp() {
 
 	this.hate = function() {
 		shack.notify( $('.notification .fa-times') );
-		$( this ).parents( '.listing' ).delay( 500 ).animate( {
+		$( this ).parents( '.listing' ).delay( 300 ).animate( {
 			opacity: 0,
 			left: '-=100%',
-		}, 500, function() {
+		}, 300, function() {
 			this.remove();
 			// Set up the next card with swipe handlers
 			shack.initSwipe( $('.listing').last() );
@@ -51,8 +51,11 @@ function shackUp() {
 
 	// Takes in a dom reference (hopefully a notification and does an opacity animation
 	this.notify = function ( notification ) {
-		notification.fadeIn( 400, function() {
-			$( this ).delay(400).fadeOut( 300 );
+		notification.css( { display: 'block' } );
+		notification.animate( { opacity: 100 }, 400, function() {
+			$( this ).delay( 300 ).animate( { opacity: 0 }, 400, function() {
+				$( '.notification .fa' ).css( { display: 'none', opacity: 0 } );
+			});
 		});
 	};
 
@@ -72,7 +75,6 @@ function shackUp() {
 			var hate = $( '.notification .fa-times' );
 			notifications.css({
 				display: 'block',
-				zIndex: '99', 
 			});
 
 			if ( e.distX < 0 ) {
@@ -88,21 +90,22 @@ function shackUp() {
 
 		swipee.bind( 'moveend', function(e) {
 			var notifications = $( '.notification .fa' );
-			notifications.animate( {
-				opacity: 0,
-			}, 100, function() {
-				$( this ).css( {display: 'none'} );
-			});
-
 			var el = $( this );
+
 			if ( e.distX > 150 ) {
 				var love = el.find( '.listing__like-button' );
 				love.trigger( 'click' );
 			} else if ( e.distX  < -150 ) {
 				var hate = el.find( '.listing__pass-button' );
 				hate.trigger( 'click');
+			} else {
+				$( this ).animate( {'left':'2.5%'}, 150 );
+				notifications.animate( {
+					opacity: 0,
+				}, 100, function() {
+					$( this ).css( {display: 'none'} );
+				});				
 			}
-			$( this ).animate( {'left':'2.5%'}, 150 );
 		});
 	};
 
