@@ -2,12 +2,49 @@ function shackUp() {
 	this.baseURI = document.URL;
 	this.pos = 0;
 	this.body = $('body');
+	// App state
+	this.saved = [];
+	this.queue = listings;
+
+	this.init = function() {
+		this.registerClickHandlers();
+	};
+
+	this.love = function() {
+		var listing = $( this ).parents( '.listing' );
+		listing.animate( {
+			opacity: 0,
+			left: '+=100%',
+		}, 300, function() {
+			shack.saved.push( listing.detach() );
+		});		
+	};
+
+	this.hate = function() {
+		$( this ).parents( '.listing' ).animate( {
+			opacity: 0,
+			left: '-=100%',
+		}, 300, function() {
+			this.remove();
+		});
+	};
+
+	this.registerClickHandlers = function() {
+		var love = $( '.listing__like-button' );
+		var hate = $( '.listing__pass-button' );
+
+		love.click( this.love );
+		hate.click( this.hate );
+	};
+
 }
 
 var shack = shack || new shackUp();
 
 $(document).ready( function() {
 	// Click handlers
+	shack.init();
+
 	$('.nav-menu').click( function() {
 		$( '.menu' ).toggleClass ( 'menu-open' );
 		$( '.overlay' ).fadeToggle( 400, 'linear' );

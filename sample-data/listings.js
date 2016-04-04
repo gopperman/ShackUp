@@ -1,4 +1,4 @@
-[
+var listings = [
   {
     "id": "268-l-4895-71973209",
     "channel": "Sales",
