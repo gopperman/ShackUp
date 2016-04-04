@@ -557,6 +557,28 @@
   padding-top: 4px !important;
 }
 
+.error__outOfListings {
+  color: #A0A09F;
+  margin: 0 5%;
+  text-align: center;
+  position: absolute;
+  top: 200px;
+  width: 90%;
+}
+.error__outOfListings a {
+  color: #2F225F;
+  font-size: .8em;
+  cursor: hand;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.error__outOfListings a:hover {
+  color: #422f85;
+}
+.error__outOfListings p {
+  margin: 0;
+}
+
 /** Layout **/
 * {
   box-sizing: border-box;
