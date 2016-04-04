@@ -58,9 +58,10 @@
 
 /** Listing **/
 .listing {
+  background: #fff;
   top: 65px;
-  left: 0;
-  position: relative;
+  left: 2.5%;
+  position: absolute;
   width: 95%;
   margin: 0 auto;
   bottom: initial;
@@ -168,6 +169,9 @@
   overflow-y: scroll;
   top: 55px;
   width: 100%;
+}
+.listing--detailed .listing__gallery {
+  height: auto;
 }
 .listing--detailed .listing__buttons-container {
   position: fixed;
@@ -277,7 +281,7 @@
 
 .listing__gallery {
   position: relative;
-  height: auto;
+  height: 75vw;
   max-height: 450px;
   overflow: hidden;
 }

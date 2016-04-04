@@ -42,7 +42,7 @@
           <div class="listing__gallery stopped">
             <ul>
               <% _.each( listItem.photos, function( photo ){ %>
-                <li><img src="<%- photo.replace(/&amp;/g, '&') %>&H=205"></li>
+                <li><img draggable="false" src="<%- photo.replace(/&amp;/g, '&') %>&H=205"></li>
               <% }); %>
             </ul>
             <div class="listing__details listing__details--contact">
