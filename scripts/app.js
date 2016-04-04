@@ -136,11 +136,20 @@ $(document).ready( function() {
 		$( '.overlay' ).fadeToggle( 400, 'linear' );
 	});
 
+	$('.nav-logo').click( function() {
+		$( '.panel-open' ).removeClass('panel-open' );
+		$( '.filters-open' ).removeClass('filters-open' );
+		$( '.overlay' ).fadeOut( 400, 'linear' );
+	});
+
 	$( '.nav-list' ).click( function() {
-		shack.showSaved( { data: shack.savedData } );
-		$( '.saved' ).toggleClass ( 'saved-open' );
+		var saved = $( '.saved' );
+		if ( ! saved.hasClass('saved-open') ) {
+			shack.showSaved( { data: shack.savedData } );
+		}
+		saved.toggleClass ( 'saved-open' );
 		$( '.container' ).toggleClass( 'panel-open' );
-		$( '.nav-logo').toggleClass( 'active' );
+		$( '.nav-logo' ).toggleClass( 'active' );
 		$( this ).toggleClass ( 'active' );
 	});
 
