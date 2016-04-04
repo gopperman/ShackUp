@@ -146,7 +146,7 @@
 .listing__button-icon {
   position: relative;
 }
-.listing__description, .listing__details-bar {
+.listing__nav, .listing__description, .listing__details-bar {
   display: none;
 }
 .listing__description {
@@ -221,6 +221,31 @@
 }
 .listing--contact .listing__contact {
   display: block;
+}
+.listing--contact .listing__nav {
+  display: block;
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  max-width: 768px;
+  margin: 0 auto;
+}
+.listing--contact .listing__nav-button {
+  float: left;
+  width: 50%;
+  text-align: center;
+  background-color: #e5e5e5;
+  color: #A0A09F;
+  padding: 17px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.listing--contact .listing__nav-button--active {
+  background-color: #CF6428;
+  color: white;
 }
 .listing--contact .listing__location--full {
   display: block;

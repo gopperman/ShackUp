@@ -34,6 +34,10 @@
       <script type="text/template" class="template2">
       <% _.each( shack.queue, function( listItem ){ %>
         <div class="listing listing--contact">
+          <div class="listing__nav">
+            <div data-type="contact" class="listing__nav-button--active listing__nav-button">contact</div>
+            <div data-type="about" class="listing__nav-button">about</div>
+          </div>
           <div class="listing__gallery stopped">
             <ul>
               <% _.each( listItem.photos, function( photo ){ %>
@@ -99,97 +103,19 @@
       <div class="saved">
         
         <ul class="saved__list">
-          <li class="saved__item">
-            <div class="saved__img-wrap">
-              <img src="http://www.wesleyan.edu/reslife/images/AAA%20House.jpg" alt="" class="saved__img">
-            </div>
-            <p class="saved__price">$290k</p>
-            <p class="saved__location">Middleboro</p>
-          </li>
-          <li class="saved__item">
-            <div class="saved__img-wrap">
-              <img src="http://www.wesleyan.edu/reslife/images/AAA%20House.jpg" alt="" class="saved__img">
-            </div>
-            <p class="saved__price">$290k</p>
-            <p class="saved__location">Middleboro</p>
-          </li>
-          <li class="saved__item">
-            <div class="saved__img-wrap">
-              <img src="http://www.wesleyan.edu/reslife/images/AAA%20House.jpg" alt="" class="saved__img">
-            </div>
-            <p class="saved__price">$290k</p>
-            <p class="saved__location">Middleboro</p>
-          </li>
-          <li class="saved__item">
-            <div class="saved__img-wrap">
-              <img src="http://www.wesleyan.edu/reslife/images/AAA%20House.jpg" alt="" class="saved__img">
-            </div>
-            <p class="saved__price">$290k</p>
-            <p class="saved__location">Middleboro</p>
-          </li>
-          <li class="saved__item">
-            <div class="saved__img-wrap">
-              <img src="http://www.wesleyan.edu/reslife/images/AAA%20House.jpg" alt="" class="saved__img">
-            </div>
-            <p class="saved__price">$290k</p>
-            <p class="saved__location">Middleboro</p>
-          </li>
-          <li class="saved__item">
-            <div class="saved__img-wrap">
-              <img src="http://www.wesleyan.edu/reslife/images/AAA%20House.jpg" alt="" class="saved__img">
-            </div>
-            <p class="saved__price">$290k</p>
-            <p class="saved__location">Middleboro</p>
-          </li>
-          <li class="saved__item">
-            <div class="saved__img-wrap">
-              <img src="http://www.wesleyan.edu/reslife/images/AAA%20House.jpg" alt="" class="saved__img">
-            </div>
-            <p class="saved__price">$290k</p>
-            <p class="saved__location">Middleboro</p>
-          </li>
-          <li class="saved__item">
-            <div class="saved__img-wrap">
-              <img src="http://www.wesleyan.edu/reslife/images/AAA%20House.jpg" alt="" class="saved__img">
-            </div>
-            <p class="saved__price">$290k</p>
-            <p class="saved__location">Middleboro</p>
-          </li>
-          <li class="saved__item">
-            <div class="saved__img-wrap">
-              <img src="http://www.wesleyan.edu/reslife/images/AAA%20House.jpg" alt="" class="saved__img">
-            </div>
-            <p class="saved__price">$290k</p>
-            <p class="saved__location">Middleboro</p>
-          </li>
-          <li class="saved__item">
-            <div class="saved__img-wrap">
-              <img src="http://www.wesleyan.edu/reslife/images/AAA%20House.jpg" alt="" class="saved__img">
-            </div>
-            <p class="saved__price">$290k</p>
-            <p class="saved__location">Middleboro</p>
-          </li>
-          <li class="saved__item">
-            <div class="saved__img-wrap">
-              <img src="http://www.wesleyan.edu/reslife/images/AAA%20House.jpg" alt="" class="saved__img">
-            </div>
-            <p class="saved__price">$290k</p>
-            <p class="saved__location">Middleboro</p>
-          </li>
-          <li class="saved__item">
-            <div class="saved__img-wrap">
-              <img src="http://www.wesleyan.edu/reslife/images/AAA%20House.jpg" alt="" class="saved__img">
-            </div>
-            <p class="saved__price">$290k</p>
-            <p class="saved__location">Middleboro</p>
-          </li>
-          <li class="saved__item">
-            <div class="saved__img-wrap">
-              <img src="http://www.wesleyan.edu/reslife/images/AAA%20House.jpg" alt="" class="saved__img">
-            </div>
-            <p class="saved__price">$290k</p>
-            <p class="saved__location">Middleboro</p>
-          </li>
+          <% _.each( shack.queue, function( listItem ){ %>
+            <li class="saved__item">
+              <div class="saved__img-wrap">
+                <img src="<%- listItem.photos[0] %>" alt="" class="saved__img">
+              </div>
+              <p class="saved__price">
+                <%- listItem.price.Price %>
+              </p>
+              <p class="saved__location">
+                <%- listItem.address.AddrNeighborhood %>
+              </p>
+            </li>
+          <% }); %>
         </ul>
         <div class="saved__filters">
           <div data-type="sale" class="saved__filter--active saved__filter">for sale</div>
