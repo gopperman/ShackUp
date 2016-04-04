@@ -7,11 +7,7 @@ function shackUp() {
 	this.queue = listings;
 
 	this.init = function() {
-		var listingsToShow = this.queue;
-		this.showListings( { data : listingsToShow } ); // TODO: Greg decides how he wants to display stuff
-		this.registerClickHandlers();
-		// Set up the next card with swipe handlers
-		this.initSwipe( $('.listing').last() );
+		this.refreshListings();
 	};
 
 	this.love = function() {
@@ -78,13 +74,20 @@ function shackUp() {
 
 	};
 
+	this.refreshListings = function() {
+		//TO-DO: De-dupe the queue
+		shack.showListings( { data : this.queue } );
+		this.registerClickHandlers();
+		this.initSwipe( $('.listing').last() );
+	};
+
 	this.showListings = function(data){
     	var template = _.template(
             $( "script.template2" ).html()
         );
 
-        $(  "script.template2" ).after( template(data) )
-    }
+        $(  "script.template2" ).after( template(data) );
+    };
 
     this.showSaved = function(data) {
 		var template = _.template(
@@ -94,7 +97,7 @@ function shackUp() {
 	    $( ".saved__list" ).html(
 	      template( data )
 	    );
-    }
+    };
 
 }
 
@@ -131,6 +134,10 @@ $(document).ready( function() {
 	$( '.overlay' ).click( function( event ) {
 		$( '.menu' ).removeClass( 'menu-open' );
 		$( '.overlay' ).fadeToggle( 200, 'linear' );
+	});
+
+	$('.refreshListings').click(function() {
+		shack.refreshListings();
 	});
 
 	// Listing magic
