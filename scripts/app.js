@@ -13,11 +13,11 @@ function shackUp() {
 
 	this.love = function() {
 		var listing = $( this ).parents( '.listing' );
-		listing.animate( {
+		shack.notify( $('.notification .fa-heart') );
+		listing.delay( 500 ).animate( {
 			opacity: 0,
 			left: '+=100%',
-		}, 300, function() {
-
+		}, 500, function() {
 			shack.saved.push( listing.detach() );
 			shack.savedData.push(_.findWhere(shack.queue, {'id': listing.data('id')}));
 			// Set up the next card with swipe handlers
@@ -26,10 +26,11 @@ function shackUp() {
 	};
 
 	this.hate = function() {
-		$( this ).parents( '.listing' ).animate( {
+		shack.notify( $('.notification .fa-times') );
+		$( this ).parents( '.listing' ).delay( 500 ).animate( {
 			opacity: 0,
 			left: '-=100%',
-		}, 300, function() {
+		}, 500, function() {
 			this.remove();
 			// Set up the next card with swipe handlers
 			shack.initSwipe( $('.listing').last() );
@@ -42,6 +43,13 @@ function shackUp() {
 			.parents( '.listing' )
 			.removeClass()
 			.addClass('listing listing--detailed');
+	};
+
+	// Takes in a dom reference (hopefully a notification and does an opacity animation
+	this.notify = function ( notification ) {
+		notification.fadeIn( 400, function() {
+			$( this ).delay(400).fadeOut( 300 );
+		});
 	};
 
 	// Takes in a dom reference and hooks up a swipe event to that object

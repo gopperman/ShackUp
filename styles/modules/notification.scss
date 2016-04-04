@@ -1,0 +1,15 @@
+$module: 'notification';
+
+.#{$module} {
+	.fa {
+		color: white;
+		font-size: 120px;
+		left: 40%;
+		left: calc(50% - 60px);
+		display: none;
+		position: absolute;
+		top: 200px;
+		top: 37vw;
+		z-index: $space + 1;
+	}
+}

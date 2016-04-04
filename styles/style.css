@@ -731,6 +731,7 @@
   padding-top: 4px !important;
 }
 
+/** Status messages **/
 .error__outOfListings {
   color: #A0A09F;
   margin: 0 5%;
@@ -763,6 +764,18 @@
   color: #2F225F;
   margin-bottom: .5em;
   padding-bottom: .5em;
+}
+
+.notification .fa {
+  color: white;
+  font-size: 120px;
+  left: 40%;
+  left: calc(50% - 60px);
+  display: none;
+  position: absolute;
+  top: 200px;
+  top: 37vw;
+  z-index: 100;
 }
 
 /** Layout **/
