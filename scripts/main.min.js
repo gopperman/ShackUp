@@ -19,10 +19,11 @@ function shackUp() {
 		listing.delay( 300 ).animate( {
 			opacity: 0,
 			left: '+=100%',
-		}, 500, function() {
+		}, 300, function() {
 			shack.savedData.push(_.findWhere(shack.currentItems, {'id': listing.data('id')}));
 			listing.addClass('saved');
-			
+			listing.detach();
+
 			// Set up the next card with swipe handlers
 			shack.initSwipe( $('.listing').last() );
 		});		
