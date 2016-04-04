@@ -59,12 +59,37 @@ function shackUp() {
 			var width = el.width();
 			var startLeft = el.css('left');
 			var startPercent = e.startX / $( window ).width();
-			console.log(e.distX);
 			if ( ! el.hasClass( 'listing--detailed' ) ) {
 				el.css({ left: e.startX + e.distX - ( width * startPercent )});
 			}
+			// Notification Opacity
+			var notifications = $( '.notification .fa' );
+			var love = $( '.notification .fa-heart' );
+			var hate = $( '.notification .fa-times' );
+			notifications.css({
+				display: 'block',
+				zIndex: '99', 
+			});
+
+			if ( e.distX < 0 ) {
+				hate.css( {opacity: Math.abs( e.distX / 150 ) });
+				love.css( {opacity: 0} ); // We need this
+			} else if ( e.distX > 0 ) {
+				love.css( {opacity: e.distX / 150 } );
+				hate.css( {opacity: 0} ); // We need this
+			} else {
+				notifications.css( {opacity: 0} );
+			}
 		});
+
 		swipee.bind( 'moveend', function(e) {
+			var notifications = $( '.notification .fa' );
+			notifications.animate( {
+				opacity: 0,
+			}, 100, function() {
+				$( this ).css( {display: 'none'} );
+			});
+
 			var el = $( this );
 			if ( e.distX > 150 ) {
 				var love = el.find( '.listing__like-button' );
