@@ -34,7 +34,7 @@
       <script type="text/template" class="template2">
 
       <% _.each( data, function( listItem ){ %>
-        <div class="listing listing--contact">
+        <div class="listing">
           <div class="listing__nav">
             <div data-type="contact" class="listing__nav-button--active listing__nav-button">contact</div>
             <div data-type="about" class="listing__nav-button">about</div>
@@ -61,7 +61,7 @@
             <div class="listing__details">
 
               <p class="listing__sale-status"><%- (listItem.channel === 'Sales') ? 'For Sale' : 'For Rent' %></p>
-              <p class="listing__price"><%- listItem.price.Price %></p>
+              <p class="listing__price">$<%- parseInt(listItem.price.Price).formatMoney(0) %></p>
 
               <div class="listing__details-lower">
                 <p class="listing__location listing__location--short"><%- listItem.propertyType[0] %></p>
