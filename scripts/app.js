@@ -103,11 +103,12 @@ function shackUp() {
     };
 
     this.showSaved = function(data) {
+    	$('.saved__item').detach(); // Remove old ones
 		var template = _.template(
 	      $( "script.template" ).html()
 	    );
 
-	    $( ".saved__list" ).html(
+	    $(  "script.template" ).after(
 	      template( data )
 	    );
     };

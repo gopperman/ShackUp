@@ -21,7 +21,7 @@ gulp.task('scripts', function() {
     .pipe(concat('main.js'))
     .pipe(gulp.dest('scripts'))
     .pipe(rename({suffix: '.min'}))
-    .pipe(uglify())
+    //.pipe(uglify())
     .pipe(gulp.dest('scripts'))
     .pipe(notify({ message: 'Scripts task complete' }));
 });
