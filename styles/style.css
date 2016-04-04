@@ -102,6 +102,7 @@
   float: left;
   margin: 0;
   width: 16.5%;
+  background-color: #e5e5e5;
 }
 .filters__option-bar li:not(:last-child) {
   border-right: none;
@@ -792,6 +793,6 @@ body {
 }
 
 .filter--active {
-  background-color: #CF6428;
+  background-color: #CF6428 !important;
   color: #fff;
 }

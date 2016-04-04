@@ -19,7 +19,8 @@
         <li class="nav-list nav-button"><i class="fa fa-commenting"></i>
       </ul>
       <div class="filters">
-        <div class="filters-container">
+        <form class="filters-container filters-form">
+
           <div class="filters__sale-type">
             <div data-type="contact" class="filter--active filters__sale-type-button">for sale</div>
             <div data-type="about" class="filters__sale-type-button">for rent</div>
@@ -35,7 +36,7 @@
             <div class="filters__header">Price Range</div>
             <div class="filters__options">
               <select name="min-price" class="filters__price">
-                <option selected>Min Price</option>
+                <option value="any" selected>Min Price</option>
                 <option value="500">$500</option>
                 <option value="1000">$1,000</option>
                 <option value="2000">$2,000</option>
@@ -49,7 +50,7 @@
                 <option value="1000000">$1,000,000</option>
               </select>
               <select name="max-price" class="filters__price">
-                <option selected>Max Price</option>
+                <option value="any" selected>Max Price</option>
                 <option value="500">$500</option>
                 <option value="1000">$1,000</option>
                 <option value="2000">$2,000</option>
@@ -100,7 +101,7 @@
               <li class="filters__filter-option">5+</li>
             </ul>
           </div>
-        </div>
+        </form>
       </div>
 
       <div class="error__outOfListings">
