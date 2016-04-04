@@ -125,7 +125,11 @@ $module: 'listing';
 
 .#{$module}--detailed {
 	border: 0;
+	height: calc(100vh - 55px);
 	margin: 0;
+	padding-bottom: 20px;
+	overflow-x: hidden;
+	overflow-y: scroll;
 	top: $nav-offset;
 	width: 100%;
 
