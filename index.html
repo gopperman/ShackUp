@@ -15,7 +15,7 @@
     <div class="container">
       <ul class="nav">
         <li class="nav-menu nav-button"><i class="fa fa-bars"></i>
-        <li class="nav-logo active">Shack Up
+        <li class="nav-logo active"><img src="img/ShackUp_Logo.png" alt="Shack Up" />
         <li class="nav-list nav-button"><i class="fa fa-commenting"></i>
       </ul>
       <div class="filters">
@@ -114,7 +114,7 @@
       <script type="text/template" class="template2">
 
       <% _.each( data, function( listItem ){ %>
-        <div class="listing">
+        <div class="listing" data-id="<%- listItem.id %>">
           <div class="listing__nav">
             <div data-type="contact" class="listing__nav-button--active listing__nav-button">contact</div>
             <div data-type="about" class="listing__nav-button">about</div>
@@ -122,7 +122,7 @@
           <div class="listing__gallery stopped">
             <ul>
               <% _.each( listItem.photos, function( photo ){ %>
-                <li><img draggable="false" src="<%- photo.replace(/&amp;/g, '&') %>&H=205"></li>
+                <li><img draggable="false" src="<%- photo.replace(/&amp;/g, '&') %>&H=1000"></li>
               <% }); %>
             </ul>
             <div class="listing__details listing__details--contact">
@@ -188,15 +188,17 @@
           <script type="text/template" class="template">
           <% _.each( data, function( listItem ){ %>
             <li class="saved__item">
-              <div class="saved__img-wrap">
-                <img src="<%- listItem.photos[0].replace(/&amp;/g, '&') %>" alt="" class="saved__img">
-              </div>
-              <p class="saved__price">
-                <%- listItem.price.Price %>
-              </p>
-              <p class="saved__location">
-                <%- listItem.address.AddrNeighborhood %>
-              </p>
+              <a href="http://realestate.boston.com/listings/<%- listItem.price.Price %>" target="_blank">
+                <div class="saved__img-wrap">
+                  <img src="<%- listItem.photos[0].replace(/&amp;/g, '&') %>" alt="" class="saved__img">
+                </div>
+                <p class="saved__price">
+                  <%- listItem.price.Price %>
+                </p>
+                <p class="saved__location">
+                  <%- listItem.address.AddrNeighborhood %>
+                </p>
+              </a>
             </li>
           <% }); %>
         </ul>
