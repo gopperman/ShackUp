@@ -8,6 +8,7 @@ function shackUp() {
 
 	this.init = function() {
 		this.registerClickHandlers();
+		this.initSwipe( $( '.listing' ) );
 	};
 
 	this.love = function() {
@@ -29,11 +30,30 @@ function shackUp() {
 		});
 	};
 
+	// displays the "detailed" state of a listing
 	this.showAbout = function() {
 		$( event.target )
 			.parents( '.listing' )
 			.removeClass()
 			.addClass('listing listing--detailed');
+	};
+
+	// Takes in a dom reference and hooks up a swipe event to that object
+	this.initSwipe = function ( swipee ) {
+		swipee.on( 'swipeleft', function() {
+			var el = $(this);
+			if ( ! el.hasClass( 'listing--detailed' ) ) {
+				var hate = $(this).find( '.listing__pass-button' );
+				hate.trigger( 'click' );
+			}
+		});
+		swipee.on( 'swiperight', function() {
+			var el = $(this);
+			if ( ! el.hasClass( 'listing--detailed' ) ) {
+				var love = $(this).find( '.listing__like-button' );
+				love.trigger( 'click' );
+			}
+		});
 	};
 
 	this.registerClickHandlers = function() {
@@ -77,7 +97,7 @@ $(document).ready( function() {
 	// Listing magic
 	$('.listing__gallery').click( function( event ) {
 		var gallery = $( this );
-		var listing = $('.listing');
+		var listing = gallery.parents( '.listing' );
 		if ( listing.hasClass( 'listing--detailed') ) {
 			event.stopPropagation();
 			listing.removeClass('listing--detailed listing--contact');
@@ -99,7 +119,6 @@ $(document).ready( function() {
 				});
 				gallery.addClass( 'initialized' );
 			} else {
-				console.log('ok');
 				gallery.unslider('initSwipe');
 				gallery.unslider('initKeys');
 				$('.unslider-nav').css( 'display', 'block' );
