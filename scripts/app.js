@@ -54,19 +54,26 @@ function shackUp() {
 
 	// Takes in a dom reference and hooks up a swipe event to that object
 	this.initSwipe = function ( swipee ) {
-		swipee.on( 'swipeleft', function() {
+		swipee.bind( 'move', function(e) {
 			var el = $(this);
+			var width = el.width();
+			var startLeft = el.css('left');
+			var startPercent = e.startX / $( window ).width();
+			console.log(e.distX);
 			if ( ! el.hasClass( 'listing--detailed' ) ) {
-				var hate = $(this).find( '.listing__pass-button' );
-				hate.trigger( 'click' );
+				el.css({ left: e.startX + e.distX - ( width * startPercent )});
 			}
 		});
-		swipee.on( 'swiperight', function() {
-			var el = $(this);
-			if ( ! el.hasClass( 'listing--detailed' ) ) {
-				var love = $(this).find( '.listing__like-button' );
+		swipee.bind( 'moveend', function(e) {
+			var el = $( this );
+			if ( e.distX > 150 ) {
+				var love = el.find( '.listing__like-button' );
 				love.trigger( 'click' );
+			} else if ( e.distX  < -150 ) {
+				var hate = el.find( '.listing__pass-button' );
+				hate.trigger( 'click');
 			}
+			$( this ).animate( {'left':'2.5%'}, 150 );
 		});
 	};
 
