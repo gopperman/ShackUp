@@ -7,6 +7,7 @@ $module: 'nav';
 	left: 0;
 	list-style-type: none;
 	margin: 0;
+	min-height: $nav-offset - 1;
 	padding: 0px 20px;
 	position: absolute;
 	text-align: center;
@@ -17,18 +18,18 @@ $module: 'nav';
 		display: inline-block;
 		padding: 10px 15px;
 
+		&:hover {
+			cursor: hand;
+			cursor: pointer;
+		}
+		
 		&.active {
-			padding-bottom: 6px;
 			border-bottom: 4px solid $orange;
 			transition: all, .1s
 		}
 	}
 
 	&-button {
-		&:hover {
-			cursor: hand;
-			cursor: pointer;
-		}
 	}
 
 	&-menu {
@@ -40,17 +41,20 @@ $module: 'nav';
 	& .nav-logo {
 		padding-bottom: 0;
 		img { 
-			height: 36px;
+			height: 37px;
 			width: auto; 
 		}
 		&.active {
 			padding-bottom: 0;
 		}
 	}
-	
+
 	&-list {
 		position: absolute;
 		right: 0;
 		top: 0;
+		&.active {
+			padding-bottom: 9px;
+		}
 	}
 }

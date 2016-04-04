@@ -133,6 +133,12 @@ $(document).ready( function() {
 		$( '.overlay' ).fadeToggle( 400, 'linear' );
 	});
 
+	$('.nav-logo').click( function() {
+		$( '.panel-open' ).removeClass('panel-open' );
+		$( '.filters-open' ).removeClass('filters-open' );
+		$( '.overlay' ).fadeOut( 400, 'linear' );
+	});
+
 	$( '.nav-list' ).click( function() {
 		shack.showSaved( { data: shack.queue } );
 		$( '.saved' ).toggleClass ( 'saved-open' );
