@@ -105,7 +105,7 @@ $module: 'listing';
 	&__button-icon {
 		position: relative;
 	}
-
+	&__nav,
 	&__description,
 	&__details-bar {
 		display: none;
@@ -198,6 +198,34 @@ $module: 'listing';
 
 		&__contact {
 			display: block;
+		}
+
+		&__nav {
+			display: block;
+			position: fixed;
+			z-index: $space;
+			top: 0;
+			left: 0;
+			right: 0;
+			height: 56px;
+			max-width: 768px;
+			margin: 0 auto;
+		}
+
+		&__nav-button {
+			float: left;
+			width: 50%;
+			text-align: center;
+			background-color: $gray-light;
+			color: $gray-dark;
+			padding: 17px;
+			text-transform: uppercase;
+			cursor: pointer;
+
+			&--active {
+				background-color: $orange;
+				color: white;
+			}
 		}
 
 		&__location--full {

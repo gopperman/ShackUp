@@ -29,12 +29,24 @@ function shackUp() {
 		});
 	};
 
+	this.showAbout = function() {
+		$( event.target )
+			.parents( '.listing' )
+			.removeClass()
+			.addClass('listing listing--detailed');
+	};
+
 	this.registerClickHandlers = function() {
 		var love = $( '.listing__like-button' );
 		var hate = $( '.listing__pass-button' );
+		var about = $( '.listing__nav [data-type="about"]' );
+		var contact = $( '.listing__nav [data-type="contact"]' );
 
 		love.click( this.love );
 		hate.click( this.hate );
+		about.click( this.showAbout );
+		contact.click( this.showContact );
+
 	};
 
 }
