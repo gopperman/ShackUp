@@ -4,10 +4,11 @@ function shackUp() {
 	this.body = $('body');
 	// App state
 	this.saved = [];
-	this.queue = [ listings[0] ];
+	this.queue = listings;
 
 	this.init = function() {
-		this.showListings(this.queue[0]); // TODO: Greg decides how he wants to display stuff
+		var listingsToShow = [ this.queue[0] ];
+		this.showListings( { data : listingsToShow } ); // TODO: Greg decides how he wants to display stuff
 		this.registerClickHandlers();
 		this.initSwipe( $( '.listing' ) );
 	};
@@ -78,6 +79,16 @@ function shackUp() {
         $(  "script.template2" ).after( template(data) )
     }
 
+    this.showSaved = function(data) {
+		var template = _.template(
+	      $( "script.template" ).html()
+	    );
+
+	    $( ".saved__list" ).html(
+	      template( data )
+	    );
+    }
+
 }
 
 var shack = shack || new shackUp();
@@ -92,7 +103,7 @@ $(document).ready( function() {
 	});
 
 	$( '.nav-list' ).click( function() {
-		showSaved();
+		shack.showSaved(shack.queue);
 		$( '.saved' ).toggleClass ( 'saved-open' );
 		$( '.container' ).toggleClass( 'panel-open' );
 		$( '.nav-logo').toggleClass( 'active' );
@@ -142,16 +153,6 @@ $(document).ready( function() {
 		} else {
 			displayValue = '$' + value/1000 + 'k';
 		}
-    }
-
-	function showSaved(){
-		var template = _.template(
-	      $( "script.template" ).html()
-	    );
-
-	    $( ".saved__list" ).html(
-	      template( shack.queue )
-	    );
     }
 
 });
