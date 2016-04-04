@@ -102,6 +102,7 @@
           </div>
         </div>
       </div>
+<<<<<<< HEAD
 
       <div class="listing">
         <div class="listing__nav">
@@ -117,153 +118,101 @@
             <li><img src="http://boston-services-beta.gabriels.net/Images/v1.0/LocalImageReader.ashx?IDClient=268&amp;IDListing=268-l-4895-71973209&amp;Option=N&amp;ImageURL=http%3a%2f%2fcdn.cbhomes.com%2fs3%2fmediasvc-prd%2fproperties%2fF566629e4082414-71973209.jpg&amp;BypassGlobalProxy=false">
           </ul>
           <div class="listing__details listing__details--contact">
+=======
+>>>>>>> 9e2ff31c22159758d3c038d521a01efd2e10800a
 
-            <p class="listing__sale-status">for sale</p>
-            <p class="listing__price">$500,000</p>
 
-            <div class="listing__details-lower">
-              <p class="listing__location listing__location--full">220 Thompson St • Middleboro, MA • 02346</p>
+      <!-- BEGIN: Underscore Template Definition. -->
+      <script type="text/template" class="template2">
+
+      <% _.each( data, function( listItem ){ %>
+        <div class="listing">
+          <div class="listing__nav">
+            <div data-type="contact" class="listing__nav-button--active listing__nav-button">contact</div>
+            <div data-type="about" class="listing__nav-button">about</div>
+          </div>
+          <div class="listing__gallery stopped">
+            <ul>
+              <% _.each( listItem.photos, function( photo ){ %>
+                <li><img draggable="false" src="<%- photo.replace(/&amp;/g, '&') %>&H=205"></li>
+              <% }); %>
+            </ul>
+            <div class="listing__details listing__details--contact">
+
+              <p class="listing__sale-status"><%- (listItem.channel === 'Sales') ? 'For Sale' : 'For Rent' %></p>
+              <p class="listing__price"><%- listItem.price.Price %></p>
+
+              <div class="listing__details-lower">
+                <p class="listing__location listing__location--full">
+                <%- listItem.address.AddrDisplay %> • <%- listItem.address.AddrNeighborhood + ', ' + listItem.address.AddrStateAbbr %></p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="listing__details-wrap">
-          <div class="listing__details">
+          <div class="listing__details-wrap">
+            <div class="listing__details">
 
-            <p class="listing__sale-status">for sale</p>
-            <p class="listing__price">$500,000</p>
+              <p class="listing__sale-status"><%- (listItem.channel === 'Sales') ? 'For Sale' : 'For Rent' %></p>
+              <p class="listing__price">$<%- parseInt(listItem.price.Price).formatMoney(0) %></p>
 
-            <div class="listing__details-lower">
-              <p class="listing__location listing__location--short">Middleboro • Single Family</p>
-              <p class="listing__location listing__location--full">220 Thompson St • Middleboro, MA</p>
+              <div class="listing__details-lower">
+                <p class="listing__location listing__location--short"><%- listItem.propertyType[0] %></p>
+                <p class="listing__location listing__location--full"><%- listItem.address.AddrDisplay %> • <%- listItem.address.AddrNeighborhood + ', ' + listItem.address.AddrStateAbbr %></p>
+              </div>
             </div>
-          </div>
 
-          <div class="listing__details-bar">
-            <ul class="listing__details-bar-items">
-              <li><i class="fa fa-map-marker"></i> 3 miles away</li>
-              <li><i class="fa fa-home"></i> Single Family</li>
-              <li><i class="fa fa-star"></i> 3 beds • 2 baths</li>
+            <div class="listing__details-bar">
+              <ul class="listing__details-bar-items">
+                <li><i class="fa fa-map-marker"></i> 3 miles away</li>
+                <li><i class="fa fa-home"></i> <%- listItem.propertyType[0] %></li>
+                <li><i class="fa fa-star"></i> <%- listItem.description.Bedroom %> beds • <%- listItem.description.BathsFull %> baths</li>
+              </ul>
+            </div>
+
+            <div class="listing__buttons-container">
+              <div class="listing__like-button"><i class="fa fa-heart listing__button-icon"></i></div>
+              <div class="listing__pass-button"><i class="fa fa-times listing__button-icon"></i></div>
+            </div>
+
+            <p class="listing__description"><%- listItem.description.CommentsLong %></p>
+          </div>
+          
+          <div class="listing__contact">
+            <div class="listing__agent-image-wrap">
+              <img class="listing__agent-image" src="<%- listItem.agents[0].photo.replace(/&amp;/g, '&') %>" alt="">
+            </div>
+            <p class="listing__agent-name"><%- listItem.agents[0].name %></p>
+            <div class="listing__agency"><%- listItem.contact.AdvertiserName %></div>
+            <ul class="listing__agent-contacts">
+              <li class="listing__agent-contact"><a href="mailto:<%- listItem.agents[0].email %>"><i class="fa fa-envelope listing__envelope-icon"></i></a></li>
+              <li class="listing__agent-contact"><a href="<%- listItem.agents[0].address %>"><i class="fa fa-globe listing__globe-icon"></i></a></li>
+              <li class="listing__agent-contact"><a href="tel:<%- listItem.agents[0].phones[0] %>"><i class="fa fa-mobile listing__phone-icon"></i></a></li>
             </ul>
           </div>
-
-          <div class="listing__buttons-container">
-            <div class="listing__like-button"><i class="fa fa-heart listing__button-icon"></i></div>
-            <div class="listing__pass-button"><i class="fa fa-times listing__button-icon"></i></div>
-          </div>
-
-          <p class="listing__description">One-of-a-kind South End Penthouse! Offering more than 5,400 sq ft of living on one level in the heart of the South End and conveniently located moments to everything this vibrant community has to offer. Secure direct elevator access welcomes one into this expansive and unique home. A front facing formal sitting room boasts sensational floor to ceiling windows, views of the Boston Skyline, and a double sided gas fire place. Positioned adjacent to the large eat-in kitchen with top-of-the-line appliances and abundant storage. A formal dinging room boasts a built-in banquet and an elegant water-wall . An oversized family room has a gas fireplace and a full auxiliary kitchen. 4 bedrooms in total including a serene master suite complete with dual walk in closets, generous marble bath with walk-in multi jet steam shower and soaking tub. This home is complete with a lushly landscaped 2,500 sq ft private roof garden, 12 person hot tub, and secret garden! 2+ Garage Parking Spaces Included!</p>
         </div>
-        
-        <div class="listing__contact">
-          <div class="listing__agent-image-wrap">
-            <img class="listing__agent-image" src="http://agent-portraits.s3.amazonaws.com/0034/2543/real-estate-agent.png" alt="">
-          </div>
-          <p class="listing__agent-name">Sharon Lucido</p>
-          <div class="listing__agency">Lucido Real Estate</div>
-          <ul class="listing__agent-contacts">
-            <li class="listing__agent-contact"><a href="#"><i class="fa fa-envelope listing__envelope-icon"></i></a></li>
-            <li class="listing__agent-contact"><a href="#"><i class="fa fa-globe listing__globe-icon"></i></a></li>
-            <li class="listing__agent-contact"><a href="#"><i class="fa fa-mobile listing__phone-icon"></i></a></li>
-          </ul>
-        </div>
-      </div>
+      <% }); %>
+      </script>
 
       <div class="saved">
         
         <ul class="saved__list">
-          <li class="saved__item">
-            <div class="saved__img-wrap">
-              <img src="http://www.wesleyan.edu/reslife/images/AAA%20House.jpg" alt="" class="saved__img">
-            </div>
-            <p class="saved__price">$290k</p>
-            <p class="saved__location">Middleboro</p>
-          </li>
-          <li class="saved__item">
-            <div class="saved__img-wrap">
-              <img src="http://www.wesleyan.edu/reslife/images/AAA%20House.jpg" alt="" class="saved__img">
-            </div>
-            <p class="saved__price">$290k</p>
-            <p class="saved__location">Middleboro</p>
-          </li>
-          <li class="saved__item">
-            <div class="saved__img-wrap">
-              <img src="http://www.wesleyan.edu/reslife/images/AAA%20House.jpg" alt="" class="saved__img">
-            </div>
-            <p class="saved__price">$290k</p>
-            <p class="saved__location">Middleboro</p>
-          </li>
-          <li class="saved__item">
-            <div class="saved__img-wrap">
-              <img src="http://www.wesleyan.edu/reslife/images/AAA%20House.jpg" alt="" class="saved__img">
-            </div>
-            <p class="saved__price">$290k</p>
-            <p class="saved__location">Middleboro</p>
-          </li>
-          <li class="saved__item">
-            <div class="saved__img-wrap">
-              <img src="http://www.wesleyan.edu/reslife/images/AAA%20House.jpg" alt="" class="saved__img">
-            </div>
-            <p class="saved__price">$290k</p>
-            <p class="saved__location">Middleboro</p>
-          </li>
-          <li class="saved__item">
-            <div class="saved__img-wrap">
-              <img src="http://www.wesleyan.edu/reslife/images/AAA%20House.jpg" alt="" class="saved__img">
-            </div>
-            <p class="saved__price">$290k</p>
-            <p class="saved__location">Middleboro</p>
-          </li>
-          <li class="saved__item">
-            <div class="saved__img-wrap">
-              <img src="http://www.wesleyan.edu/reslife/images/AAA%20House.jpg" alt="" class="saved__img">
-            </div>
-            <p class="saved__price">$290k</p>
-            <p class="saved__location">Middleboro</p>
-          </li>
-          <li class="saved__item">
-            <div class="saved__img-wrap">
-              <img src="http://www.wesleyan.edu/reslife/images/AAA%20House.jpg" alt="" class="saved__img">
-            </div>
-            <p class="saved__price">$290k</p>
-            <p class="saved__location">Middleboro</p>
-          </li>
-          <li class="saved__item">
-            <div class="saved__img-wrap">
-              <img src="http://www.wesleyan.edu/reslife/images/AAA%20House.jpg" alt="" class="saved__img">
-            </div>
-            <p class="saved__price">$290k</p>
-            <p class="saved__location">Middleboro</p>
-          </li>
-          <li class="saved__item">
-            <div class="saved__img-wrap">
-              <img src="http://www.wesleyan.edu/reslife/images/AAA%20House.jpg" alt="" class="saved__img">
-            </div>
-            <p class="saved__price">$290k</p>
-            <p class="saved__location">Middleboro</p>
-          </li>
-          <li class="saved__item">
-            <div class="saved__img-wrap">
-              <img src="http://www.wesleyan.edu/reslife/images/AAA%20House.jpg" alt="" class="saved__img">
-            </div>
-            <p class="saved__price">$290k</p>
-            <p class="saved__location">Middleboro</p>
-          </li>
-          <li class="saved__item">
-            <div class="saved__img-wrap">
-              <img src="http://www.wesleyan.edu/reslife/images/AAA%20House.jpg" alt="" class="saved__img">
-            </div>
-            <p class="saved__price">$290k</p>
-            <p class="saved__location">Middleboro</p>
-          </li>
-          <li class="saved__item">
-            <div class="saved__img-wrap">
-              <img src="http://www.wesleyan.edu/reslife/images/AAA%20House.jpg" alt="" class="saved__img">
-            </div>
-            <p class="saved__price">$290k</p>
-            <p class="saved__location">Middleboro</p>
-          </li>
+        <!-- BEGIN: Underscore Template Definition. -->
+          <script type="text/template" class="template">
+          <% _.each( data, function( listItem ){ %>
+            <li class="saved__item">
+              <div class="saved__img-wrap">
+                <img src="<%- listItem.photos[0].replace(/&amp;/g, '&') %>" alt="" class="saved__img">
+              </div>
+              <p class="saved__price">
+                <%- listItem.price.Price %>
+              </p>
+              <p class="saved__location">
+                <%- listItem.address.AddrNeighborhood %>
+              </p>
+            </li>
+          <% }); %>
         </ul>
+        </script>
         <div class="saved__filters">
           <div data-type="sale" class="saved__filter--active saved__filter">for sale</div>
           <div data-type="rent" class="saved__filter">for rent</div>

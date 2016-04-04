@@ -8,13 +8,16 @@
   background: #fff;
   padding: 20px;
   bottom: 0;
-  left: -100%;
+  left: -120%;
   position: absolute;
   top: 55px;
   transition: all, .2s;
   width: 80%;
   z-index: 99;
   font-size: 14px;
+  /**
+   * Cross Browser Styles for Input Range
+   */
   /*hide the outline behind the border*/
 }
 .filters-open {
@@ -37,6 +40,7 @@
   color: #A0A09F;
   padding: 5px;
   text-transform: uppercase;
+  cursor: pointer;
 }
 .filters__item {
   margin-bottom: 10px;
@@ -94,6 +98,7 @@
   list-style-type: none;
 }
 .filters__option-bar li {
+  text-align: center;
   float: left;
   margin: 0;
   width: 16.5%;
@@ -102,7 +107,6 @@
   border-right: none;
 }
 .filters input[type=range] {
-  /*removes default webkit styles*/
   -webkit-appearance: none;
 }
 .filters input[type=range]::-webkit-slider-runnable-track {
@@ -212,9 +216,10 @@
 
 /** Listing **/
 .listing {
+  background: #fff;
   top: 65px;
-  left: 0;
-  position: relative;
+  left: 2.5%;
+  position: absolute;
   width: 95%;
   margin: 0 auto;
   bottom: initial;
@@ -315,9 +320,16 @@
  */
 .listing--detailed {
   border: 0;
+  height: calc(100vh - 55px);
   margin: 0;
+  padding-bottom: 20px;
+  overflow-x: hidden;
+  overflow-y: scroll;
   top: 55px;
   width: 100%;
+}
+.listing--detailed .listing__gallery {
+  height: auto;
 }
 .listing--detailed .listing__buttons-container {
   position: fixed;
@@ -427,7 +439,7 @@
 
 .listing__gallery {
   position: relative;
-  height: auto;
+  height: 75vw;
   max-height: 450px;
   overflow: hidden;
 }
@@ -723,8 +735,6 @@ body {
   height: 100%;
   height: 100vh;
   max-width: 768px;
-  overflow-x: hidden;
-  overflow-y: scroll;
   position: relative;
   width: 100%;
 }

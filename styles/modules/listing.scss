@@ -1,9 +1,10 @@
 $module: 'listing';
 
 .#{$module} {
+	background: $white;
 	top: $nav-offset + 10px; 
-	left: 0;		
-	position: relative;
+	left: 2.5%;		
+	position: absolute;
 	width: 95%;
 	margin: 0 auto;
 	bottom: initial;
@@ -125,10 +126,18 @@ $module: 'listing';
 
 .#{$module}--detailed {
 	border: 0;
+	height: calc(100vh - 55px);
 	margin: 0;
+	padding-bottom: 20px;
+	overflow-x: hidden;
+	overflow-y: scroll;
 	top: $nav-offset;
 	width: 100%;
 
+	.listing__gallery {
+		height: auto;
+	}
+	
 	.#{$module} {
 		&__buttons-container {
 			position: fixed;

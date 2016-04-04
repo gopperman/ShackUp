@@ -5,7 +5,7 @@ $module: 'filters';
 	background: $white;
 	padding: 20px;
 	bottom: 0;
-	left: -100%;
+	left: -120%;
 	position: absolute;
 	top: $nav-offset;
 	transition: all, .2s;
@@ -35,6 +35,7 @@ $module: 'filters';
 		color: $gray-dark;
 		padding: 5px;
 		text-transform: uppercase;
+		cursor: pointer;
 	}
 
 	&__item {
@@ -103,6 +104,7 @@ $module: 'filters';
 		list-style-type: none;
 
 		li {
+			text-align: center;
 			float: left;
 			margin: 0;
 			width: 16.5%;
@@ -114,11 +116,10 @@ $module: 'filters';
 	}
 
 
-
-
-
+	/**
+	 * Cross Browser Styles for Input Range
+	 */
 	input[type=range] {
-    /*removes default webkit styles*/
     -webkit-appearance: none;
 	}
 	input[type=range]::-webkit-slider-runnable-track {
