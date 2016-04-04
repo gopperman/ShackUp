@@ -1,0 +1,194 @@
+$module: 'filters';
+
+.#{$module} {
+
+	background: $white;
+	padding: 20px;
+	bottom: 0;
+	left: -100%;
+	position: absolute;
+	top: $nav-offset;
+	transition: all, .2s;
+	width: 80%;
+	z-index: $space;
+	font-size: 14px;
+
+	&-open {
+		left: 0;
+	}
+
+	&__sale-type {
+		position: relative;
+		overflow: auto;
+		top: 0;
+		left: 0;
+		right: 0;
+		max-width: 768px;
+		margin: 0 auto 10px;
+	}
+
+	&__sale-type-button {
+		float: left;
+		width: 50%;
+		text-align: center;
+		background-color: $gray-light;
+		color: $gray-dark;
+		padding: 5px;
+		text-transform: uppercase;
+	}
+
+	&__item {
+		margin-bottom: 10px;
+		padding-bottom: 20px;
+		clear: both;
+		overflow-y: auto;
+    overflow-x: hidden;
+		border-bottom: 1px solid $gray-light;
+	}
+
+	&__options {
+		clear: both;
+	}
+
+	&__header {
+		float: left;
+		clear: both;
+		margin: 0;
+		text-transform: uppercase;
+		color: $gray-dark;
+		margin-bottom: 10px;
+	}
+
+	&__location {
+		width: 100%;
+		padding: 5px;
+		border-radius: 3px;
+		border: 1px solid $gray-dark;
+	}
+
+	&__distance {
+		width: 100%;
+	}
+
+	&__list {
+		margin: 0;
+	}
+
+	&__range-label {
+		float: right;
+		color: $gray-dark;
+	}
+
+	&__price {
+		width: 49%;
+		float: left;
+
+		&:first-child {
+			margin-right: 1%;
+		}
+	}
+
+	&__filter-option {
+		border: 1px solid $gray-light;
+    display: inline-block;
+    margin: 0 3px 6px 0;
+    padding: 5px 10px;
+    cursor: pointer;
+	}
+
+	&__option-bar {
+		overflow: auto;
+		margin: 0 0 5px;
+		padding: 0;
+		list-style-type: none;
+
+		li {
+			float: left;
+			margin: 0;
+			width: 16.5%;
+		}
+
+		li:not(:last-child) {
+			border-right: none;
+		}
+	}
+
+
+
+
+
+	input[type=range] {
+    /*removes default webkit styles*/
+    -webkit-appearance: none;
+	}
+	input[type=range]::-webkit-slider-runnable-track {
+	    height: 5px;
+	    background: $gray-light;
+	    border: none;
+	    border-radius: 3px;
+	}
+	input[type=range]::-webkit-slider-thumb {
+	    -webkit-appearance: none;
+	    border: none;
+	    height: 16px;
+	    width: 16px;
+	    border-radius: 50%;
+	    border: 2px solid $orange;
+	    background: $white;
+	    margin-top: -4px;
+	}
+	input[type=range]:focus {
+	    outline: none;
+	}
+	input[type=range]:focus::-webkit-slider-runnable-track {
+	    background: $gray-light;
+	}
+
+	input[type=range]::-moz-range-track {
+	    height: 5px;
+	    background: $white;
+	    border: none;
+	    border-radius: 3px;
+	}
+	input[type=range]::-moz-range-thumb {
+	    border: none;
+	    height: 16px;
+	    width: 16px;
+	    border-radius: 50%;
+	    border: 2px solid $orange;
+	    background: $white;
+	}
+
+	/*hide the outline behind the border*/
+	input[type=range]:-moz-focusring{
+	    outline: 1px solid white;
+	    outline-offset: -1px;
+	}
+
+	input[type=range]::-ms-track {
+	    height: 5px;
+	    /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+	    background: transparent;
+	}
+	input[type=range]::-ms-fill-lower {
+	    background: $orange;
+	    border-radius: 10px;
+	}
+	input[type=range]::-ms-fill-upper {
+	    background: $white;
+	    border-radius: 10px;
+	}
+	input[type=range]::-ms-thumb {
+	    height: 16px;
+	    width: 16px;
+	    border-radius: 50%;
+	    border: 1px solid $white;
+	    background: $orange;
+	}
+	input[type=range]:focus::-ms-fill-lower {
+	    background: $orange;
+	}
+	input[type=range]:focus::-ms-fill-upper {
+	    background: $white;
+	}
+}
