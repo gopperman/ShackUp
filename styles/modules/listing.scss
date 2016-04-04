@@ -1,7 +1,8 @@
 $module: 'listing';
 
 .#{$module} {
-	top: $nav-offset + 10px; 		
+	top: $nav-offset + 10px; 
+	left: 0;		
 	position: relative;
 	width: 95%;
 	margin: 0 auto;
