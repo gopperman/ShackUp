@@ -76,6 +76,9 @@
   width: calc( 100% - 80px );
   padding: 15px;
 }
+.listing__details--contact {
+  display: none;
+}
 .listing__sale-status {
   display: none;
   text-transform: uppercase;
@@ -208,6 +211,39 @@
 }
 .listing--detailed .listing__details-bar-items li i {
   color: #CF6428;
+}
+
+.listing--contact {
+  border: 0;
+  margin: 0;
+  top: 55px;
+  width: 100%;
+}
+.listing--contact .listing__contact {
+  display: block;
+}
+.listing--contact .listing__location--full {
+  display: block;
+}
+.listing--contact .listing__price {
+  border-bottom: none;
+  font-weight: 500;
+}
+.listing--contact .listing__sale-status {
+  display: block;
+}
+.listing--contact .listing__details-wrap {
+  display: none;
+}
+.listing--contact .listing__details--contact {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #2F225F;
+}
+.listing--contact .listing__details--contact p {
+  color: white;
 }
 
 .listing__gallery {
@@ -406,6 +442,88 @@
     width: 25%;
   }
 }
+/** Contact Agent **/
+.listing__contact {
+  display: none;
+  padding: 20px 10px 30px;
+}
+.listing__nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 768px;
+  margin: 0 auto;
+}
+.listing__nav-button {
+  float: left;
+  width: 50%;
+  text-align: center;
+  background-color: #e5e5e5;
+  color: #A0A09F;
+  padding: 15px;
+  text-transform: uppercase;
+}
+.listing__nav-button--active {
+  background-color: #CF6428;
+  color: white;
+}
+.listing__agent-image {
+  width: 100%;
+}
+.listing__agent-image-wrap {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.listing__agent-name {
+  margin: 0;
+  text-align: center;
+  font-size: 20px;
+  color: #221F1F;
+}
+.listing__agency {
+  margin: 0 0 15px;
+  text-align: center;
+  font-size: 16px;
+  color: #A0A09F;
+}
+.listing__agent-contacts {
+  overflow: auto;
+  width: 250px;
+  margin: 0 auto;
+  padding: 0;
+  list-style-type: none;
+}
+.listing__agent-contacts li {
+  float: left;
+  width: 33%;
+  text-align: center;
+  font-size: 26px;
+}
+.listing__agent-contacts li a {
+  color: #fff;
+}
+.listing__agent-contacts li i {
+  padding: 10px;
+  background: #CF6428;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.listing__globe-icon {
+  width: 46px;
+  height: 46px;
+}
+.listing__phone-icon {
+  width: 46px;
+  height: 46px;
+  font-size: 40px !important;
+  padding-top: 4px !important;
+}
+
 /** Layout **/
 * {
   box-sizing: border-box;
