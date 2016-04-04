@@ -210,6 +210,16 @@
   left: 0;
   top: 0;
 }
+.nav .nav-logo {
+  padding-bottom: 0;
+}
+.nav .nav-logo img {
+  height: 36px;
+  width: auto;
+}
+.nav .nav-logo.active {
+  padding-bottom: 0;
+}
 .nav-list {
   position: absolute;
   right: 0;

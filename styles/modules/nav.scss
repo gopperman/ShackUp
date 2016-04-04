@@ -25,17 +25,29 @@ $module: 'nav';
 	}
 
 	&-button {
-
 		&:hover {
 			cursor: hand;
 			cursor: pointer;
 		}
 	}
+
 	&-menu {
 		position: absolute;
 		left: 0;
 		top: 0;
 	}
+
+	& .nav-logo {
+		padding-bottom: 0;
+		img { 
+			height: 36px;
+			width: auto; 
+		}
+		&.active {
+			padding-bottom: 0;
+		}
+	}
+	
 	&-list {
 		position: absolute;
 		right: 0;
