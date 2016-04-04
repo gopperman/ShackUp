@@ -592,6 +592,9 @@
   float: left;
   margin-bottom: 30px;
 }
+.saved__item a:link, .saved__item a:visited, .saved__item a:active, .saved__item a:hover {
+  text-decoration: none;
+}
 .saved__price {
   margin: 0;
   text-align: center;

@@ -70,13 +70,50 @@ function shackUp() {
 		});
 	};
 
+	/**
+	 * parses search filters form, necessary for non-HTML form elements
+	 *
+	 * @param event - original submit event
+	 * @return string - full query string for Gabriels request
+	 *
+	 */
 	this.getQuery = function( event ) {
 		event.preventDefault();
-		var query = this.searchForm.serialize();
-		var proptypes = $('.filters__options--prop-type .filter--active');
-		var beds = $('.filters__options--beds .filter--active');
-		var baths = $('.filters__options--baths .filter--active');
-		console.log( beds, baths, proptypes );
+		var self = this;
+		var saleType = $('.filters__sale-type .filter--active').data('type');
+		var gabrielsParams = [ 'propertyType', 'bedrooms', 'bathrooms' ];
+		var paramMap = {
+			propertyType: $('.prop-type-options .filter--active'),
+			bedrooms: $('.bed-options .filter--active'),
+			bathrooms: $('.bath-options .filter--active')
+		};
+
+		queryString = this.searchForm.serialize() + '&channel=' + saleType;
+
+		_.each( gabrielsParams, function( param ) {
+			queryString += '&' + param + '=' + self.buildQueryString( paramMap[ param ] );
+		});
+
+		return queryString;
+	};
+
+	/**
+	 * builds complete query string for Gabriels request
+	 *
+	 * @param array - array of values for a single filter
+	 * @return string - string of values of a filter
+	 *
+	 */
+	this.buildQueryString = function( filter ) {
+		var filterValues = _.map( filter, function( filterVal ) {
+			return encodeURIComponent(  filterVal.innerText );
+		});
+		return filterValues;
+	};
+
+	this.setSaleType = function( event ) {
+		$( '.filters__sale-type-button' ).removeClass( 'filter--active' );
+		$( event.target ).addClass( 'filter--active' );
 	};
 
 	this.registerClickHandlers = function() {
@@ -85,11 +122,12 @@ function shackUp() {
 		var about = $( '.listing__nav [data-type="about"]' );
 		var contact = $( '.listing__nav [data-type="contact"]' );
 		var searchFilter = $( '.filters__filter-option' );
-		
+		var saleType = $( '.filters__sale-type-button' );
 
 		love.click( this.love );
 		hate.click( this.hate );
 		about.click( this.showAbout );
+		saleType.click( this.setSaleType );
 		searchFilter.click( function() {$(event.target).toggleClass( 'filter--active' );});
 		this.searchForm.submit( this.getQuery.bind( this ) );
 	};
@@ -110,11 +148,12 @@ function shackUp() {
     };
 
     this.showSaved = function(data) {
+    	$('.saved__item').detach(); // Remove old ones
 		var template = _.template(
 	      $( "script.template" ).html()
 	    );
 
-	    $( ".saved__list" ).html(
+	    $(  "script.template" ).after(
 	      template( data )
 	    );
     };

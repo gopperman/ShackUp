@@ -22,8 +22,8 @@
         <form class="filters-container filters__form">
 
           <div class="filters__sale-type">
-            <div data-type="contact" class="filter--active filters__sale-type-button">for sale</div>
-            <div data-type="about" class="filters__sale-type-button">for rent</div>
+            <div data-type="sales" class="filter--active filters__sale-type-button">for sale</div>
+            <div data-type="rentals" class="filters__sale-type-button">for rent</div>
           </div>
 
           <div class="filters__item">
@@ -68,7 +68,7 @@
 
           <div class="filters__item">
             <div class="filters__header">Property Type</div>
-            <div class="filters__options filters__options--prop-type">
+            <div class="filters__options prop-type-options">
               <div class="filters__filter-option">Single Family</div>
               <div class="filters__filter-option">Land</div>
               <div class="filters__filter-option">Commercial</div>
@@ -83,7 +83,7 @@
 
           <div class="filters__item">
             <div class="filters__header">Beds</div>
-            <ul class="filters__option-bar filters__options">
+            <ul class="filters__option-bar filters__options bed-options">
               <li class="filters__filter-option">0+</li>
               <li class="filters__filter-option">1+</li>
               <li class="filters__filter-option">2+</li>
@@ -92,7 +92,7 @@
               <li class="filters__filter-option">5+</li>
             </ul>
             <div class="filters__header">Baths</div>
-            <ul class="filters__option-bar filters__options">
+            <ul class="filters__option-bar filters__options bath-options">
               <li class="filters__filter-option">0+</li>
               <li class="filters__filter-option">1+</li>
               <li class="filters__filter-option">2+</li>
@@ -192,12 +192,13 @@
           <script type="text/template" class="template">
           <% _.each( data, function( listItem ){ %>
             <li class="saved__item">
-              <a href="http://realestate.boston.com/listings/<%- listItem.price.Price %>" target="_blank">
+              <a href="http://realestate.boston.com/listings/<%- listItem.id %>" target="_blank">
                 <div class="saved__img-wrap">
                   <img src="<%- listItem.photos[0].replace(/&amp;/g, '&') %>" alt="" class="saved__img">
                 </div>
                 <p class="saved__price">
-                  <%- listItem.price.Price %>
+                  <%- ( listItem.price.Price.toString().length > 6 ) ?
+      '$' + listItem.price.Price/1000000 + 'm' : '$' + listItem.price.Price/1000 + 'k' %>
                 </p>
                 <p class="saved__location">
                   <%- listItem.address.AddrNeighborhood %>
