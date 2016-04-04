@@ -1,7 +1,6 @@
 function shackUp() {
 	this.baseURI = document.URL;
-	this.pos = 0;
-	this.body = $('body');
+
 	// App state
 	this.saved = [];
 	this.queue = listings;
