@@ -60,13 +60,44 @@ function shackUp() {
 		});
 	};
 
+	/**
+	 * parses search filters form, necessary for non-HTML form elements
+	 *
+	 * @param event - original submit event
+	 * @return string - full query string for Gabriels request
+	 *
+	 */
 	this.getQuery = function( event ) {
 		event.preventDefault();
-		var query = this.searchForm.serialize();
-		var proptypes = $('.filters__options--prop-type .filter--active');
-		var beds = $('.filters__options--beds .filter--active');
-		var baths = $('.filters__options--baths .filter--active');
-		console.log( beds, baths, proptypes );
+		var self = this;
+		var gabrielsParams = [ 'propertyType', 'bedrooms', 'bathrooms' ];
+		var paramMap = {
+			propertyType: $('.prop-type-options .filter--active'),
+			bedrooms: $('.bed-options .filter--active'),
+			bathrooms: $('.bath-options .filter--active')
+		};
+
+		queryString = this.searchForm.serialize();
+
+		_.each( gabrielsParams, function( param ) {
+			queryString += '&' + param + '=' + self.buildQueryString( paramMap[ param ] );
+		});
+
+		return queryString;
+	};
+
+	/**
+	 * builds complete query string for Gabriels request
+	 *
+	 * @param array - array of values for a single filter
+	 * @return string - string of values of a filter
+	 *
+	 */
+	this.buildQueryString = function( filter ) {
+		var filterValues = _.map( filter, function( filterVal ) {
+			return encodeURIComponent(  filterVal.innerText );
+		});
+		return filterValues;
 	};
 
 	this.registerClickHandlers = function() {
