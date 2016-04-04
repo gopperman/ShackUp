@@ -8,6 +8,7 @@ function shackUp() {
 
 	this.init = function() {
 		this.registerClickHandlers();
+		this.showListings(this.queue[0]); // TODO: Greg decides how he wants to display stuff
 	};
 
 	this.love = function() {
@@ -37,6 +38,14 @@ function shackUp() {
 		hate.click( this.hate );
 	};
 
+	this.showListings = function(data){
+    	var template = _.template(
+            $( "script.template2" ).html()
+        );
+
+        $(  "script.template2" ).after( template(data) )
+    }
+
 }
 
 var shack = shack || new shackUp();
@@ -51,6 +60,7 @@ $(document).ready( function() {
 	});
 
 	$( '.nav-list' ).click( function() {
+		showSaved();
 		$( '.saved' ).toggleClass ( 'saved-open' );
 		$( '.container' ).toggleClass( 'panel-open' );
 		$( '.nav-logo').toggleClass( 'active' );
@@ -94,5 +104,23 @@ $(document).ready( function() {
 			}
 		}
 	});
+
+	function showMinifiedPrice (value) {
+    	if ( value.toString().length > 6 ) {
+			displayValue = '$' + value/1000000 + 'm';
+		} else {
+			displayValue = '$' + value/1000 + 'k';
+		}
+    }
+
+	function showSaved(){
+		var template = _.template(
+	      $( "script.template" ).html()
+	    );
+
+	    $( ".saved__list" ).html(
+	      template( shack.queue )
+	    );
+    }
 
 });
