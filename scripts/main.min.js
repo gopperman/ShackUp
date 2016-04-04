@@ -72,6 +72,7 @@ function shackUp() {
 	this.getQuery = function( event ) {
 		event.preventDefault();
 		var self = this;
+		var saleType = $('.filters__sale-type .filter--active').data('type');
 		var gabrielsParams = [ 'propertyType', 'bedrooms', 'bathrooms' ];
 		var paramMap = {
 			propertyType: $('.prop-type-options .filter--active'),
@@ -79,7 +80,7 @@ function shackUp() {
 			bathrooms: $('.bath-options .filter--active')
 		};
 
-		queryString = this.searchForm.serialize();
+		queryString = this.searchForm.serialize() + '&channel=' + saleType;
 
 		_.each( gabrielsParams, function( param ) {
 			queryString += '&' + param + '=' + self.buildQueryString( paramMap[ param ] );
@@ -102,17 +103,23 @@ function shackUp() {
 		return filterValues;
 	};
 
+	this.setSaleType = function( event ) {
+		$( '.filters__sale-type-button' ).removeClass( 'filter--active' );
+		$( event.target ).addClass( 'filter--active' );
+	};
+
 	this.registerClickHandlers = function() {
 		var love = $( '.listing__like-button' );
 		var hate = $( '.listing__pass-button' );
 		var about = $( '.listing__nav [data-type="about"]' );
 		var contact = $( '.listing__nav [data-type="contact"]' );
 		var searchFilter = $( '.filters__filter-option' );
-		
+		var saleType = $( '.filters__sale-type-button' );
 
 		love.click( this.love );
 		hate.click( this.hate );
 		about.click( this.showAbout );
+		saleType.click( this.setSaleType );
 		searchFilter.click( function() {$(event.target).toggleClass( 'filter--active' );});
 		this.searchForm.submit( this.getQuery.bind( this ) );
 	};
