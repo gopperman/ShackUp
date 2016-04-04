@@ -77,7 +77,7 @@ body {
 
 // default active state for filter buttons
 .filter--active {
-	background-color: $orange;
+	background-color: $orange !important;
 	color: $white;
 }
 
