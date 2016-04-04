@@ -131,8 +131,9 @@
             </ul>
             <div class="listing__details listing__details--contact">
 
-              <p class="listing__sale-status"><%- (listItem.channel === 'Sales') ? 'For Sale' : 'For Rent' %></p>
+             
               <p class="listing__price"><%- listItem.price.Price %></p>
+              <p class="listing__sale-status"><%- (listItem.channel === 'Sales') ? 'For Sale' : 'For Rent' %></p>
 
               <div class="listing__details-lower">
                 <p class="listing__location listing__location--full">
@@ -171,10 +172,10 @@
           
           <div class="listing__contact">
             <div class="listing__agent-image-wrap">
-              <img class="listing__agent-image" src="<%- listItem.agents[0].photo.replace(/&amp;/g, '&') %>" alt="">
+              <img class="listing__agent-image" src="" alt="">
             </div>
-            <p class="listing__agent-name"><%- listItem.agents[0].name %></p>
-            <div class="listing__agency"><%- listItem.contact.AdvertiserName %></div>
+            <p class="listing__agent-name">Agent Name</p>
+            <div class="listing__agency">Agent Contact</div>
             <ul class="listing__agent-contacts">
               <li class="listing__agent-contact"><a href="mailto:<%- listItem.agents[0].email %>"><i class="fa fa-envelope listing__envelope-icon"></i></a></li>
               <li class="listing__agent-contact"><a href="<%- listItem.agents[0].address %>"><i class="fa fa-globe listing__globe-icon"></i></a></li>
