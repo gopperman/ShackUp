@@ -106,7 +106,7 @@
         <ul class="saved__list">
         <!-- BEGIN: Underscore Template Definition. -->
           <script type="text/template" class="template">
-          <% _.each( shack.queue, function( listItem ){ %>
+          <% _.each( data, function( listItem ){ %>
             <li class="saved__item">
               <div class="saved__img-wrap">
                 <img src="<%- listItem.photos[0].replace(/&amp;/g, '&') %>" alt="" class="saved__img">
