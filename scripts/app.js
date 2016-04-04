@@ -68,7 +68,7 @@ $(document).ready( function() {
 		var listing = $('.listing');
 		if ( listing.hasClass( 'listing--detailed') ) {
 			event.stopPropagation();
-			listing.removeClass('listing--detailed');
+			listing.removeClass('listing--detailed listing--contact');
 			gallery.unslider('destroySwipe');
 			gallery.unslider('destroyKeys');
 			$('.unslider-nav').css( 'display', 'none');

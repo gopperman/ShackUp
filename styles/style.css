@@ -76,6 +76,9 @@
   width: calc( 100% - 80px );
   padding: 15px;
 }
+.listing__details--contact {
+  display: none;
+}
 .listing__sale-status {
   display: none;
   text-transform: uppercase;
@@ -208,6 +211,39 @@
 }
 .listing--detailed .listing__details-bar-items li i {
   color: #CF6428;
+}
+
+.listing--contact {
+  border: 0;
+  margin: 0;
+  top: 55px;
+  width: 100%;
+}
+.listing--contact .listing__contact {
+  display: block;
+}
+.listing--contact .listing__location--full {
+  display: block;
+}
+.listing--contact .listing__price {
+  border-bottom: none;
+  font-weight: 500;
+}
+.listing--contact .listing__sale-status {
+  display: block;
+}
+.listing--contact .listing__details-wrap {
+  display: none;
+}
+.listing--contact .listing__details--contact {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #2F225F;
+}
+.listing--contact .listing__details--contact p {
+  color: white;
 }
 
 .listing__gallery {
@@ -408,6 +444,7 @@
 }
 /** Contact Agent **/
 .listing__contact {
+  display: none;
   padding: 20px 10px 30px;
 }
 .listing__nav {
