@@ -10,7 +10,8 @@ function shackUp() {
 		var listingsToShow = this.queue;
 		this.showListings( { data : listingsToShow } ); // TODO: Greg decides how he wants to display stuff
 		this.registerClickHandlers();
-		this.initSwipe( $( '.listing' ) );
+		// Set up the next card with swipe handlers
+		this.initSwipe( $('.listing').last() );
 	};
 
 	this.love = function() {
@@ -20,6 +21,8 @@ function shackUp() {
 			left: '+=100%',
 		}, 300, function() {
 			shack.saved.push( listing.detach() );
+			// Set up the next card with swipe handlers
+			shack.initSwipe( $('.listing').last() );
 		});		
 	};
 
@@ -29,6 +32,8 @@ function shackUp() {
 			left: '-=100%',
 		}, 300, function() {
 			this.remove();
+			// Set up the next card with swipe handlers
+			shack.initSwipe( $('.listing').last() );
 		});
 	};
 
