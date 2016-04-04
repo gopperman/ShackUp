@@ -64,11 +64,13 @@ function shackUp() {
 		var hate = $( '.listing__pass-button' );
 		var about = $( '.listing__nav [data-type="about"]' );
 		var contact = $( '.listing__nav [data-type="contact"]' );
+		var searchFilter = $( '.filters__filter-option' );
 
 		love.click( this.love );
 		hate.click( this.hate );
 		about.click( this.showAbout );
 		contact.click( this.showContact );
+		searchFilter.click( function() {$(event.target).toggleClass( 'filter--active' );});
 
 	};
 
@@ -117,7 +119,7 @@ $(document).ready( function() {
 	shack.init();
 
 	$('.nav-menu').click( function() {
-		$( '.menu' ).toggleClass ( 'menu-open' );
+		$( '.filters' ).toggleClass ( 'filters-open' );
 		$( '.overlay' ).fadeToggle( 400, 'linear' );
 	});
 

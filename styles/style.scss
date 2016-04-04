@@ -24,6 +24,7 @@ $nav-offset: 55px;
 
 /** Menu **/
 @import 'modules/menu';
+@import 'modules/filters';
 
 /** Navigation **/
 @import 'modules/nav';
@@ -53,7 +54,6 @@ body {
 	margin: 0;
 	overflow: hidden;
 }
-
 .container {
 	background: $white;
 	margin: 0 auto;
@@ -75,6 +75,12 @@ body {
 	background: $alpha-black;
 	display:none;
 	z-index: $high;
+}
+
+// default active state for filter buttons
+.filter--active {
+	background-color: $orange;
+	color: $white;
 }
 
 @media (min-width: 768px) {
