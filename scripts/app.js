@@ -23,6 +23,7 @@ function shackUp() {
 			shack.saved.push( { 'id': listing.data('id'), 'markup': listing.detach() } );
 			shack.savedData.push(_.findWhere(shack.currentItems, {'id': listing.data('id')}));
 			listing.addClass('saved');
+			listing.detach();
 			// Set up the next card with swipe handlers
 			shack.initSwipe( $('.listing').last() );
 		});		
@@ -62,48 +63,52 @@ function shackUp() {
 	this.initSwipe = function ( swipee ) {
 		swipee.bind( 'move', function(e) {
 			var el = $(this);
-			var width = el.width();
-			var startLeft = el.css('left');
-			var startPercent = e.startX / $( window ).width();
-			if ( ! el.hasClass( 'listing--detailed' ) ) {
+			if ( ! el.hasClass('listing--detailed') ) {
+				var width = el.width();
+				var startLeft = el.css('left');
+				var startPercent = e.startX / $( window ).width();
+				
 				el.css({ left: e.startX + e.distX - ( width * startPercent )});
-			}
-			// Notification Opacity
-			var notifications = $( '.notification .fa' );
-			var love = $( '.notification .fa-heart' );
-			var hate = $( '.notification .fa-times' );
-			notifications.css({
-				display: 'block',
-			});
+				
+				// Notification Opacity
+				var notifications = $( '.notification .fa' );
+				var love = $( '.notification .fa-heart' );
+				var hate = $( '.notification .fa-times' );
+				notifications.css({
+					display: 'block',
+				});
 
-			if ( e.distX < 0 ) {
-				hate.css( {opacity: Math.abs( e.distX / 150 ) });
-				love.css( {opacity: 0} ); // We need this
-			} else if ( e.distX > 0 ) {
-				love.css( {opacity: e.distX / 150 } );
-				hate.css( {opacity: 0} ); // We need this
-			} else {
-				notifications.css( {opacity: 0} );
+				if ( e.distX < 0 ) {
+					hate.css( {opacity: Math.abs( e.distX / 150 ) });
+					love.css( {opacity: 0} ); // We need this
+				} else if ( e.distX > 0 ) {
+					love.css( {opacity: e.distX / 150 } );
+					hate.css( {opacity: 0} ); // We need this
+				} else {
+					notifications.css( {opacity: 0} );
+				}
 			}
 		});
 
 		swipee.bind( 'moveend', function(e) {
-			var notifications = $( '.notification .fa' );
 			var el = $( this );
+			if ( ! el.hasClass('listing--detailed') ) {
+				var notifications = $( '.notification .fa' );
 
-			if ( e.distX > 150 ) {
-				var love = el.find( '.listing__like-button' );
-				love.trigger( 'click' );
-			} else if ( e.distX  < -150 ) {
-				var hate = el.find( '.listing__pass-button' );
-				hate.trigger( 'click');
-			} else {
-				$( this ).animate( {'left':'2.5%'}, 150 );
-				notifications.animate( {
-					opacity: 0,
-				}, 100, function() {
-					$( this ).css( {display: 'none'} );
-				});				
+				if ( e.distX > 150 ) {
+					var love = el.find( '.listing__like-button' );
+					love.trigger( 'click' );
+				} else if ( e.distX  < -150 ) {
+					var hate = el.find( '.listing__pass-button' );
+					hate.trigger( 'click');
+				} else {
+					$( this ).animate( {'left':'2.5%'}, 150 );
+					notifications.animate( {
+						opacity: 0,
+					}, 100, function() {
+						$( this ).css( {display: 'none'} );
+					});				
+				}
 			}
 		});
 	};
