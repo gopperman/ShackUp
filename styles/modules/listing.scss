@@ -1,7 +1,8 @@
 $module: 'listing';
 
 .#{$module} {
-	top: $nav-offset + 10px; 		
+	top: $nav-offset + 10px; 
+	left: 0;		
 	position: relative;
 	width: 95%;
 	margin: 0 auto;
@@ -19,6 +20,10 @@ $module: 'listing';
 		width: calc( 100% - 80px );
 		padding: 15px;
  	}
+
+	&__details--contact {
+		display: none;
+	}
 
  	&__sale-status {
  		display: none;
@@ -178,6 +183,49 @@ $module: 'listing';
 						color: $orange;
 					}
 				}
+			}
+		}
+	}
+}
+
+.#{$module}--contact{
+	border: 0;
+	margin: 0;
+	top: $nav-offset;
+	width: 100%;
+
+	.#{$module} {
+
+		&__contact {
+			display: block;
+		}
+
+		&__location--full {
+			display: block;
+		}
+
+		&__price {
+			border-bottom: none;
+			font-weight: 500;
+		}
+
+		&__sale-status {
+			display: block;
+		}
+
+		&__details-wrap {
+			display: none;
+		}
+
+		&__details--contact {
+			display: block;
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			background-color: $purple;
+
+			p {
+				color: white;
 			}
 		}
 	}

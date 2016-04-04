@@ -3,7 +3,7 @@ function shackUp() {
 	this.pos = 0;
 	this.body = $('body');
 	// App state
-	this.likes = [];
+	this.saved = [];
 	this.queue = listings;
 
 	this.init = function() {
@@ -11,11 +11,22 @@ function shackUp() {
 	};
 
 	this.love = function() {
-		console.log('liked!');
+		var listing = $( this ).parents( '.listing' );
+		listing.animate( {
+			opacity: 0,
+			left: '+=100%',
+		}, 300, function() {
+			shack.saved.push( listing.detach() );
+		});		
 	};
 
 	this.hate = function() {
-		console.log('fuck this!');
+		$( this ).parents( '.listing' ).animate( {
+			opacity: 0,
+			left: '-=100%',
+		}, 300, function() {
+			this.remove();
+		});
 	};
 
 	this.registerClickHandlers = function() {
@@ -57,7 +68,7 @@ $(document).ready( function() {
 		var listing = $('.listing');
 		if ( listing.hasClass( 'listing--detailed') ) {
 			event.stopPropagation();
-			listing.removeClass('listing--detailed');
+			listing.removeClass('listing--detailed listing--contact');
 			gallery.unslider('destroySwipe');
 			gallery.unslider('destroyKeys');
 			$('.unslider-nav').css( 'display', 'none');
