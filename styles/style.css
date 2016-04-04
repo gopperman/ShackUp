@@ -743,7 +743,7 @@
   margin: 0;
 }
 .error__outOfListings p:nth-child(2) {
-  border-bottom: 1px solid #A0A09F;
+  border-bottom: 1px solid #e5e5e5;
   font-size: 1.6em;
   color: #2F225F;
   margin-bottom: .5em;
