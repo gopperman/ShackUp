@@ -2,12 +2,38 @@ function shackUp() {
 	this.baseURI = document.URL;
 	this.pos = 0;
 	this.body = $('body');
+	// App state
+	this.likes = [];
+	this.queue = listings;
+
+	this.init = function() {
+		this.registerClickHandlers();
+	};
+
+	this.love = function() {
+		console.log('liked!');
+	};
+
+	this.hate = function() {
+		console.log('fuck this!');
+	};
+
+	this.registerClickHandlers = function() {
+		var love = $( '.listing__like-button' );
+		var hate = $( '.listing__pass-button' );
+
+		love.click( this.love );
+		hate.click( this.hate );
+	};
+
 }
 
 var shack = shack || new shackUp();
 
 $(document).ready( function() {
 	// Click handlers
+	shack.init();
+
 	$('.nav-menu').click( function() {
 		$( '.menu' ).toggleClass ( 'menu-open' );
 		$( '.overlay' ).fadeToggle( 400, 'linear' );
