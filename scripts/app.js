@@ -4,6 +4,7 @@ function shackUp() {
 	this.body = $('body');
 	// App state
 	this.saved = [];
+	this.savedData = [];
 	this.queue = listings;
 	this.searchForm = $( '.filters__form' );
 
@@ -17,7 +18,9 @@ function shackUp() {
 			opacity: 0,
 			left: '+=100%',
 		}, 300, function() {
+
 			shack.saved.push( listing.detach() );
+			shack.savedData.push(_.findWhere(shack.queue, {'id': listing.data('id')}));
 			// Set up the next card with swipe handlers
 			shack.initSwipe( $('.listing').last() );
 		});		
@@ -134,7 +137,7 @@ $(document).ready( function() {
 	});
 
 	$( '.nav-list' ).click( function() {
-		shack.showSaved( { data: shack.queue } );
+		shack.showSaved( { data: shack.savedData } );
 		$( '.saved' ).toggleClass ( 'saved-open' );
 		$( '.container' ).toggleClass( 'panel-open' );
 		$( '.nav-logo').toggleClass( 'active' );
