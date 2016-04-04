@@ -16,13 +16,14 @@ function shackUp() {
 	this.love = function() {
 		var listing = $( this ).parents( '.listing' );
 		shack.notify( $('.notification .fa-heart') );
-		listing.delay( 500 ).animate( {
+		listing.delay( 300 ).animate( {
 			opacity: 0,
 			left: '+=100%',
-		}, 500, function() {
+		}, 300, function() {
 			shack.savedData.push(_.findWhere(shack.currentItems, {'id': listing.data('id')}));
 			listing.addClass('saved');
-			
+			listing.detach();
+
 			// Set up the next card with swipe handlers
 			shack.initSwipe( $('.listing').last() );
 		});		
