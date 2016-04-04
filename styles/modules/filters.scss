@@ -5,7 +5,7 @@ $module: 'filters';
 	background: $white;
 	padding: 20px;
 	bottom: 0;
-	left: -120%;
+	left: -130%;
 	position: absolute;
 	top: $nav-offset;
 	transition: all, .2s;
@@ -104,11 +104,12 @@ $module: 'filters';
 		list-style-type: none;
 
 		li {
+			border: 1px solid $gray-light;
 			text-align: center;
 			float: left;
 			margin: 0;
 			width: 16.5%;
-			background-color: $gray-light
+			background-color: lightgrey;
 		}
 
 		li:not(:last-child) {
