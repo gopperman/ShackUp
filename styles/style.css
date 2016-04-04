@@ -336,6 +336,7 @@
 .listing--detailed {
   border: 0;
   height: calc(100vh - 55px);
+  left: 0;
   margin: 0;
   padding-bottom: 20px;
   overflow-x: hidden;
