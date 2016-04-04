@@ -15,23 +15,25 @@ function shackUp() {
 
 	this.love = function() {
 		var listing = $( this ).parents( '.listing' );
-		listing.animate( {
+		shack.notify( $('.notification .fa-heart') );
+		listing.delay( 500 ).animate( {
 			opacity: 0,
 			left: '+=100%',
-		}, 300, function() {
+		}, 500, function() {
 			shack.savedData.push(_.findWhere(shack.currentItems, {'id': listing.data('id')}));
 			listing.addClass('saved');
-			shack.saved.push( listing.detach() );
+			
 			// Set up the next card with swipe handlers
 			shack.initSwipe( $('.listing').last() );
 		});		
 	};
 
 	this.hate = function() {
-		$( this ).parents( '.listing' ).animate( {
+		shack.notify( $('.notification .fa-times') );
+		$( this ).parents( '.listing' ).delay( 500 ).animate( {
 			opacity: 0,
 			left: '-=100%',
-		}, 300, function() {
+		}, 500, function() {
 			this.remove();
 			// Set up the next card with swipe handlers
 			shack.initSwipe( $('.listing').last() );
@@ -46,21 +48,60 @@ function shackUp() {
 			.addClass('listing listing--detailed');
 	};
 
+	// Takes in a dom reference (hopefully a notification and does an opacity animation
+	this.notify = function ( notification ) {
+		notification.fadeIn( 400, function() {
+			$( this ).delay(400).fadeOut( 300 );
+		});
+	};
+
 	// Takes in a dom reference and hooks up a swipe event to that object
 	this.initSwipe = function ( swipee ) {
-		swipee.on( 'swipeleft', function() {
+		swipee.bind( 'move', function(e) {
 			var el = $(this);
+			var width = el.width();
+			var startLeft = el.css('left');
+			var startPercent = e.startX / $( window ).width();
 			if ( ! el.hasClass( 'listing--detailed' ) ) {
-				var hate = $(this).find( '.listing__pass-button' );
-				hate.trigger( 'click' );
+				el.css({ left: e.startX + e.distX - ( width * startPercent )});
+			}
+			// Notification Opacity
+			var notifications = $( '.notification .fa' );
+			var love = $( '.notification .fa-heart' );
+			var hate = $( '.notification .fa-times' );
+			notifications.css({
+				display: 'block',
+				zIndex: '99', 
+			});
+
+			if ( e.distX < 0 ) {
+				hate.css( {opacity: Math.abs( e.distX / 150 ) });
+				love.css( {opacity: 0} ); // We need this
+			} else if ( e.distX > 0 ) {
+				love.css( {opacity: e.distX / 150 } );
+				hate.css( {opacity: 0} ); // We need this
+			} else {
+				notifications.css( {opacity: 0} );
 			}
 		});
-		swipee.on( 'swiperight', function() {
-			var el = $(this);
-			if ( ! el.hasClass( 'listing--detailed' ) ) {
-				var love = $(this).find( '.listing__like-button' );
+
+		swipee.bind( 'moveend', function(e) {
+			var notifications = $( '.notification .fa' );
+			notifications.animate( {
+				opacity: 0,
+			}, 100, function() {
+				$( this ).css( {display: 'none'} );
+			});
+
+			var el = $( this );
+			if ( e.distX > 150 ) {
+				var love = el.find( '.listing__like-button' );
 				love.trigger( 'click' );
+			} else if ( e.distX  < -150 ) {
+				var hate = el.find( '.listing__pass-button' );
+				hate.trigger( 'click');
 			}
+			$( this ).animate( {'left':'2.5%'}, 150 );
 		});
 	};
 
@@ -74,6 +115,7 @@ function shackUp() {
 	this.getQuery = function( event ) {
 		event.preventDefault();
 		var self = this;
+		var saleType = $('.filters__sale-type .filter--active').data('type');
 		var gabrielsParams = [ 'propertyType', 'bedrooms', 'bathrooms' ];
 		var paramMap = {
 			propertyType: $('.prop-type-options .filter--active'),
@@ -81,7 +123,7 @@ function shackUp() {
 			bathrooms: $('.bath-options .filter--active')
 		};
 
-		queryString = this.searchForm.serialize();
+		queryString = this.searchForm.serialize() + '&channel=' + saleType;
 
 		_.each( gabrielsParams, function( param ) {
 			queryString += '&' + param + '=' + self.buildQueryString( paramMap[ param ] );
@@ -104,17 +146,23 @@ function shackUp() {
 		return filterValues;
 	};
 
+	this.setSaleType = function( event ) {
+		$( '.filters__sale-type-button' ).removeClass( 'filter--active' );
+		$( event.target ).addClass( 'filter--active' );
+	};
+
 	this.registerClickHandlers = function() {
 		var love = $( '.listing__like-button' );
 		var hate = $( '.listing__pass-button' );
 		var about = $( '.listing__nav [data-type="about"]' );
 		var contact = $( '.listing__nav [data-type="contact"]' );
 		var searchFilter = $( '.filters__filter-option' );
-		
+		var saleType = $( '.filters__sale-type-button' );
 
 		love.click( this.love );
 		hate.click( this.hate );
 		about.click( this.showAbout );
+		saleType.click( this.setSaleType );
 		searchFilter.click( function() {$(event.target).toggleClass( 'filter--active' );});
 		this.searchForm.submit( this.getQuery.bind( this ) );
 		// Listing magic

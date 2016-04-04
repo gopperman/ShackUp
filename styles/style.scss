@@ -39,7 +39,9 @@ $nav-offset: 59px;
 /** Contact Agent **/
 @import 'modules/contact-agent';
 
+/** Status messages **/
 @import 'modules/error';
+@import 'modules/notification';
 
 /** Layout **/
 * {
