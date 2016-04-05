@@ -14,3 +14,11 @@ $module: 'notification';
 		z-index: $space + 1;
 	}
 }
+
+@media (min-width: 768px) {
+	.#{$module} {
+		.fa {
+			top: 220px;
+		}
+	}
+}
