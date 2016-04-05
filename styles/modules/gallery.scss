@@ -48,10 +48,10 @@ $module: 'listing__gallery';
   border-radius: 5px;
   overflow: hidden;
   text-indent: -999em;
-  border: 2px solid #fff;
+  border: 2px solid $gray-light;
   cursor: pointer;
 }
 .unslider-nav ol li.unslider-active {
-  background: #fff;
+  background: $gray-light;
   cursor: default;
 }
