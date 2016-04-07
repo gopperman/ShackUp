@@ -9,8 +9,10 @@ function shackUp() {
 	this.searchForm = $( '.filters__form' );
 
 	this.init = function() {
-		this.refreshListings();
 		this.getListings();
+		//#hack
+		setTimeout(function() { shack.refreshListings(); $('.error__loading').hide(); }, 3000);
+		
 	};
 
 	this.love = function() {
@@ -283,6 +285,10 @@ function shackUp() {
 									success: function(response) {
 										var listings = response.data.listings;
 										[].push.apply(shack.queue, listings);
+										//Dedupe this stuff. #hack
+										_.uniq(shack.queue);
+										//Shuffle it too while you're in there #hack
+										_.shuffle(shack.queue);
 									},
 									dataType: 'json',
 									error: function (error, response) {

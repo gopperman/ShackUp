@@ -742,10 +742,26 @@
   position: absolute;
   top: 100px;
   width: 90%;
+  background: white;
 }
 .error__outOfListings .fa {
   font-size: 10em;
   color: #CF6428;
+}
+.error__outOfListings .fa-refresh {
+  font-size: 9em;
+  padding: 10px;
+}
+@-webkit-keyframes rotating {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+.error__outOfListings .rotating {
+  -webkit-animation: rotating 2s linear infinite;
 }
 .error__outOfListings a {
   color: #A0A09F;

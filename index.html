@@ -104,10 +104,18 @@
         </form>
       </div>
 
+      
+
       <div class="error__outOfListings">
         <p><i class="fa fa-check"></i></p>
         <p>Looks like you've already seen everything!</p>
         <p><a class="refreshListings">Give a home a second chance</a></p>
+      </div>
+
+      <div class="error__outOfListings error__loading">
+        <p><i class="fa fa-refresh rotating"></i></p>
+        <p>Gathering the hottest houses in your area.</p>
+        <p>It'll be worth the wait!</p>
       </div>
       <div class="notification">
         <i class="fa fa-heart"></i>
@@ -146,6 +154,8 @@
             <div class="listing__details">
 
               <p class="listing__sale-status"><%- (listItem.channel === 'Sales') ? 'For Sale' : 'For Rent' %></p>
+              <p class="listing__location listing__location--full">
+                <%- listItem.address.AddrDisplay %> • <%- listItem.address.AddrNeighborhood + ', ' + listItem.address.AddrStateAbbr %></p>
               <p class="listing__price">$<%- parseInt(listItem.price.Price).formatMoney(0) %></p>
 
               <div class="listing__details-lower">
@@ -156,7 +166,8 @@
 
             <div class="listing__details-bar">
               <ul class="listing__details-bar-items">
-                <li><i class="fa fa-map-marker"></i> 3 miles away</li>
+                <!-- #TODO: Make this real -->
+                <li><i class="fa fa-map-marker"></i> 3 miles away</li> 
                 <li><i class="fa fa-home"></i> <%- listItem.propertyType[0] %></li>
                 <li><i class="fa fa-star"></i> <%- listItem.description.Bedroom %> beds • <%- listItem.description.BathsFull %> baths</li>
               </ul>
