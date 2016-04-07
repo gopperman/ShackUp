@@ -350,7 +350,7 @@ $(document).ready( function() {
 	});
 
 	$( '.overlay' ).click( function( event ) {
-		$( '.menu' ).removeClass( 'menu-open' );
+		$( '.filters' ).removeClass( 'filters-open' );
 		$( '.overlay' ).fadeToggle( 200, 'linear' );
 	});
 
