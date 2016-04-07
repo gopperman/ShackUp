@@ -90,6 +90,7 @@
   margin: 0 3px 6px 0;
   padding: 5px 10px;
   cursor: pointer;
+  transition: all, .1s;
 }
 .filters__option-bar {
   overflow: auto;
@@ -557,12 +558,12 @@
   border-radius: 5px;
   overflow: hidden;
   text-indent: -999em;
-  border: 2px solid #fff;
+  border: 2px solid #e5e5e5;
   cursor: pointer;
 }
 
 .unslider-nav ol li.unslider-active {
-  background: #fff;
+  background: #e5e5e5;
   cursor: default;
 }
 
@@ -783,6 +784,11 @@
   z-index: 100;
 }
 
+@media (min-width: 768px) {
+  .notification .fa {
+    top: 220px;
+  }
+}
 /** Layout **/
 * {
   box-sizing: border-box;

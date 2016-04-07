@@ -181,7 +181,11 @@ function shackUp() {
 		hate.click( this.hate );
 		about.click( this.showAbout );
 		saleType.click( this.setSaleType );
-		searchFilter.click( function() {$(event.target).toggleClass( 'filter--active' );});
+		searchFilter.click( function( event ) {
+			var target = $( event.target );
+			target.siblings( '.filter--active' ).removeClass( 'filter--active' );
+			$(event.target).toggleClass( 'filter--active' );
+		});
 		this.searchForm.submit( this.getQuery.bind( this ) );
 		$('body').on( 'click', '.saved__item', this.loadSavedListing );
 
@@ -362,13 +366,12 @@ $(document).ready( function() {
 	});
 
 	$( '.overlay' ).click( function( event ) {
-		$( '.menu' ).removeClass( 'menu-open' );
+		$( '.filters' ).removeClass( 'filters-open' );
 		$( '.overlay' ).fadeToggle( 200, 'linear' );
 	});
 
 	$('.refreshListings').click(function() {
 		shack.refreshListings();
 	});
-
 	
 });
