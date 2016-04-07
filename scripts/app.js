@@ -171,7 +171,11 @@ function shackUp() {
 		hate.click( this.hate );
 		about.click( this.showAbout );
 		saleType.click( this.setSaleType );
-		searchFilter.click( function() {$(event.target).toggleClass( 'filter--active' );});
+		searchFilter.click( function( event ) {
+			var target = $( event.target );
+			target.siblings( '.filter--active' ).removeClass( 'filter--active' );
+			$(event.target).toggleClass( 'filter--active' );
+		});
 		this.searchForm.submit( this.getQuery.bind( this ) );
 		// Listing magic
 		$('.listing__gallery').click( function( event ) {
@@ -357,6 +361,5 @@ $(document).ready( function() {
 	$('.refreshListings').click(function() {
 		shack.refreshListings();
 	});
-
 	
 });

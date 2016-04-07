@@ -90,6 +90,7 @@
   margin: 0 3px 6px 0;
   padding: 5px 10px;
   cursor: pointer;
+  transition: all, .1s;
 }
 .filters__option-bar {
   overflow: auto;
