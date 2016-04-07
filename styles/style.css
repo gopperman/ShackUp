@@ -90,6 +90,7 @@
   margin: 0 3px 6px 0;
   padding: 5px 10px;
   cursor: pointer;
+  transition: all, .1s;
 }
 .filters__option-bar {
   overflow: auto;
@@ -421,7 +422,7 @@
   text-align: center;
   background-color: #e5e5e5;
   color: #A0A09F;
-  padding: 17px;
+  padding: 20px;
   text-transform: uppercase;
   cursor: pointer;
 }
@@ -591,6 +592,7 @@
   width: 33%;
   float: left;
   margin-bottom: 30px;
+  cursor: pointer;
 }
 .saved__item a:link, .saved__item a:visited, .saved__item a:active, .saved__item a:hover {
   text-decoration: none;
@@ -672,7 +674,7 @@
   text-align: center;
   background-color: #e5e5e5;
   color: #A0A09F;
-  padding: 15px;
+  padding: 20px;
   text-transform: uppercase;
 }
 .listing__nav-button--active {
@@ -798,6 +800,11 @@
   z-index: 100;
 }
 
+@media (min-width: 768px) {
+  .notification .fa {
+    top: 220px;
+  }
+}
 /** Layout **/
 * {
   box-sizing: border-box;

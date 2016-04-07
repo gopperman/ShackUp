@@ -56,6 +56,7 @@ body {
 	margin: 0;
 	overflow: hidden;
 }
+
 .container {
 	background: $white;
 	margin: 0 auto;
@@ -73,6 +74,7 @@ body {
 		}
 	}
 }
+
 .overlay {
 	@include full-screen();
 	background: $alpha-black;
@@ -84,8 +86,4 @@ body {
 .filter--active {
 	background-color: $orange !important;
 	color: $white;
-}
-
-@media (min-width: 768px) {
-
 }

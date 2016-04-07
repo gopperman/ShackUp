@@ -90,10 +90,11 @@ $module: 'filters';
 
 	&__filter-option {
 		border: 1px solid $gray-light;
-    display: inline-block;
-    margin: 0 3px 6px 0;
-    padding: 5px 10px;
-    cursor: pointer;
+	    display: inline-block;
+	    margin: 0 3px 6px 0;
+	    padding: 5px 10px;
+	    cursor: pointer;
+	    transition: all, .1s;
 	}
 
 	&__option-bar {

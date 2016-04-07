@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Shack Up</title>
-    <meta name="description" content="Get with your new home" />
+    <meta name="description" content="Get with your new home. Hot open houses, down-to-furnish in your area!" />
     <link rel="canonical" href="http://gopperman.github.io/realestatetinder" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="styles/style.css">
@@ -139,9 +139,8 @@
             </ul>
             <div class="listing__details listing__details--contact">
 
-             
-              <p class="listing__price"><%- listItem.price.Price %></p>
               <p class="listing__sale-status"><%- (listItem.channel === 'Sales') ? 'For Sale' : 'For Rent' %></p>
+              <p class="listing__price"><%- listItem.price.Price %></p>
 
               <div class="listing__details-lower">
                 <p class="listing__location listing__location--full">
@@ -159,7 +158,7 @@
               <p class="listing__price">$<%- parseInt(listItem.price.Price).formatMoney(0) %></p>
 
               <div class="listing__details-lower">
-                <p class="listing__location listing__location--short"><%- listItem.propertyType[0] %></p>
+                <p class="listing__location listing__location--short"><%- listItem.propertyType[0] %> • <%- listItem.address.AddrNeighborhood %></p>
                 <p class="listing__location listing__location--full"><%- listItem.address.AddrDisplay %> • <%- listItem.address.AddrNeighborhood + ', ' + listItem.address.AddrStateAbbr %></p>
               </div>
             </div>
@@ -203,19 +202,17 @@
         <!-- BEGIN: Underscore Template Definition. -->
           <script type="text/template" class="template">
           <% _.each( data, function( listItem ){ %>
-            <li class="saved__item">
-              <a href="http://realestate.boston.com/listings/<%- listItem.id %>" target="_blank">
-                <div class="saved__img-wrap">
-                  <img src="<%- listItem.photos[0].replace(/&amp;/g, '&') %>" alt="" class="saved__img">
-                </div>
-                <p class="saved__price">
-                  <%- ( listItem.price.Price.toString().length > 6 ) ?
-      '$' + listItem.price.Price/1000000 + 'm' : '$' + listItem.price.Price/1000 + 'k' %>
-                </p>
-                <p class="saved__location">
-                  <%- listItem.address.AddrNeighborhood %>
-                </p>
-              </a>
+            <li class="saved__item" data-id="<%- listItem.id %>">
+              <div class="saved__img-wrap">
+                <img src="<%- listItem.photos[0].replace(/&amp;/g, '&') %>" alt="" class="saved__img">
+              </div>
+              <p class="saved__price">
+                <%- ( listItem.price.Price.toString().length > 6 ) ?
+    '$' + listItem.price.Price/1000000 + 'm' : '$' + listItem.price.Price/1000 + 'k' %>
+              </p>
+              <p class="saved__location">
+                <%- listItem.address.AddrNeighborhood %>
+              </p>
             </li>
           <% }); %>
         </ul>
