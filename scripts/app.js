@@ -20,10 +20,10 @@ function shackUp() {
 			opacity: 0,
 			left: '+=100%',
 		}, 300, function() {
+			shack.saved.push( { 'id': listing.data('id'), 'markup': listing.detach() } );
 			shack.savedData.push(_.findWhere(shack.currentItems, {'id': listing.data('id')}));
 			listing.addClass('saved');
 			listing.detach();
-
 			// Set up the next card with swipe handlers
 			shack.initSwipe( $('.listing').last() );
 		});		
@@ -159,6 +159,16 @@ function shackUp() {
 		$( event.target ).addClass( 'filter--active' );
 	};
 
+	this.loadSavedListing = function( event ) {
+		var listingID = $( event.target ).attr('data-id') || $( event.target ).parents('.saved__item').attr('data-id');
+		var listing = _.findWhere( shack.saved, { id: listingID });
+		$( '.nav-list' ).click();
+		$( '.container' ).find('.listing').remove();
+		setTimeout( function() {
+			$( 'script.template2' ).after( listing.markup.addClass('listing--contact').css({'opacity':'1', 'left':'2.5%'}) ).fadeIn();
+		}, 100);
+	};
+
 	this.registerClickHandlers = function() {
 		var love = $( '.listing__like-button' );
 		var hate = $( '.listing__pass-button' );
@@ -177,6 +187,8 @@ function shackUp() {
 			$(event.target).toggleClass( 'filter--active' );
 		});
 		this.searchForm.submit( this.getQuery.bind( this ) );
+		$('body').on( 'click', '.saved__item', this.loadSavedListing );
+
 		// Listing magic
 		$('.listing__gallery').click( function( event ) {
 			var gallery = $( this );

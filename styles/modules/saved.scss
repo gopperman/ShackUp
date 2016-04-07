@@ -26,6 +26,7 @@ $module: 'saved';
 		width: 33%;
 		float: left;
 		margin-bottom: 30px;
+		cursor: pointer;
 	}
 
 	&__item a:link, &__item a:visited, &__item a:active, &__item a:hover {

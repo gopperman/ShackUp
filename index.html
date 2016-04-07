@@ -131,9 +131,8 @@
             </ul>
             <div class="listing__details listing__details--contact">
 
-             
-              <p class="listing__price"><%- listItem.price.Price %></p>
               <p class="listing__sale-status"><%- (listItem.channel === 'Sales') ? 'For Sale' : 'For Rent' %></p>
+              <p class="listing__price"><%- listItem.price.Price %></p>
 
               <div class="listing__details-lower">
                 <p class="listing__location listing__location--full">
@@ -192,19 +191,17 @@
         <!-- BEGIN: Underscore Template Definition. -->
           <script type="text/template" class="template">
           <% _.each( data, function( listItem ){ %>
-            <li class="saved__item">
-              <a href="http://realestate.boston.com/listings/<%- listItem.id %>" target="_blank">
-                <div class="saved__img-wrap">
-                  <img src="<%- listItem.photos[0].replace(/&amp;/g, '&') %>" alt="" class="saved__img">
-                </div>
-                <p class="saved__price">
-                  <%- ( listItem.price.Price.toString().length > 6 ) ?
-      '$' + listItem.price.Price/1000000 + 'm' : '$' + listItem.price.Price/1000 + 'k' %>
-                </p>
-                <p class="saved__location">
-                  <%- listItem.address.AddrNeighborhood %>
-                </p>
-              </a>
+            <li class="saved__item" data-id="<%- listItem.id %>">
+              <div class="saved__img-wrap">
+                <img src="<%- listItem.photos[0].replace(/&amp;/g, '&') %>" alt="" class="saved__img">
+              </div>
+              <p class="saved__price">
+                <%- ( listItem.price.Price.toString().length > 6 ) ?
+    '$' + listItem.price.Price/1000000 + 'm' : '$' + listItem.price.Price/1000 + 'k' %>
+              </p>
+              <p class="saved__location">
+                <%- listItem.address.AddrNeighborhood %>
+              </p>
             </li>
           <% }); %>
         </ul>
