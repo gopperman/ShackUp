@@ -149,7 +149,7 @@
               <p class="listing__price">$<%- parseInt(listItem.price.Price).formatMoney(0) %></p>
 
               <div class="listing__details-lower">
-                <p class="listing__location listing__location--short"><%- listItem.propertyType[0] %></p>
+                <p class="listing__location listing__location--short"><%- listItem.propertyType[0] %> • <%- listItem.address.AddrNeighborhood %></p>
                 <p class="listing__location listing__location--full"><%- listItem.address.AddrDisplay %> • <%- listItem.address.AddrNeighborhood + ', ' + listItem.address.AddrStateAbbr %></p>
               </div>
             </div>
