@@ -79,6 +79,7 @@ body {
 	@include full-screen();
 	background: $alpha-black;
 	display:none;
+	top: $nav-offset -1;
 	z-index: $high;
 }
 
