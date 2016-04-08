@@ -278,53 +278,39 @@ function shackUp() {
 
 		
 	    
-	    /* Step 2, figure out what's around us */
-	    $.ajax({
-			type: 'get',
-			url: 'https://www.zipcodeapi.com/rest/js-ewCNyI7UqfAote0T7hZ9oHU99g5knwuC26qBPywfN6EglEatV9CkRxu0Nzlb6PN8/radius.json/02145/3/mile',
-			cache: false,
-			success: function(response) {
-				var zipCodes = response.zip_codes;
-				$.each(zipCodes, function(index, zipcode){
-					// Get the seopath for this location
-			    	$.ajax({
+	    
+   //  	$.ajax({
+			// type: 'get',
+			// url: 'https://boston-services.gabriels.net/Listings/v1.0/Boston.Listings.svc/getSmartSearchResults?key=' + zipcode.zip_code,
+			// cache: false,
+			// success: function(response) {
+			// 	if(response.matchGroupList) {
+					//var seoPath = response.matchGroupList.pop().matchList.pop().seoPath.replace('/', '');
+					$.ajax({
 						type: 'get',
-						url: 'https://boston-services.gabriels.net/Listings/v1.0/Boston.Listings.svc/getSmartSearchResults?key=' + zipcode.zip_code,
+						url: 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&priceMin=400000&priceMax=1000000&propertyType=Single+Family%2CSingle+Family+Home%2CMulti+Family%2CMulti-Family+Home%2C&freetext=Boston%2C+MA&locationsSEOPath=boston-ma-usa&channel=sales&_=1460137103156',
 						cache: false,
 						success: function(response) {
-							if(response.matchGroupList) {
-								var seoPath = response.matchGroupList.pop().matchList.pop().seoPath.replace('/', '');
-								$.ajax({
-									type: 'get',
-									url: 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&freetext=Somerville%2C+MA&locationsSEOPath=' + seoPath + '&channel=sales&_=1459796138733',
-									cache: false,
-									success: function(response) {
-										var listings = response.data.listings;
-										[].push.apply(shack.queue, listings);
-										//Dedupe this stuff. #hack
-										_.uniq(shack.queue);
-										//Shuffle it too while you're in there #hack
-										_.shuffle(shack.queue);
-									},
-									dataType: 'json',
-									error: function (error, response) {
-										console.log(error);
-									}
-								});	
-							}
+							var listings = response.data.listings;
+							[].push.apply(shack.queue, listings);
+							//Dedupe this stuff. #hack
+							_.uniq(shack.queue);
+							//Shuffle it too while you're in there #hack
+							_.shuffle(shack.queue);
 						},
 						dataType: 'json',
 						error: function (error, response) {
 							console.log(error);
 						}
-					});
-				});	
-			},
-			dataType: 'json',
-			error: function (error, response) {
-				console.log(error);
-			}
-		});
+					});	
+		// 		}
+		// 	},
+		// 	dataType: 'json',
+		// 	error: function (error, response) {
+		// 		console.log(error);
+		// 	}
+		// });
+				
 
 
     	
