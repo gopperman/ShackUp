@@ -2,7 +2,7 @@ $module: 'listing__gallery';
 
 .#{$module} {
 	position: relative;
-	height: 75vw;
+	height: 65vw;
 	max-height: 450px;
 	overflow: hidden;
 
@@ -19,8 +19,12 @@ $module: 'listing__gallery';
 	&.stopped {
 		width: 500%;
 		li {
+			display: none;
 			float: left;
 			width: 20%;
+			&:first-child {
+				display: list-item;
+			}
 		}
 	}
 }

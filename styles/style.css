@@ -456,7 +456,7 @@
 
 .listing__gallery {
   position: relative;
-  height: 75vw;
+  height: 65vw;
   max-height: 450px;
   overflow: hidden;
 }
@@ -473,8 +473,12 @@
   width: 500%;
 }
 .listing__gallery.stopped li {
+  display: none;
   float: left;
   width: 20%;
+}
+.listing__gallery.stopped li:first-child {
+  display: list-item;
 }
 
 /** Unslider default CSS **/
