@@ -302,6 +302,36 @@ function shackUp() {
 						error: function (error, response) {
 							console.log(error);
 						}
+					});
+					$.ajax({
+						type: 'get',
+						url: 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&priceMin=400000&priceMax=1000000&propertyType=Single+Family%2CSingle+Family+Home%2CMulti+Family%2CMulti-Family+Home%2C&freetext=Boston%2C+MA&locationsSEOPath=boston-ma-usa&channel=sales&_=1460137103156&results_page=2',
+						cache: false,
+						success: function(response) {
+							var listings = response.data.listings;
+							[].push.apply(shack.queue, listings);
+							//Shuffle it too while you're in there #hack
+							_.shuffle(shack.queue);
+						},
+						dataType: 'json',
+						error: function (error, response) {
+							console.log(error);
+						}
+					});	
+					$.ajax({
+						type: 'get',
+						url: 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&priceMin=400000&priceMax=1000000&propertyType=Single+Family%2CSingle+Family+Home%2CMulti+Family%2CMulti-Family+Home%2C&freetext=Boston%2C+MA&locationsSEOPath=boston-ma-usa&channel=sales&_=1460137103156&results_page=3',
+						cache: false,
+						success: function(response) {
+							var listings = response.data.listings;
+							[].push.apply(shack.queue, listings);
+							//Shuffle it too while you're in there #hack
+							_.shuffle(shack.queue);
+						},
+						dataType: 'json',
+						error: function (error, response) {
+							console.log(error);
+						}
 					});	
 		// 		}
 		// 	},
