@@ -227,6 +227,7 @@ function shackUp() {
 	this.refreshListings = function() {
 		//TO-DO: De-dupe the queue
 		this.currentItems = shack.queue.splice(0,10);
+		_.shuffle(this.currentItems);
 		shack.showListings( { data : this.currentItems } );
 		this.registerClickHandlers();
 		this.initSwipe( $('.listing').last() );
@@ -295,8 +296,6 @@ function shackUp() {
 							[].push.apply(shack.queue, listings);
 							//Dedupe this stuff. #hack
 							_.uniq(shack.queue);
-							//Shuffle it too while you're in there #hack
-							_.shuffle(shack.queue);
 						},
 						dataType: 'json',
 						error: function (error, response) {
@@ -310,8 +309,6 @@ function shackUp() {
 						success: function(response) {
 							var listings = response.data.listings;
 							[].push.apply(shack.queue, listings);
-							//Shuffle it too while you're in there #hack
-							_.shuffle(shack.queue);
 						},
 						dataType: 'json',
 						error: function (error, response) {
@@ -325,8 +322,6 @@ function shackUp() {
 						success: function(response) {
 							var listings = response.data.listings;
 							[].push.apply(shack.queue, listings);
-							//Shuffle it too while you're in there #hack
-							_.shuffle(shack.queue);
 						},
 						dataType: 'json',
 						error: function (error, response) {
