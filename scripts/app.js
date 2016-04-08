@@ -18,10 +18,10 @@ function shackUp() {
 	this.love = function() {
 		var listing = $( this ).parents( '.listing' );
 		shack.notify( $('.notification .fa-heart') );
-		listing.delay( 300 ).animate( {
+		listing.animate( {
 			opacity: 0,
 			left: '+=100%',
-		}, 300, function() {
+		}, 500, function() {
 			shack.saved.push( { 'id': listing.data('id'), 'markup': listing.detach() } );
 			shack.savedData.push(_.findWhere(shack.currentItems, {'id': listing.data('id')}));
 			listing.addClass('saved');
@@ -33,10 +33,10 @@ function shackUp() {
 
 	this.hate = function() {
 		shack.notify( $('.notification .fa-times') );
-		$( this ).parents( '.listing' ).delay( 300 ).animate( {
+		$( this ).parents( '.listing' ).animate( {
 			opacity: 0,
 			left: '-=100%',
-		}, 300, function() {
+		}, 500, function() {
 			this.remove();
 			// Set up the next card with swipe handlers
 			shack.initSwipe( $('.listing').last() );
@@ -54,8 +54,8 @@ function shackUp() {
 	// Takes in a dom reference (hopefully a notification and does an opacity animation
 	this.notify = function ( notification ) {
 		notification.css( { display: 'block' } );
-		notification.animate( { opacity: 100 }, 400, function() {
-			$( this ).delay( 300 ).animate( { opacity: 0 }, 400, function() {
+		notification.animate( { opacity: 100 }, 300, function() {
+			$( this ).delay( 100 ).animate( { opacity: 0 }, 400, function() {
 				$( '.notification .fa' ).css( { display: 'none', opacity: 0 } );
 			});
 		});
