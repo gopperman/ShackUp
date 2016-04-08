@@ -280,13 +280,7 @@ function shackUp() {
 		
 	    
 	    
-   //  	$.ajax({
-			// type: 'get',
-			// url: 'https://boston-services.gabriels.net/Listings/v1.0/Boston.Listings.svc/getSmartSearchResults?key=' + zipcode.zip_code,
-			// cache: false,
-			// success: function(response) {
-			// 	if(response.matchGroupList) {
-					//var seoPath = response.matchGroupList.pop().matchList.pop().seoPath.replace('/', '');
+
 					$.ajax({
 						type: 'get',
 						url: 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&priceMin=400000&priceMax=1000000&propertyType=Single+Family%2CSingle+Family+Home%2CMulti+Family%2CMulti-Family+Home%2C&freetext=Boston%2C+MA&locationsSEOPath=boston-ma-usa&channel=sales&_=1460137103156',
@@ -328,13 +322,6 @@ function shackUp() {
 							console.log(error);
 						}
 					});	
-		// 		}
-		// 	},
-		// 	dataType: 'json',
-		// 	error: function (error, response) {
-		// 		console.log(error);
-		// 	}
-		// });
 				
 
 
