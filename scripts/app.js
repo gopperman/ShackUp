@@ -151,7 +151,7 @@ function shackUp() {
 	 */
 	this.buildQueryString = function( filter ) {
 		var filterValues = _.map( filter, function( filterVal ) {
-			return encodeURIComponent(  filterVal.innerText );
+			return encodeURIComponent( filterVal.innerText );
 		});
 		return filterValues;
 	};
@@ -235,98 +235,49 @@ function shackUp() {
 
 	this.showListings = function(data){
 		$('.listing:not(.saved)').detach();
-    	var template = _.template(
-            $( "script.template2" ).html()
-        );
+			var template = _.template(
+						$( "script.template2" ).html()
+				);
 
-        $(  "script.template2" ).after( template(data) );
-    };
+				$(  "script.template2" ).after( template(data) );
+		};
 
-    this.showSaved = function(data) {
-    	$('.saved__item').detach(); // Remove old ones
+		this.showSaved = function(data) {
+			$('.saved__item').detach(); // Remove old ones
 		var template = _.template(
-	      $( "script.template" ).html()
-	    );
+				$( "script.template" ).html()
+			);
 
-	    $(  "script.template" ).after(
-	      template( data )
-	    );
-    };
-
-    this.getListings = function(distanceMiles, zipCode) {
-    	shack.queue = [];
-    	/* Step 1 - figure out where we are */
-		var options = {
-		  enableHighAccuracy: true,
-		  timeout: 5000,
-		  maximumAge: 0
+			$( "script.template" ).after(
+				template( data )
+			);
 		};
 
-		function success(pos) {
-		  var crd = pos.coords;
+		/**
+		 * Get listings
+		 * @return jqXHR results
+		 */
+		this.getListings = function(distanceMiles, zipCode) {
+			shack.queue = [];
 
-		  console.log('Your current position is:');
-		  console.log('Latitude : ' + crd.latitude);
-		  console.log('Longitude: ' + crd.longitude);
-		  console.log('More or less ' + crd.accuracy + ' meters.');
-		};
+			var $request = $.ajax({
+				type: 'get',
+				url: 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&locationsSEOPath=boston-ma-usa&channel=sales',
+				cache: false,
+				// success: function(response) {
+				// 	var listings = response.data.listings;
+				// 	[].push.apply(shack.queue, listings);
+				// 	// Dedupe this stuff. #hack
+				// 	_.uniq(shack.queue);
+				// },
+				dataType: 'json',
+				// error: function (error, response) {
+				// 	console.log(error);
+				// }
+			});
 
-		function error(err) {
-		  console.warn('ERROR(' + err.code + '): ' + err.message);
-		};
-
-		navigator.geolocation.getCurrentPosition(success, error, options);
-
-		
-	    
-	    
-
-					$.ajax({
-						type: 'get',
-						url: 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&priceMin=400000&priceMax=1000000&propertyType=Single+Family%2CSingle+Family+Home%2CMulti+Family%2CMulti-Family+Home%2C&freetext=Boston%2C+MA&locationsSEOPath=boston-ma-usa&channel=sales&_=1460137103156',
-						cache: false,
-						success: function(response) {
-							var listings = response.data.listings;
-							[].push.apply(shack.queue, listings);
-							//Dedupe this stuff. #hack
-							_.uniq(shack.queue);
-						},
-						dataType: 'json',
-						error: function (error, response) {
-							console.log(error);
-						}
-					});
-					$.ajax({
-						type: 'get',
-						url: 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&priceMin=400000&priceMax=1000000&propertyType=Single+Family%2CSingle+Family+Home%2CMulti+Family%2CMulti-Family+Home%2C&freetext=Boston%2C+MA&locationsSEOPath=boston-ma-usa&channel=sales&_=1460137103156&results_page=2',
-						cache: false,
-						success: function(response) {
-							var listings = response.data.listings;
-							[].push.apply(shack.queue, listings);
-						},
-						dataType: 'json',
-						error: function (error, response) {
-							console.log(error);
-						}
-					});	
-					$.ajax({
-						type: 'get',
-						url: 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&priceMin=400000&priceMax=1000000&propertyType=Single+Family%2CSingle+Family+Home%2CMulti+Family%2CMulti-Family+Home%2C&freetext=Boston%2C+MA&locationsSEOPath=boston-ma-usa&channel=sales&_=1460137103156&results_page=3',
-						cache: false,
-						success: function(response) {
-							var listings = response.data.listings;
-							[].push.apply(shack.queue, listings);
-						},
-						dataType: 'json',
-						error: function (error, response) {
-							console.log(error);
-						}
-					});	
-				
-
-
-    	
-    }
+			return $request;
+		}
 
 }
 
@@ -335,12 +286,12 @@ var shack = shack || new shackUp();
 $(document).ready( function() {
 	Number.prototype.formatMoney = function(c, d, t){
 		var n = this, 
-		    c = isNaN(c = Math.abs(c)) ? 2 : c, 
-		    d = d == undefined ? "." : d, 
-		    t = t == undefined ? "," : t, 
-		    s = n < 0 ? "-" : "", 
-		    i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", 
-		    j = (j = i.length) > 3 ? j % 3 : 0;
+				c = isNaN(c = Math.abs(c)) ? 2 : c, 
+				d = d == undefined ? "." : d, 
+				t = t == undefined ? "," : t, 
+				s = n < 0 ? "-" : "", 
+				i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", 
+				j = (j = i.length) > 3 ? j % 3 : 0;
 		return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 	};
 
