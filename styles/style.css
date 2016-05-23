@@ -1,6 +1,7 @@
 /** Fonts **/
 /** Colors **/
 /** Z-indexes **/
+/** Z-indexes **/
 /** Spacing **/
 /** Mixins **/
 /** Menu **/
@@ -189,10 +190,11 @@
   margin: 0;
   min-height: 58px;
   padding: 0px 20px;
-  position: absolute;
+  position: fixed;
   text-align: center;
-  top: 0;
   right: 0;
+  top: 0;
+  z-index: 75;
 }
 .nav li {
   display: inline-block;
@@ -243,9 +245,11 @@
   border-radius: 8px;
   border: 2px solid #e5e5e5;
   overflow: hidden;
+  z-index: 25;
 }
 .listing__details-wrap {
   position: relative;
+  background: #fff;
 }
 .listing__details {
   width: calc( 100% - 80px );
@@ -336,14 +340,16 @@
  */
 .listing--detailed {
   border: 0;
-  height: calc(100vh - 55px);
+  height: 100vh;
   left: 0;
+  top: 0;
   margin: 0;
   padding-bottom: 20px;
   overflow-x: hidden;
   overflow-y: scroll;
-  top: 59px;
+  padding-top: 59px;
   width: 100%;
+  z-index: 50;
 }
 .listing--detailed .listing__gallery {
   height: auto;

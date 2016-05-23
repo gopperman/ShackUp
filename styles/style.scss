@@ -10,11 +10,7 @@ $font-xxl: 3.4em;
 @import 'modules/colors';
 
 /** Z-indexes **/
-$bottom: 0;
-$low: 25;
-$middle: 50;
-$high: 75;
-$space: 99;
+@import 'modules/z-index';
 
 /** Spacing **/
 $nav-offset: 59px;

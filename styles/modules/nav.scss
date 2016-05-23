@@ -9,10 +9,11 @@ $module: 'nav';
 	margin: 0;
 	min-height: $nav-offset - 1;
 	padding: 0px 20px;
-	position: absolute;
+	position: fixed;
 	text-align: center;
-	top: 0;
 	right: 0;
+	top: 0;
+	z-index: $high;
 
 	li {
 		display: inline-block;

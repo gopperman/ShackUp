@@ -47,7 +47,6 @@ function shackUp() {
 	this.showAbout = function() {
 		$( event.target )
 			.parents( '.listing' )
-			.removeClass()
 			.addClass('listing listing--detailed');
 	};
 
@@ -276,11 +275,6 @@ function shackUp() {
 		};
 
 		navigator.geolocation.getCurrentPosition(success, error, options);
-
-		
-	    
-	    
-
 					$.ajax({
 						type: 'get',
 						url: 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&priceMin=400000&priceMax=1000000&propertyType=Single+Family%2CSingle+Family+Home%2CMulti+Family%2CMulti-Family+Home%2C&freetext=Boston%2C+MA&locationsSEOPath=boston-ma-usa&channel=sales&_=1460137103156',

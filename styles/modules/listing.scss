@@ -12,9 +12,11 @@ $module: 'listing';
 	border-radius: 8px;
 	border: 2px solid $gray-light;
 	overflow: hidden;
+	z-index: $low;
 
  	&__details-wrap {
  		position: relative;
+ 		background: $white;
  	}
 
  	&__details {
@@ -126,14 +128,16 @@ $module: 'listing';
 
 .#{$module}--detailed {
 	border: 0;
-	height: calc(100vh - 55px);
+	height: 100vh;
 	left: 0;
+	top: 0;
 	margin: 0;
 	padding-bottom: 20px;
 	overflow-x: hidden;
 	overflow-y: scroll;
-	top: $nav-offset;
+	padding-top: $nav-offset;
 	width: 100%;
+	z-index: $middle;
 
 	.listing__gallery {
 		height: auto;
