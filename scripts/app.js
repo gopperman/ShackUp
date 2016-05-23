@@ -9,14 +9,10 @@ function shackUp() {
 	this.searchForm = $( '.filters__form' );
 
 	this.init = function() {
-		var self = this;
+		this.currentPagination = 1;
 		var listings = this.getListings();
-
+		shack.queue = [];
 		listings.success( this.displayListings );
-
-
-		// #hack
-		// setTimeout(function() { shack.refreshListings(); $('.error__loading').hide(); }, 3000);
 		
 	};
 
@@ -31,9 +27,11 @@ function shackUp() {
 			shack.savedData.push(_.findWhere(shack.currentItems, {'id': listing.data('id')}));
 			listing.addClass('saved');
 			listing.detach();
+			if ( $('.listing').length < 4 ) {
+				shack.refreshListings();
+			}
 			// Set up the next card with swipe handlers
 			shack.initSwipe( $('.listing').last() );
-			// TODO: If there are two more left, start loading next set of cards and prepend to list here.
 		});		
 	};
 
@@ -44,6 +42,9 @@ function shackUp() {
 			left: '-=100%',
 		}, 500, function() {
 			this.remove();
+			if ( $('.listing').length < 4 ) {
+				shack.refreshListings();
+			}
 			// Set up the next card with swipe handlers
 			shack.initSwipe( $('.listing').last() );
 		});
@@ -230,22 +231,29 @@ function shackUp() {
 		});
 	};
 
-	this.refreshListings = function() {
-		//TODO: De-dupe the queue
+	this.addListingsToStack = function( jqXHR ) {
+		[].push.apply( shack.queue, jqXHR.data.listings );
 		this.currentItems = shack.queue.splice(0,10);
 		_.shuffle(this.currentItems);
-		shack.showListings( { data : this.currentItems } );
-		this.registerClickHandlers(); // FIXME: Yeah, don't do this here maybe?
-		this.initSwipe( $('.listing').last() );
+	}
+
+	this.refreshListings = function() {
+		shack.currentPagination++;
+		var listings = shack.getListings( shack.currentPagination );
+		listings.success( shack.displayListings );
+
+		// shack.showListings( { data : shack.currentItems } );
+		// this.registerClickHandlers(); // FIXME: Yeah, don't do this here maybe?
+		// this.initSwipe( $('.listing').last() );
 	};
 
 	this.showListings = function(data){
-		$('.listing:not(.saved)').detach();
+		//$('.listing:not(.saved)').detach();
 			var template = _.template(
 						$( "script.template2" ).html()
 				);
 
-				$(  "script.template2" ).after( template(data) );
+				$( "script.template2" ).after( template(data) );
 		};
 
 		this.showSaved = function(data) {
@@ -263,33 +271,24 @@ function shackUp() {
 		 * Get listings
 		 * @return jqXHR results
 		 */
-		this.getListings = function(distanceMiles, zipCode) {
-			shack.queue = [];
-
+		this.getListings = function( pagination, params ) {
+			var requestURL = 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&locationsSEOPath=boston-ma-usa&channel=sales';
+			if ( pagination ) {
+				requestURL += '&results_page=' + pagination;
+			}
 			var $request = $.ajax({
 				type: 'get',
-				url: 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&locationsSEOPath=boston-ma-usa&channel=sales',
+				url: requestURL,
 				cache: false,
-				// success: function(response) {
-				// 	var listings = response.data.listings;
-				// 	[].push.apply(shack.queue, listings);
-				// 	// Dedupe this stuff. #hack
-				// 	_.uniq(shack.queue);
-				// },
 				dataType: 'json',
-				// error: function (error, response) {
-				// 	console.log(error);
-				// }
 			});
 
 			return $request;
 		}
 
 		this.displayListings = function( jqXHR ) {
-			console.log(jqXHR.data.listings);
-			_.uniq(shack.queue);
+			shack.currentItems = shack.currentItems.concat(jqXHR.data.listings);
 			shack.showListings( { data : jqXHR.data.listings } );
-			$('.error__loading').hide();
 			shack.registerClickHandlers();
 			shack.initSwipe( $('.listing').last() );
 		}
