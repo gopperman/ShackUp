@@ -9,9 +9,14 @@ function shackUp() {
 	this.searchForm = $( '.filters__form' );
 
 	this.init = function() {
-		this.getListings();
-		//#hack
-		setTimeout(function() { shack.refreshListings(); $('.error__loading').hide(); }, 3000);
+		var self = this;
+		var listings = this.getListings();
+
+		listings.success( this.displayListings );
+
+
+		// #hack
+		// setTimeout(function() { shack.refreshListings(); $('.error__loading').hide(); }, 3000);
 		
 	};
 
@@ -28,6 +33,7 @@ function shackUp() {
 			listing.detach();
 			// Set up the next card with swipe handlers
 			shack.initSwipe( $('.listing').last() );
+			// TODO: If there are two more left, start loading next set of cards and prepend to list here.
 		});		
 	};
 
@@ -225,11 +231,11 @@ function shackUp() {
 	};
 
 	this.refreshListings = function() {
-		//TO-DO: De-dupe the queue
+		//TODO: De-dupe the queue
 		this.currentItems = shack.queue.splice(0,10);
 		_.shuffle(this.currentItems);
 		shack.showListings( { data : this.currentItems } );
-		this.registerClickHandlers();
+		this.registerClickHandlers(); // FIXME: Yeah, don't do this here maybe?
 		this.initSwipe( $('.listing').last() );
 	};
 
@@ -277,6 +283,15 @@ function shackUp() {
 			});
 
 			return $request;
+		}
+
+		this.displayListings = function( jqXHR ) {
+			console.log(jqXHR.data.listings);
+			_.uniq(shack.queue);
+			shack.showListings( { data : jqXHR.data.listings } );
+			$('.error__loading').hide();
+			shack.registerClickHandlers();
+			shack.initSwipe( $('.listing').last() );
 		}
 
 }
