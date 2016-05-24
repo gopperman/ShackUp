@@ -11,9 +11,7 @@ function shackUp() {
 	this.init = function() {
 		this.currentPagination = 0;
 		this.totalPages = 1; // Assume 1 at default, override with each request.
-		shack.queue = []; // FIXME: Why??
-		shack.refreshListings();
-		
+		shack.addListingsToCardStack();
 	};
 
 	this.love = function() {
@@ -28,7 +26,7 @@ function shackUp() {
 			listing.addClass('saved');
 			listing.detach();
 			if ( $('.listing').length < 4 ) {
-				shack.refreshListings();
+				shack.addListingsToCardStack();
 			}
 			// Set up the next card with swipe handlers
 			shack.initSwipe( $('.listing').last() );
@@ -43,7 +41,7 @@ function shackUp() {
 		}, 500, function() {
 			this.remove();
 			if ( $('.listing').length < 4 ) {
-				shack.refreshListings();
+				shack.addListingsToCardStack();
 			}
 			// Set up the next card with swipe handlers
 			shack.initSwipe( $('.listing').last() );
@@ -168,16 +166,6 @@ function shackUp() {
 		$( event.target ).addClass( 'filter--active' );
 	};
 
-	this.loadSavedListing = function( event ) {
-		var listingID = $( event.target ).attr('data-id') || $( event.target ).parents('.saved__item').attr('data-id');
-		var listing = _.findWhere( shack.saved, { id: listingID });
-		$( '.nav-list' ).click();
-		$( '.container' ).find('.listing').remove();
-		setTimeout( function() {
-			$( 'script.listing-template' ).after( listing.markup.addClass('listing--contact').css({'opacity':'1', 'left':'2.5%'}) ).fadeIn();
-		}, 100);
-	};
-
 	this.registerClickHandlers = function() {
 		var love = $( '.listing__like-button' );
 		var hate = $( '.listing__pass-button' );
@@ -231,9 +219,9 @@ function shackUp() {
 		});
 	};
 
-	this.refreshListings = function() {
+	// Add listings to the card stack
+	this.addListingsToCardStack = function() {
 		if ( shack.currentPagination < shack.totalPages ) {
-			console.log('found listings');
 			shack.currentPagination++;
 			var listings = shack.getListings( shack.currentPagination );
 			listings.success( shack.displayListings );	
@@ -242,14 +230,15 @@ function shackUp() {
 		}
 	};
 
+	// Reset the pagination to zero and start requesting again
 	this.resetListings = function() {
 		shack.currentPagination = 0;
-		shack.refreshListings();
+		shack.addListingsToCardStack();
 		$('.error__loading').show();
 	}
 
+	// Take the listings from returned ajax data and add them to the bottom of the card stack
 	this.showListings = function(data){
-	//$('.listing:not(.saved)').detach();
 		var template = _.template(
 			$( "script.listing-template" ).html()
 		);
@@ -257,6 +246,18 @@ function shackUp() {
 		$( "script.listing-template" ).after( template(data) );
 	};
 
+	// Load the saved listing into the top of the card stack, giving it unique classes maybe?
+	this.loadSavedListing = function( event ) {
+		var listingID = $( event.target ).attr('data-id') || $( event.target ).parents('.saved__item').attr('data-id');
+		var listing = _.findWhere( shack.saved, { id: listingID });
+		$( '.nav-list' ).click();
+		$( '.container' ).find('.listing').remove();
+		setTimeout( function() {
+			$( 'script.listing-template' ).after( listing.markup.addClass('listing--contact').css({'opacity':'1', 'left':'2.5%'}) ).fadeIn();
+		}, 100);
+	};
+
+	// Add listing thumbnails/descriptions to saved listing menu
 	this.showSaved = function(data) {
 		$('.saved__item').detach(); // Remove old ones
 		var template = _.template(
@@ -273,8 +274,7 @@ function shackUp() {
 	 * @return jqXHR results
 	 */
 	this.getListings = function( pagination, params ) {
-		//var requestURL = 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&locationsSEOPath=boston-ma-usa&channel=sales';
-		var requestURL = 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&bedrooms=3%2B&priceMin=420005&priceMax=450000&freetext=Hingham%2C+MA&locationsSEOPath=hingham-ma-usa&channel=sales&_=1464112437693';
+		var requestURL = 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&locationsSEOPath=somerville-ma-usa&channel=sales';
 		if ( pagination ) {
 			requestURL += '&results_page=' + pagination;
 		}
@@ -289,8 +289,9 @@ function shackUp() {
 	}
 
 	this.displayListings = function( jqXHR ) {
-		// Set total pages for later use
+		// Set total pages so that other requests don't ask for more data when there is none.
 		shack.totalPages = jqXHR.data.totalPages;
+		// Concatenate the current data to the currentItems cache of data
 		shack.currentItems = shack.currentItems.concat(jqXHR.data.listings);
 		shack.showListings( { data : jqXHR.data.listings } );
 		shack.registerClickHandlers();
@@ -343,7 +344,7 @@ $(document).ready( function() {
 		$( '.overlay' ).fadeToggle( 200, 'linear' );
 	});
 
-	$('.refreshListings').click(function() {
+	$('.addListingsToCardStack').click(function() {
 		shack.resetListings();
 	});
 	
