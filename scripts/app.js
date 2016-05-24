@@ -9,10 +9,10 @@ function shackUp() {
 	this.searchForm = $( '.filters__form' );
 
 	this.init = function() {
-		this.currentPagination = 1;
-		var listings = this.getListings();
-		shack.queue = [];
-		listings.success( this.displayListings );
+		this.currentPagination = 0;
+		this.totalPages = 1; // Assume 1 at default, override with each request.
+		shack.queue = []; // FIXME: Why??
+		shack.refreshListings();
 		
 	};
 
@@ -32,7 +32,7 @@ function shackUp() {
 			}
 			// Set up the next card with swipe handlers
 			shack.initSwipe( $('.listing').last() );
-		});		
+		});   
 	};
 
 	this.hate = function() {
@@ -116,7 +116,7 @@ function shackUp() {
 						opacity: 0,
 					}, 100, function() {
 						$( this ).css( {display: 'none'} );
-					});				
+					});       
 				}
 			}
 		});
@@ -174,7 +174,7 @@ function shackUp() {
 		$( '.nav-list' ).click();
 		$( '.container' ).find('.listing').remove();
 		setTimeout( function() {
-			$( 'script.template2' ).after( listing.markup.addClass('listing--contact').css({'opacity':'1', 'left':'2.5%'}) ).fadeIn();
+			$( 'script.listing-template' ).after( listing.markup.addClass('listing--contact').css({'opacity':'1', 'left':'2.5%'}) ).fadeIn();
 		}, 100);
 	};
 
@@ -231,67 +231,71 @@ function shackUp() {
 		});
 	};
 
-	this.addListingsToStack = function( jqXHR ) {
-		[].push.apply( shack.queue, jqXHR.data.listings );
-		this.currentItems = shack.queue.splice(0,10);
-		_.shuffle(this.currentItems);
-	}
-
 	this.refreshListings = function() {
-		shack.currentPagination++;
-		var listings = shack.getListings( shack.currentPagination );
-		listings.success( shack.displayListings );
-
-		// shack.showListings( { data : shack.currentItems } );
-		// this.registerClickHandlers(); // FIXME: Yeah, don't do this here maybe?
-		// this.initSwipe( $('.listing').last() );
+		if ( shack.currentPagination < shack.totalPages ) {
+			console.log('found listings');
+			shack.currentPagination++;
+			var listings = shack.getListings( shack.currentPagination );
+			listings.success( shack.displayListings );	
+		} else {
+			$('.error__loading').hide();
+		}
 	};
 
+	this.resetListings = function() {
+		shack.currentPagination = 0;
+		shack.refreshListings();
+		$('.error__loading').show();
+	}
+
 	this.showListings = function(data){
-		//$('.listing:not(.saved)').detach();
-			var template = _.template(
-						$( "script.template2" ).html()
-				);
-
-				$( "script.template2" ).after( template(data) );
-		};
-
-		this.showSaved = function(data) {
-			$('.saved__item').detach(); // Remove old ones
+	//$('.listing:not(.saved)').detach();
 		var template = _.template(
-				$( "script.template" ).html()
-			);
+			$( "script.listing-template" ).html()
+		);
 
-			$( "script.template" ).after(
-				template( data )
-			);
-		};
+		$( "script.listing-template" ).after( template(data) );
+	};
 
-		/**
-		 * Get listings
-		 * @return jqXHR results
-		 */
-		this.getListings = function( pagination, params ) {
-			var requestURL = 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&locationsSEOPath=boston-ma-usa&channel=sales';
-			if ( pagination ) {
-				requestURL += '&results_page=' + pagination;
-			}
-			var $request = $.ajax({
-				type: 'get',
-				url: requestURL,
-				cache: false,
-				dataType: 'json',
-			});
+	this.showSaved = function(data) {
+		$('.saved__item').detach(); // Remove old ones
+		var template = _.template(
+			$( "script.saved-listing-template" ).html()
+		);
 
-			return $request;
+		$( "script.saved-listing-template" ).after(
+			template( data )
+		);
+	};
+
+	/**
+	 * Get listings
+	 * @return jqXHR results
+	 */
+	this.getListings = function( pagination, params ) {
+		//var requestURL = 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&locationsSEOPath=boston-ma-usa&channel=sales';
+		var requestURL = 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&bedrooms=3%2B&priceMin=420005&priceMax=450000&freetext=Hingham%2C+MA&locationsSEOPath=hingham-ma-usa&channel=sales&_=1464112437693';
+		if ( pagination ) {
+			requestURL += '&results_page=' + pagination;
 		}
+		var $request = $.ajax({
+			type: 'get',
+			url: requestURL,
+			cache: false,
+			dataType: 'json',
+		});
 
-		this.displayListings = function( jqXHR ) {
-			shack.currentItems = shack.currentItems.concat(jqXHR.data.listings);
-			shack.showListings( { data : jqXHR.data.listings } );
-			shack.registerClickHandlers();
-			shack.initSwipe( $('.listing').last() );
-		}
+		return $request;
+	}
+
+	this.displayListings = function( jqXHR ) {
+		// Set total pages for later use
+		shack.totalPages = jqXHR.data.totalPages;
+		shack.currentItems = shack.currentItems.concat(jqXHR.data.listings);
+		shack.showListings( { data : jqXHR.data.listings } );
+		shack.registerClickHandlers();
+		shack.initSwipe( $('.listing').last() );
+	}
 
 }
 
@@ -340,7 +344,7 @@ $(document).ready( function() {
 	});
 
 	$('.refreshListings').click(function() {
-		shack.refreshListings();
+		shack.resetListings();
 	});
 	
 });
