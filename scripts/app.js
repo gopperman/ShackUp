@@ -344,7 +344,7 @@ $(document).ready( function() {
 		$( '.overlay' ).fadeToggle( 200, 'linear' );
 	});
 
-	$('.addListingsToCardStack').click(function() {
+	$('.refreshListings').click(function() {
 		shack.resetListings();
 	});
 	
