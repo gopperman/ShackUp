@@ -179,9 +179,9 @@ function shackUp() {
 		about.click( this.showAbout );
 		saleType.click( this.setSaleType );
 		searchFilter.click( function( event ) {
-			var target = $( event.target );
-			target.siblings( '.filter--active' ).removeClass( 'filter--active' );
-			$(event.target).toggleClass( 'filter--active' );
+			var $eventTarget = $( event.target );
+			$eventTarget.siblings( '.filter--active' ).removeClass( 'filter--active' );
+			$eventTarget.toggleClass( 'filter--active' );
 		});
 		this.searchForm.submit( this.getQuery.bind( this ) );
 		$('body').on( 'click', '.saved__item', this.loadSavedListing );
@@ -248,7 +248,8 @@ function shackUp() {
 
 	// Load the saved listing into the top of the card stack, giving it unique classes maybe?
 	this.loadSavedListing = function( event ) {
-		var listingID = $( event.target ).attr('data-id') || $( event.target ).parents('.saved__item').attr('data-id');
+		var $eventTarget = $( event.target );
+		var listingID = $eventTarget.attr('data-id') || $eventTarget.parents('.saved__item').attr('data-id');
 		var listing = _.findWhere( shack.saved, { id: listingID });
 		$( '.nav-list' ).click();
 		$( '.container' ).find('.listing').remove();
