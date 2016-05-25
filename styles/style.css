@@ -696,28 +696,6 @@
   overflow: hidden;
   margin: 0 auto 5px;
 }
-.saved__filters {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  max-width: 768px;
-  margin: 0 auto;
-}
-.saved__filter {
-  float: left;
-  width: 50%;
-  text-align: center;
-  background-color: #e5e5e5;
-  color: #A0A09F;
-  padding: 15px;
-  text-transform: uppercase;
-}
-.saved__filter--active {
-  background-color: #CF6428;
-  color: white;
-}
 
 /**
  *	---------------------

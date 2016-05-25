@@ -172,13 +172,11 @@ function shackUp() {
 	this.loadSavedListing = function( event ) {
 		var listingID = $( event.target ).attr('data-id') || $( event.target ).parents('.saved__item').attr('data-id');
 		var listing = _.findWhere( shack.saved, { id: listingID });
-		$( '.nav-list' ).click();
 		$( '.container' ).find('.listing').remove();
 		setTimeout( function() {
 			// TODO: Figure out why we need to set left here
 			// TODO: Start gallery, too
 			$( 'script.template2' ).after( listing.markup.addClass('listing--detailed').css({'opacity':'1', 'left':'0'}) ).fadeIn();
-			console.log( listing.markup );
 			shack.galleryInit( listing.markup.find( '.listing__gallery' ) );
 		}, 100);
 	};
@@ -207,12 +205,20 @@ function shackUp() {
 	this.registerClickHandlers = function() {
 		var love = $( '.listing__like-button' );
 		var hate = $( '.listing__pass-button' );
+		var closeListing = $( '.listing__close');
 		var savedListingNav = $( '.listing__nav-button' );
 		var searchFilter = $( '.filters__filter-option' );
 		var saleType = $( '.filters__sale-type-button' );
 
+		$('body').on( 'click', '.saved__item', this.loadSavedListing );
+		
 		love.click( this.love );
 		hate.click( this.hate );
+
+		closeListing.click( function() {
+			$( this ).parents( '.listing' ).detach();
+		});
+
 		savedListingNav.click( this.toggleSavedListingState );
 		saleType.click( this.setSaleType );
 		searchFilter.click( function( event ) {
@@ -221,7 +227,6 @@ function shackUp() {
 			$(event.target).toggleClass( 'filter--active' );
 		});
 		this.searchForm.submit( this.getQuery.bind( this ) );
-		$('body').on( 'click', '.saved__item', this.loadSavedListing );
 
 		// Listing magic
 		$('.listing__gallery').click( function( event ) {
