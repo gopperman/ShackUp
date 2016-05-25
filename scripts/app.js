@@ -24,7 +24,7 @@ function shackUp() {
 		}, 500, function() {
 			shack.saved.push( { 'id': listing.data('id'), 'markup': listing.detach() } );
 			shack.savedData.push(_.findWhere(shack.currentItems, {'id': listing.data('id')}));
-			listing.addClass('saved');
+			listing.addClass('listing--saved');
 			listing.detach();
 			// Set up the next card with swipe handlers
 			shack.initSwipe( $('.listing').last() );
@@ -43,11 +43,20 @@ function shackUp() {
 		});
 	};
 
-	// displays the "detailed" state of a listing
-	this.showAbout = function() {
-		$( event.target )
-			.parents( '.listing' )
-			.addClass('listing listing--detailed');
+	// displays the "detailed" state of a listing from the saved list
+	this.toggleSavedListingState = function() {
+		var target = $( event.target );
+		if ( ! target.hasClass( 'listing__nav-button--active' ) ) {
+			var parent = target.parents( '.listing' );
+			parent.toggleClass('listing--detailed listing--contact');
+			shack.navAddActiveState( target );
+			//Todo: unbind click out to card
+		}
+	};
+
+	this.navAddActiveState = function( target ) {
+		target.siblings().removeClass('listing__nav-button--active');
+		target.addClass('listing__nav-button--active');
 	};
 
 	// Takes in a dom reference (hopefully a notification and does an opacity animation
@@ -166,21 +175,22 @@ function shackUp() {
 		$( '.nav-list' ).click();
 		$( '.container' ).find('.listing').remove();
 		setTimeout( function() {
-			$( 'script.template2' ).after( listing.markup.addClass('listing--contact').css({'opacity':'1', 'left':'2.5%'}) ).fadeIn();
+			// TODO: Figure out why we need to set left here
+			// TODO: Start gallery, too
+			$( 'script.template2' ).after( listing.markup.addClass('listing--detailed').css({'opacity':'1', 'left':'0'}) ).fadeIn();
 		}, 100);
 	};
 
 	this.registerClickHandlers = function() {
 		var love = $( '.listing__like-button' );
 		var hate = $( '.listing__pass-button' );
-		var about = $( '.listing__nav [data-type="about"]' );
-		var contact = $( '.listing__nav [data-type="contact"]' );
+		var savedListingNav = $( '.listing__nav-button' );
 		var searchFilter = $( '.filters__filter-option' );
 		var saleType = $( '.filters__sale-type-button' );
 
 		love.click( this.love );
 		hate.click( this.hate );
-		about.click( this.showAbout );
+		savedListingNav.click( this.toggleSavedListingState );
 		saleType.click( this.setSaleType );
 		searchFilter.click( function( event ) {
 			var target = $( event.target );
@@ -275,52 +285,48 @@ function shackUp() {
 		};
 
 		navigator.geolocation.getCurrentPosition(success, error, options);
-					$.ajax({
-						type: 'get',
-						url: 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&priceMin=400000&priceMax=1000000&propertyType=Single+Family%2CSingle+Family+Home%2CMulti+Family%2CMulti-Family+Home%2C&freetext=Boston%2C+MA&locationsSEOPath=boston-ma-usa&channel=sales&_=1460137103156',
-						cache: false,
-						success: function(response) {
-							var listings = response.data.listings;
-							[].push.apply(shack.queue, listings);
-							//Dedupe this stuff. #hack
-							_.uniq(shack.queue);
-						},
-						dataType: 'json',
-						error: function (error, response) {
-							console.log(error);
-						}
-					});
-					$.ajax({
-						type: 'get',
-						url: 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&priceMin=400000&priceMax=1000000&propertyType=Single+Family%2CSingle+Family+Home%2CMulti+Family%2CMulti-Family+Home%2C&freetext=Boston%2C+MA&locationsSEOPath=boston-ma-usa&channel=sales&_=1460137103156&results_page=2',
-						cache: false,
-						success: function(response) {
-							var listings = response.data.listings;
-							[].push.apply(shack.queue, listings);
-						},
-						dataType: 'json',
-						error: function (error, response) {
-							console.log(error);
-						}
-					});	
-					$.ajax({
-						type: 'get',
-						url: 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&priceMin=400000&priceMax=1000000&propertyType=Single+Family%2CSingle+Family+Home%2CMulti+Family%2CMulti-Family+Home%2C&freetext=Boston%2C+MA&locationsSEOPath=boston-ma-usa&channel=sales&_=1460137103156&results_page=3',
-						cache: false,
-						success: function(response) {
-							var listings = response.data.listings;
-							[].push.apply(shack.queue, listings);
-						},
-						dataType: 'json',
-						error: function (error, response) {
-							console.log(error);
-						}
-					});	
-				
-
-
-    	
-    }
+		$.ajax({
+			type: 'get',
+			url: 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&priceMin=400000&priceMax=1000000&propertyType=Single+Family%2CSingle+Family+Home%2CMulti+Family%2CMulti-Family+Home%2C&freetext=Boston%2C+MA&locationsSEOPath=boston-ma-usa&channel=sales&_=1460137103156',
+			cache: false,
+			success: function(response) {
+				var listings = response.data.listings;
+				[].push.apply(shack.queue, listings);
+				//Dedupe this stuff. #hack
+				_.uniq(shack.queue);
+			},
+			dataType: 'json',
+			error: function (error, response) {
+				console.log(error);
+			}
+		});
+		$.ajax({
+			type: 'get',
+			url: 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&priceMin=400000&priceMax=1000000&propertyType=Single+Family%2CSingle+Family+Home%2CMulti+Family%2CMulti-Family+Home%2C&freetext=Boston%2C+MA&locationsSEOPath=boston-ma-usa&channel=sales&_=1460137103156&results_page=2',
+			cache: false,
+			success: function(response) {
+				var listings = response.data.listings;
+				[].push.apply(shack.queue, listings);
+			},
+			dataType: 'json',
+			error: function (error, response) {
+				console.log(error);
+			}
+		});	
+		$.ajax({
+			type: 'get',
+			url: 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&priceMin=400000&priceMax=1000000&propertyType=Single+Family%2CSingle+Family+Home%2CMulti+Family%2CMulti-Family+Home%2C&freetext=Boston%2C+MA&locationsSEOPath=boston-ma-usa&channel=sales&_=1460137103156&results_page=3',
+			cache: false,
+			success: function(response) {
+				var listings = response.data.listings;
+				[].push.apply(shack.queue, listings);
+			},
+			dataType: 'json',
+			error: function (error, response) {
+				console.log(error);
+			}
+		});	
+    };
 
 }
 

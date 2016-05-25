@@ -128,67 +128,74 @@
       <% _.each( data, function( listItem ){ %>
         <div class="listing" data-id="<%- listItem.id %>">
           <div class="listing__nav">
-            <div data-type="contact" class="listing__nav-button--active listing__nav-button">contact</div>
-            <div data-type="about" class="listing__nav-button">about</div>
-          </div>
-          <div class="listing__gallery stopped">
-            <ul>
-              <% _.each( listItem.photos, function( photo ){ %>
-                <li><img draggable="false" src="<%- photo.replace(/&amp;/g, '&') %>&H=1000"></li>
-              <% }); %>
-            </ul>
-            <div class="listing__details listing__details--contact">
-
-              <p class="listing__sale-status"><%- (listItem.channel === 'Sales') ? 'For Sale' : 'For Rent' %></p>
-              <p class="listing__price"><%- listItem.price.Price %></p>
-
-              <div class="listing__details-lower">
-                <p class="listing__location listing__location--full">
-                <%- listItem.address.AddrDisplay %> • <%- listItem.address.AddrNeighborhood + ', ' + listItem.address.AddrStateAbbr %></p>
+            <a class="listing__close"><span class="listing__close-arrow">&lt;</span> <img class="listing__close-thumbnail" src="<%- listItem.photos[0].replace(/&amp;/g, '&') %>&H=60" /></a>
+            <div class="listing__nav-info">
+              <span class="listing__nav-address"><%- listItem.address.AddrDisplay %> • <%- listItem.address.AddrNeighborhood + ', ' + listItem.address.AddrStateAbbr %></span>
+              <div class="listing__nav-links">
+                <a class="listing__nav-button listing__nav-button--active listing__nav-open-about">about</a>
+                <a class="listing__nav-button listing__nav-open-contact">contact</a>
               </div>
             </div>
           </div>
+          <div class="listing__viewport">
+            <div class="listing__gallery stopped">
+              <ul>
+                <% _.each( listItem.photos, function( photo ){ %>
+                  <li><img draggable="false" src="<%- photo.replace(/&amp;/g, '&') %>&H=1000"></li>
+                <% }); %>
+              </ul>
+              <div class="listing__details listing__details--contact">
 
-          <div class="listing__details-wrap">
-            <div class="listing__details">
+                <p class="listing__sale-status"><%- (listItem.channel === 'Sales') ? 'For Sale' : 'For Rent' %></p>
+                <p class="listing__price"><%- listItem.price.Price %></p>
 
-              <p class="listing__sale-status"><%- (listItem.channel === 'Sales') ? 'For Sale' : 'For Rent' %></p>
-              <p class="listing__price">$<%- parseInt(listItem.price.Price).formatMoney(0) %></p>
-
-              <div class="listing__details-lower">
-                <p class="listing__location listing__location--short"><%- listItem.propertyType[0] %> • <%- listItem.address.AddrNeighborhood %></p>
-                <p class="listing__location listing__location--full"><%- listItem.address.AddrDisplay %> • <%- listItem.address.AddrNeighborhood + ', ' + listItem.address.AddrStateAbbr %></p>
+                <div class="listing__details-lower">
+                  <p class="listing__location listing__location--full">
+                  <%- listItem.address.AddrDisplay %> • <%- listItem.address.AddrNeighborhood + ', ' + listItem.address.AddrStateAbbr %></p>
+                </div>
               </div>
             </div>
 
-            <div class="listing__details-bar">
-              <ul class="listing__details-bar-items">
-                <!-- #TODO: Make this real -->
-                <li><i class="fa fa-map-marker"></i> 3 miles away</li> 
-                <li><i class="fa fa-home"></i> <%- listItem.propertyType[0] %></li>
-                <li><i class="fa fa-star"></i> <%- listItem.description.Bedroom %> beds • <%- listItem.description.BathsFull %> baths</li>
+            <div class="listing__details-wrap">
+              <div class="listing__details">
+
+                <p class="listing__sale-status"><%- (listItem.channel === 'Sales') ? 'For Sale' : 'For Rent' %></p>
+                <p class="listing__price">$<%- parseInt(listItem.price.Price).formatMoney(0) %></p>
+
+                <div class="listing__details-lower">
+                  <p class="listing__location listing__location--short"><%- listItem.propertyType[0] %> • <%- listItem.address.AddrNeighborhood %></p>
+                  <p class="listing__location listing__location--full"><%- listItem.address.AddrDisplay %> • <%- listItem.address.AddrNeighborhood + ', ' + listItem.address.AddrStateAbbr %></p>
+                </div>
+              </div>
+
+              <div class="listing__details-bar">
+                <ul class="listing__details-bar-items">
+                  <!-- #TODO: Make this real -->
+                  <li><i class="fa fa-map-marker"></i> 3 miles away</li> 
+                  <li><i class="fa fa-home"></i> <%- listItem.propertyType[0] %></li>
+                  <li><i class="fa fa-star"></i> <%- listItem.description.Bedroom %> beds • <%- listItem.description.BathsFull %> baths</li>
+                </ul>
+              </div>
+
+              <div class="listing__buttons-container">
+                <div class="listing__like-button"><i class="fa fa-heart listing__button-icon"></i></div>
+                <div class="listing__pass-button"><i class="fa fa-times listing__button-icon"></i></div>
+              </div>
+
+              <p class="listing__description"><%- listItem.description.CommentsLong %></p>
+            </div>
+            
+            <div class="listing__contact">
+              <div class="listing__agent-image-wrap">
+                <img class="listing__agent-image" src="<%- listItem.agents[0].photo %>" alt="">
+              </div>
+              <p class="listing__agent-name"><%- listItem.agents[0].name %></p>
+              <div class="listing__agency"><%- listItem.contact.AdvertiserName %></div>
+              <ul class="listing__agent-contacts">
+                <li class="listing__agent-contact"><a href="mailto:<%- listItem.agents[0].email %>"><i class="fa fa-envelope listing__envelope-icon"></i></a></li>
+                <li class="listing__agent-contact"><a href="tel:<%- listItem.agents[0].phones[0] %>"><i class="fa fa-mobile listing__phone-icon"></i></a></li>
               </ul>
             </div>
-
-            <div class="listing__buttons-container">
-              <div class="listing__like-button"><i class="fa fa-heart listing__button-icon"></i></div>
-              <div class="listing__pass-button"><i class="fa fa-times listing__button-icon"></i></div>
-            </div>
-
-            <p class="listing__description"><%- listItem.description.CommentsLong %></p>
-          </div>
-          
-          <div class="listing__contact">
-            <div class="listing__agent-image-wrap">
-              <img class="listing__agent-image" src="" alt="">
-            </div>
-            <p class="listing__agent-name">Agent Name</p>
-            <div class="listing__agency">Agent Contact</div>
-            <ul class="listing__agent-contacts">
-              <li class="listing__agent-contact"><a href="mailto:<%- listItem.agents[0].email %>"><i class="fa fa-envelope listing__envelope-icon"></i></a></li>
-              <li class="listing__agent-contact"><a href="<%- listItem.agents[0].address %>"><i class="fa fa-globe listing__globe-icon"></i></a></li>
-              <li class="listing__agent-contact"><a href="tel:<%- listItem.agents[0].phones[0] %>"><i class="fa fa-mobile listing__phone-icon"></i></a></li>
-            </ul>
           </div>
         </div>
       <% }); %>

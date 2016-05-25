@@ -245,7 +245,27 @@
   border-radius: 8px;
   border: 2px solid #e5e5e5;
   overflow: hidden;
-  z-index: 25;
+}
+.listing__nav {
+  display: none;
+}
+.listing__close {
+  cursor: hand;
+  cursor: pointer;
+  display: inline-block;
+  float: left;
+  margin-right: 20px;
+}
+.listing__close-arrow {
+  color: #e5e5e5;
+  font-size: 30px;
+  position: relative;
+  top: -13px;
+}
+.listing__close-thumbnail {
+  border-radius: 50px;
+  height: 50px;
+  width: 50px;
 }
 .listing__details-wrap {
   position: relative;
@@ -325,7 +345,7 @@
 .listing__button-icon {
   position: relative;
 }
-.listing__nav, .listing__description, .listing__details-bar {
+.listing__description, .listing__details-bar {
   display: none;
 }
 .listing__description {
@@ -335,22 +355,79 @@
 
 /**
  *	---------------------
- *	DETAILED VIEW STYLES
+ *	SAVED LISTING STYLES
  *	---------------------
  */
-.listing--detailed {
+.listing--saved {
   border: 0;
   height: 100vh;
   left: 0;
   top: 0;
   margin: 0;
-  padding-bottom: 20px;
+  width: 100%;
+  z-index: 99;
+}
+.listing--saved .listing__nav {
+  background: #2F225F;
+  box-sizing: border-box;
+  display: block;
+  height: 59px;
+  overflow: hidden;
+  padding: 4px 10px;
+  z-index: 99;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+.listing--saved .listing__nav-info {
+  color: #A0A09F;
+  display: inline-block;
+  float: left;
+  height: 55px;
+  position: relative;
+  width: 75%;
+}
+.listing--saved .listing__nav-address {
+  font-size: .9em;
+  position: absolute;
+  top: 4px;
+}
+.listing--saved .listing__nav-links {
+  position: absolute;
+  bottom: 0;
+}
+.listing--saved .listing__nav-button {
+  text-transform: uppercase;
+  color: #fff;
+  cursor: hand;
+  cursor: pointer;
+  margin: 0 20px 0 0;
+  position: relative;
+  bottom: 4px;
+}
+.listing--saved .listing__nav-button--active {
+  border-bottom: 4px solid #CF6428;
+}
+
+/**
+ *	---------------------
+ *	DETAILED VIEW STYLES
+ *	---------------------
+ */
+.listing--detailed .listing__viewport, .listing--saved .listing__viewport {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
   overflow-x: hidden;
   overflow-y: scroll;
-  padding-top: 59px;
-  width: 100%;
+  padding: 59px 0 20px 0;
   z-index: 50;
 }
+
 .listing--detailed .listing__gallery {
   height: auto;
 }
@@ -402,14 +479,17 @@
   color: #CF6428;
 }
 
-.listing--contact {
-  border: 0;
-  margin: 0;
-  top: 59px;
-  width: 100%;
-}
+/**
+ *	---------------------
+ *	CONTACT VIEW STYLES
+ *	---------------------
+ */
 .listing--contact .listing__contact {
   display: block;
+  position: absolute;
+  bottom: 0;
+  top: 59px;
+  width: 100%;
 }
 .listing--contact .listing__nav {
   display: block;
@@ -418,23 +498,8 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 56px;
   max-width: 768px;
   margin: 0 auto;
-}
-.listing--contact .listing__nav-button {
-  float: left;
-  width: 50%;
-  text-align: center;
-  background-color: #e5e5e5;
-  color: #A0A09F;
-  padding: 20px;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-.listing--contact .listing__nav-button--active {
-  background-color: #CF6428;
-  color: white;
 }
 .listing--contact .listing__location--full {
   display: block;
@@ -446,15 +511,13 @@
 .listing--contact .listing__sale-status {
   display: block;
 }
-.listing--contact .listing__details-wrap {
+.listing--contact .listing__details-wrap, .listing--contact .listing__gallery {
   display: none;
 }
 .listing--contact .listing__details--contact {
-  display: block;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
   background-color: #2F225F;
+  display: block;
+  width: 100%;
 }
 .listing--contact .listing__details--contact p {
   color: white;
@@ -668,28 +731,6 @@
 .listing__contact {
   display: none;
   padding: 20px 10px 30px;
-}
-.listing__nav {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  max-width: 768px;
-  margin: 0 auto;
-}
-.listing__nav-button {
-  float: left;
-  width: 50%;
-  text-align: center;
-  background-color: #e5e5e5;
-  color: #A0A09F;
-  padding: 20px;
-  text-transform: uppercase;
-}
-.listing__nav-button--active {
-  background-color: #CF6428;
-  color: white;
 }
 .listing__agent-image {
   width: 100%;
