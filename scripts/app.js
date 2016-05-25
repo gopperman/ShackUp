@@ -172,7 +172,7 @@ function shackUp() {
 	this.setSaleType = function( event ) {
 		var $eventTarget = $( event.target );
 		$( '.filters__sale-type-button' ).removeClass( 'filter--active' );
-		$( event.target ).addClass( 'filter--active' );
+		$eventTarget.addClass( 'filter--active' );
 	};
 
 	// Starts up a gallery
