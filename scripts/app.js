@@ -178,7 +178,30 @@ function shackUp() {
 			// TODO: Figure out why we need to set left here
 			// TODO: Start gallery, too
 			$( 'script.template2' ).after( listing.markup.addClass('listing--detailed').css({'opacity':'1', 'left':'0'}) ).fadeIn();
+			console.log( listing.markup );
+			shack.galleryInit( listing.markup.find( '.listing__gallery' ) );
 		}, 100);
+	};
+
+	// Starts up a gallery
+	this.galleryInit = function( gallery ) {
+		gallery.removeClass( 'stopped' );
+		if ( ! gallery.hasClass( 'initialized' ) ) {
+			gallery.unslider({
+				arrows: false,
+				autoplay: false,
+				speed: 500,
+				complete: function() {},
+				keys: true,               
+				nav: true,               
+				fluid: true
+			});
+			gallery.addClass( 'initialized' );
+		} else {
+			gallery.unslider('initSwipe');
+			gallery.unslider('initKeys');
+			$('.unslider-nav').css( 'display', 'block' );
+		}
 	};
 
 	this.registerClickHandlers = function() {
@@ -204,30 +227,16 @@ function shackUp() {
 		$('.listing__gallery').click( function( event ) {
 			var gallery = $( this );
 			var listing = gallery.parents( '.listing' );
-			if ( listing.hasClass( 'listing--detailed') ) {
-				event.stopPropagation();
-				listing.removeClass('listing--detailed listing--contact');
-				gallery.unslider('destroySwipe');
-				gallery.unslider('destroyKeys');
-				$('.unslider-nav').css( 'display', 'none');
-			} else {
-				listing.addClass( 'listing--detailed' );
-				gallery.removeClass( 'stopped' );
-				if ( ! gallery.hasClass( 'initialized' ) ) {
-					gallery.unslider({
-						arrows: false,
-						autoplay: false,
-						speed: 500,
-						complete: function() {},
-						keys: true,               
-						nav: true,               
-						fluid: true
-					});
-					gallery.addClass( 'initialized' );
+			if ( ! listing.hasClass( 'listing--saved' ) ) {
+				if ( listing.hasClass( 'listing--detailed' ) ) {
+					event.stopPropagation();
+					listing.removeClass('listing--detailed listing--contact');
+					gallery.unslider('destroySwipe');
+					gallery.unslider('destroyKeys');
+					$('.unslider-nav').css( 'display', 'none');
 				} else {
-					gallery.unslider('initSwipe');
-					gallery.unslider('initKeys');
-					$('.unslider-nav').css( 'display', 'block' );
+					listing.addClass( 'listing--detailed' );
+					shack.galleryInit( gallery );
 				}
 			}
 		});
