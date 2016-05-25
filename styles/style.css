@@ -359,12 +359,6 @@
  *	---------------------
  */
 .listing--saved {
-  border: 0;
-  height: 100vh;
-  left: 0;
-  top: 0;
-  margin: 0;
-  width: 100%;
   z-index: 99;
 }
 .listing--saved .listing__nav {
@@ -415,6 +409,14 @@
  *	DETAILED VIEW STYLES
  *	---------------------
  */
+.listing--detailed, .listing--saved {
+  border: 0;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  margin: 0;
+  width: 100%;
+}
 .listing--detailed .listing__viewport, .listing--saved .listing__viewport {
   position: absolute;
   bottom: 0;

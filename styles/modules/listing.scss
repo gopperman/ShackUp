@@ -148,12 +148,6 @@ $module: 'listing';
  *	---------------------
  */
 .#{$module}--saved {
-	border: 0;
-	height: 100vh;
-	left: 0;
-	top: 0;
-	margin: 0;
-	width: 100%;
 	z-index: $space;
 
 	.#{$module} {
@@ -212,7 +206,13 @@ $module: 'listing';
  *	---------------------
  */
 .#{$module}--detailed, .#{$module}--saved {
-
+	border: 0;
+	height: 100vh;
+	left: 0;
+	top: 0;
+	margin: 0;
+	width: 100%;
+	
 	.#{$module} {
 		&__viewport {
 			position: absolute;
