@@ -123,7 +123,7 @@
       </div>
 
       <!-- BEGIN: Underscore Template Definition. -->
-      <script type="text/template" class="template2">
+      <script type="text/template" class="listing-template">
 
       <% _.each( data, function( listItem ){ %>
         <div class="listing" data-id="<%- listItem.id %>">
@@ -193,7 +193,7 @@
               <div class="listing__agency"><%- listItem.contact.AdvertiserName %></div>
               <ul class="listing__agent-contacts">
                 <li class="listing__agent-contact"><a href="mailto:<%- listItem.agents[0].email %>"><i class="fa fa-envelope listing__envelope-icon"></i></a></li>
-                <li class="listing__agent-contact"><a href="tel:<%- listItem.agents[0].phones[0] %>"><i class="fa fa-mobile listing__phone-icon"></i></a></li>
+                <li class="listing__agent-contact"><a href="tel:1234567890"><i class="fa fa-mobile listing__phone-icon"></i></a></li>
               </ul>
             </div>
           </div>
@@ -205,7 +205,7 @@
         
         <ul class="saved__list">
         <!-- BEGIN: Underscore Template Definition. -->
-          <script type="text/template" class="template">
+          <script type="text/template" class="saved-listing-template">
           <% _.each( data, function( listItem ){ %>
             <li class="saved__item" data-id="<%- listItem.id %>">
               <div class="saved__img-wrap">

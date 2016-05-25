@@ -9,10 +9,9 @@ function shackUp() {
 	this.searchForm = $( '.filters__form' );
 
 	this.init = function() {
-		this.getListings();
-		//#hack
-		setTimeout(function() { shack.refreshListings(); $('.error__loading').hide(); }, 3000);
-		
+		this.currentPagination = 0;
+		this.totalPages = 1; // Assume 1 at default, override with each request.
+		shack.addListingsToCardStack();
 	};
 
 	this.love = function() {
@@ -26,9 +25,12 @@ function shackUp() {
 			shack.savedData.push(_.findWhere(shack.currentItems, {'id': listing.data('id')}));
 			listing.addClass('listing--saved');
 			listing.detach();
+			if ( $('.listing').length < 4 ) {
+				shack.addListingsToCardStack();
+			}
 			// Set up the next card with swipe handlers
 			shack.initSwipe( $('.listing').last() );
-		});		
+		});   
 	};
 
 	this.hate = function() {
@@ -38,6 +40,9 @@ function shackUp() {
 			left: '-=100%',
 		}, 500, function() {
 			this.remove();
+			if ( $('.listing').length < 4 ) {
+				shack.addListingsToCardStack();
+			}
 			// Set up the next card with swipe handlers
 			shack.initSwipe( $('.listing').last() );
 		});
@@ -117,7 +122,7 @@ function shackUp() {
 						opacity: 0,
 					}, 100, function() {
 						$( this ).css( {display: 'none'} );
-					});				
+					});       
 				}
 			}
 		});
@@ -159,26 +164,15 @@ function shackUp() {
 	 */
 	this.buildQueryString = function( filter ) {
 		var filterValues = _.map( filter, function( filterVal ) {
-			return encodeURIComponent(  filterVal.innerText );
+			return encodeURIComponent( filterVal.innerText );
 		});
 		return filterValues;
 	};
 
 	this.setSaleType = function( event ) {
+		var $eventTarget = $( event.target );
 		$( '.filters__sale-type-button' ).removeClass( 'filter--active' );
 		$( event.target ).addClass( 'filter--active' );
-	};
-
-	this.loadSavedListing = function( event ) {
-		var listingID = $( event.target ).attr('data-id') || $( event.target ).parents('.saved__item').attr('data-id');
-		var listing = _.findWhere( shack.saved, { id: listingID });
-		$( '.container' ).find('.listing').remove();
-		setTimeout( function() {
-			// TODO: Figure out why we need to set left here
-			// TODO: Start gallery, too
-			$( 'script.template2' ).after( listing.markup.addClass('listing--detailed').css({'opacity':'1', 'left':'0'}) ).fadeIn();
-			shack.galleryInit( listing.markup.find( '.listing__gallery' ) );
-		}, 100);
 	};
 
 	// Starts up a gallery
@@ -222,9 +216,9 @@ function shackUp() {
 		savedListingNav.click( this.toggleSavedListingState );
 		saleType.click( this.setSaleType );
 		searchFilter.click( function( event ) {
-			var target = $( event.target );
-			target.siblings( '.filter--active' ).removeClass( 'filter--active' );
-			$(event.target).toggleClass( 'filter--active' );
+			var $eventTarget = $( event.target );
+			$eventTarget.siblings( '.filter--active' ).removeClass( 'filter--active' );
+			$eventTarget.toggleClass( 'filter--active' );
 		});
 		this.searchForm.submit( this.getQuery.bind( this ) );
 
@@ -247,58 +241,51 @@ function shackUp() {
 		});
 	};
 
-	this.refreshListings = function() {
-		//TO-DO: De-dupe the queue
-		this.currentItems = shack.queue.splice(0,10);
-		_.shuffle(this.currentItems);
-		shack.showListings( { data : this.currentItems } );
-		this.registerClickHandlers();
-		this.initSwipe( $('.listing').last() );
+	// Add listings to the card stack
+	this.addListingsToCardStack = function() {
+		if ( shack.currentPagination < shack.totalPages ) {
+			shack.currentPagination++;
+			var listings = shack.getListings( shack.currentPagination );
+			listings.success( shack.displayListings );	
+		} else {
+			$('.error__loading').hide();
+		}
 	};
 
+	// Reset the pagination to zero and start requesting again
+	this.resetListings = function() {
+		shack.currentPagination = 0;
+		shack.addListingsToCardStack();
+		$('.error__loading').show();
+	};
+
+	// Take the listings from returned ajax data and add them to the bottom of the card stack
 	this.showListings = function(data){
-		$('.listing:not(.saved)').detach();
-    	var template = _.template(
-            $( "script.template2" ).html()
-        );
-
-        $(  "script.template2" ).after( template(data) );
-    };
-
-    this.showSaved = function(data) {
-    	$('.saved__item').detach(); // Remove old ones
 		var template = _.template(
-	      $( "script.template" ).html()
-	    );
+			$( "script.listing-template" ).html()
+		);
 
-	    $(  "script.template" ).after(
-	      template( data )
-	    );
-    };
+		$( "script.listing-template" ).after( template(data) );
+	};
 
-    this.getListings = function(distanceMiles, zipCode) {
-    	shack.queue = [];
-    	/* Step 1 - figure out where we are */
-		var options = {
-		  enableHighAccuracy: true,
-		  timeout: 5000,
-		  maximumAge: 0
-		};
+	// Load the saved listing into the top of the card stack, giving it unique classes maybe?
+	this.loadSavedListing = function( event ) {
+		var $eventTarget = $( event.target );
+		var listingID = $eventTarget.attr('data-id') || $eventTarget.parents('.saved__item').attr('data-id');
+		var listing = _.findWhere( shack.saved, { id: listingID });
+		$( '.container' ).find('.listing').remove();
+		setTimeout( function() {
+			$( 'script.listing-template' ).after( listing.markup.addClass('listing--detailed').css({'opacity':'1', 'left':'0'}) ).fadeIn();
+			shack.galleryInit( listing.markup.find( '.listing__gallery' ) );
+		}, 100);
+	};
 
-		function success(pos) {
-		  var crd = pos.coords;
-
-		  console.log('Your current position is:');
-		  console.log('Latitude : ' + crd.latitude);
-		  console.log('Longitude: ' + crd.longitude);
-		  console.log('More or less ' + crd.accuracy + ' meters.');
-		};
-
-		function error(err) {
-		  console.warn('ERROR(' + err.code + '): ' + err.message);
-		};
-
-		navigator.geolocation.getCurrentPosition(success, error, options);
+	// Add listing thumbnails/descriptions to saved listing menu
+	this.showSaved = function(data) {
+		$('.saved__item').detach(); // Remove old ones
+		var template = _.template(
+			$( "script.saved-listing-template" ).html()
+		);
 		$.ajax({
 			type: 'get',
 			url: 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&priceMin=400000&priceMax=1000000&propertyType=Single+Family%2CSingle+Family+Home%2CMulti+Family%2CMulti-Family+Home%2C&freetext=Boston%2C+MA&locationsSEOPath=boston-ma-usa&channel=sales&_=1460137103156',
@@ -340,8 +327,40 @@ function shackUp() {
 				console.log(error);
 			}
 		});	
-    };
 
+		$( "script.saved-listing-template" ).after(
+			template( data )
+		);
+	};
+
+	/**
+	 * Get listings
+	 * @return jqXHR results
+	 */
+	this.getListings = function( pagination, params ) {
+		var requestURL = 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&locationsSEOPath=somerville-ma-usa&channel=sales';
+		if ( pagination ) {
+			requestURL += '&results_page=' + pagination;
+		}
+		var $request = $.ajax({
+			type: 'get',
+			url: requestURL,
+			cache: false,
+			dataType: 'json',
+		});
+
+		return $request;
+	};
+
+	this.displayListings = function( jqXHR ) {
+		// Set total pages so that other requests don't ask for more data when there is none.
+		shack.totalPages = jqXHR.data.totalPages;
+		// Concatenate the current data to the currentItems cache of data
+		shack.currentItems = shack.currentItems.concat(jqXHR.data.listings);
+		shack.showListings( { data : jqXHR.data.listings } );
+		shack.registerClickHandlers();
+		shack.initSwipe( $('.listing').last() );
+	};
 }
 
 var shack = shack || new shackUp();
@@ -349,12 +368,12 @@ var shack = shack || new shackUp();
 $(document).ready( function() {
 	Number.prototype.formatMoney = function(c, d, t){
 		var n = this, 
-		    c = isNaN(c = Math.abs(c)) ? 2 : c, 
-		    d = d == undefined ? "." : d, 
-		    t = t == undefined ? "," : t, 
-		    s = n < 0 ? "-" : "", 
-		    i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", 
-		    j = (j = i.length) > 3 ? j % 3 : 0;
+				c = isNaN(c = Math.abs(c)) ? 2 : c, 
+				d = d == undefined ? "." : d, 
+				t = t == undefined ? "," : t, 
+				s = n < 0 ? "-" : "", 
+				i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", 
+				j = (j = i.length) > 3 ? j % 3 : 0;
 		return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 	};
 
@@ -389,7 +408,7 @@ $(document).ready( function() {
 	});
 
 	$('.refreshListings').click(function() {
-		shack.refreshListings();
+		shack.resetListings();
 	});
 	
 });
