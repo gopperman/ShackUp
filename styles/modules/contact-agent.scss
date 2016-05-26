@@ -5,31 +5,7 @@ $module: 'listing';
 	&__contact {
 		display: none;
 		padding: 20px 10px 30px;
-	}
-
-	&__nav {
-		display: none;
-		position: fixed;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		max-width: 768px;
-		margin: 0 auto;
-	}
-
-	&__nav-button {
-		float: left;
-		width: 50%;
 		text-align: center;
-		background-color: $gray-light;
-		color: $gray-dark;
-		padding: 20px;
-		text-transform: uppercase;
-
-		&--active {
-			background-color: $orange;
-			color: white;
-		}
 	}
 
 	&__agent-image {
@@ -46,30 +22,27 @@ $module: 'listing';
 
 	&__agent-name {
 		margin: 0;
-		text-align: center;
 		font-size: 20px;
 		color: $black;
 	}
 
 	&__agency {
 		margin: 0 0 15px;
-		text-align: center;
 		font-size: 16px;
 		color: $gray-dark;
 	}
 
 	&__agent-contacts {
-		overflow: auto;
-		width: 250px;
-		margin: 0 auto;
+		display:inline-block;
 		padding: 0;
 		list-style-type: none;
+		width: auto;
 
 		li {
+			display: inline-block;
 			float: left;
-			width: 33%;
-			text-align: center;
 			font-size: 26px;
+			margin: 0 10px;
 
 			a {
 				color: $white;

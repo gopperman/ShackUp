@@ -23,7 +23,7 @@ function shackUp() {
 		}, 500, function() {
 			shack.saved.push( { 'id': listing.data('id'), 'markup': listing.detach() } );
 			shack.savedData.push(_.findWhere(shack.currentItems, {'id': listing.data('id')}));
-			listing.addClass('saved');
+			listing.addClass('listing--saved');
 			listing.detach();
 			if ( $('.listing').length < 4 ) {
 				shack.addListingsToCardStack();
@@ -48,12 +48,19 @@ function shackUp() {
 		});
 	};
 
-	// displays the "detailed" state of a listing
-	this.showAbout = function() {
-		$( event.target )
-			.parents( '.listing' )
-			.removeClass()
-			.addClass('listing listing--detailed');
+	// displays the "detailed" state of a listing from the saved list
+	this.toggleSavedListingState = function() {
+		var target = $( event.target );
+		if ( ! target.hasClass( 'listing__nav-button--active' ) ) {
+			var parent = target.parents( '.listing' );
+			parent.toggleClass('listing--detailed listing--contact');
+			shack.navAddActiveState( target );
+		}
+	};
+
+	this.navAddActiveState = function( target ) {
+		target.siblings().removeClass('listing__nav-button--active');
+		target.addClass('listing__nav-button--active');
 	};
 
 	// Takes in a dom reference (hopefully a notification and does an opacity animation
@@ -167,17 +174,46 @@ function shackUp() {
 		$eventTarget.addClass( 'filter--active' );
 	};
 
+	// Starts up a gallery
+	this.galleryInit = function( gallery ) {
+		gallery.removeClass( 'stopped' );
+		if ( ! gallery.hasClass( 'initialized' ) ) {
+			gallery.unslider({
+				arrows: false,
+				autoplay: false,
+				speed: 500,
+				complete: function() {
+					gallery.addClass( 'initialized' );
+				},
+				keys: true,               
+				nav: true,               
+				fluid: true
+			});
+					} else {
+			gallery.unslider('initSwipe');
+			gallery.unslider('initKeys');
+			$('.unslider-nav').css( 'display', 'block' );
+		}
+	};
+
 	this.registerClickHandlers = function() {
 		var love = $( '.listing__like-button' );
 		var hate = $( '.listing__pass-button' );
-		var about = $( '.listing__nav [data-type="about"]' );
-		var contact = $( '.listing__nav [data-type="contact"]' );
+		var closeListing = $( '.listing__close');
+		var savedListingNav = $( '.listing__nav-button' );
 		var searchFilter = $( '.filters__filter-option' );
 		var saleType = $( '.filters__sale-type-button' );
 
+		$('body').on( 'click', '.saved__item', this.loadSavedListing );
+		
 		love.click( this.love );
 		hate.click( this.hate );
-		about.click( this.showAbout );
+
+		closeListing.click( function() {
+			$( this ).parents( '.listing' ).detach();
+		});
+
+		savedListingNav.click( this.toggleSavedListingState );
 		saleType.click( this.setSaleType );
 		searchFilter.click( function( event ) {
 			var $eventTarget = $( event.target );
@@ -185,36 +221,21 @@ function shackUp() {
 			$eventTarget.toggleClass( 'filter--active' );
 		});
 		this.searchForm.submit( this.getQuery.bind( this ) );
-		$('body').on( 'click', '.saved__item', this.loadSavedListing );
 
 		// Listing magic
 		$('.listing__gallery').click( function( event ) {
 			var gallery = $( this );
 			var listing = gallery.parents( '.listing' );
-			if ( listing.hasClass( 'listing--detailed') ) {
-				event.stopPropagation();
-				listing.removeClass('listing--detailed listing--contact');
-				gallery.unslider('destroySwipe');
-				gallery.unslider('destroyKeys');
-				$('.unslider-nav').css( 'display', 'none');
-			} else {
-				listing.addClass( 'listing--detailed' );
-				gallery.removeClass( 'stopped' );
-				if ( ! gallery.hasClass( 'initialized' ) ) {
-					gallery.unslider({
-						arrows: false,
-						autoplay: false,
-						speed: 500,
-						complete: function() {},
-						keys: true,               
-						nav: true,               
-						fluid: true
-					});
-					gallery.addClass( 'initialized' );
+			if ( ! listing.hasClass( 'listing--saved' ) ) {
+				if ( listing.hasClass( 'listing--detailed' ) ) {
+					event.stopPropagation();
+					listing.removeClass('listing--detailed listing--contact');
+					gallery.unslider('destroySwipe');
+					gallery.unslider('destroyKeys');
+					$('.unslider-nav').css( 'display', 'none');
 				} else {
-					gallery.unslider('initSwipe');
-					gallery.unslider('initKeys');
-					$('.unslider-nav').css( 'display', 'block' );
+					listing.addClass( 'listing--detailed' );
+					shack.galleryInit( gallery );
 				}
 			}
 		});
@@ -236,7 +257,7 @@ function shackUp() {
 		shack.currentPagination = 0;
 		shack.addListingsToCardStack();
 		$('.error__loading').show();
-	}
+	};
 
 	// Take the listings from returned ajax data and add them to the bottom of the card stack
 	this.showListings = function(data){
@@ -252,10 +273,10 @@ function shackUp() {
 		var $eventTarget = $( event.target );
 		var listingID = $eventTarget.attr('data-id') || $eventTarget.parents('.saved__item').attr('data-id');
 		var listing = _.findWhere( shack.saved, { id: listingID });
-		$( '.nav-list' ).click();
 		$( '.container' ).find('.listing').remove();
 		setTimeout( function() {
-			$( 'script.listing-template' ).after( listing.markup.addClass('listing--contact').css({'opacity':'1', 'left':'2.5%'}) ).fadeIn();
+			$( 'script.listing-template' ).after( listing.markup.addClass('listing--detailed').css({'opacity':'1', 'left':'0'}) ).fadeIn();
+			shack.galleryInit( listing.markup.find( '.listing__gallery' ) );
 		}, 100);
 	};
 
@@ -288,7 +309,7 @@ function shackUp() {
 		});
 
 		return $request;
-	}
+	};
 
 	this.displayListings = function( jqXHR ) {
 		// Set total pages so that other requests don't ask for more data when there is none.
@@ -298,8 +319,7 @@ function shackUp() {
 		shack.showListings( { data : jqXHR.data.listings } );
 		shack.registerClickHandlers();
 		shack.initSwipe( $('.listing').last() );
-	}
-
+	};
 }
 
 var shack = shack || new shackUp();

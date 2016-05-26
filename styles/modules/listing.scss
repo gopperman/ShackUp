@@ -13,8 +13,33 @@ $module: 'listing';
 	border: 2px solid $gray-light;
 	overflow: hidden;
 
+	&__nav {
+		display: none;
+	}
+
+	&__close {
+		cursor: hand;
+		cursor: pointer;
+		display: inline-block;
+		float: left;
+		margin-right: 20px;
+
+		&-arrow {
+			color: $gray-light;
+			font-size: 30px;
+			position: relative;
+			top: -13px;
+		}
+		
+		&-thumbnail {
+			border-radius: 50px;
+			height: 50px;
+			width: 50px;
+		}
+	}
  	&__details-wrap {
  		position: relative;
+ 		background: $white;
  	}
 
  	&__details {
@@ -89,8 +114,8 @@ $module: 'listing';
 		width: 50px;
 		height: 50px;
 		margin-left: 10px;
-    padding: 10px;
-    cursor: pointer;
+    	padding: 10px;
+    	cursor: pointer;
 
 		border-radius: 50%;
 		background-color: #A0A09F;
@@ -106,7 +131,6 @@ $module: 'listing';
 	&__button-icon {
 		position: relative;
 	}
-	&__nav,
 	&__description,
 	&__details-bar {
 		display: none;
@@ -120,21 +144,92 @@ $module: 'listing';
 
 /**
  *	---------------------
+ *	SAVED LISTING STYLES
+ *	---------------------
+ */
+.#{$module}--saved {
+	z-index: $space;
+
+	.#{$module} {
+		&__nav {
+			background: $purple;
+			box-sizing: border-box;
+			display: block;
+			height: $nav-offset;
+			overflow: hidden;
+			padding: 4px 10px;
+			z-index: $space;
+			position: fixed;
+			left: 0;
+			right: 0;
+			top: 0;
+
+			&-info {
+				color: $gray-dark;
+				display: inline-block;
+				float: left;
+				height: 55px;
+				position: relative;
+				width: 75%;
+			}
+
+			&-address {
+				font-size: .9em; // Needs to be just a tad smaller than our defaults
+				position: absolute;
+				top: 4px;
+			}
+
+			&-links {
+				position: absolute;
+				bottom: 0;
+			}
+			&-button {
+				text-transform: uppercase;
+				color: $white;
+				cursor: hand;
+				cursor: pointer;
+				margin: 0 20px 0 0;
+				position: relative;
+				bottom: 4px;
+
+				&--active {
+					border-bottom: 4px solid $orange;
+				}
+			}
+		}
+	}
+}
+
+/**
+ *	---------------------
  *	DETAILED VIEW STYLES
  *	---------------------
  */
+.#{$module}--detailed, .#{$module}--saved {
+	border: 0;
+	height: 100vh;
+	left: 0;
+	top: 0;
+	margin: 0;
+	width: 100%;
+	
+	.#{$module} {
+		&__viewport {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			top: 0;
+			height: 100%;
+			width: 100%;
+			overflow-x: hidden;
+			overflow-y: scroll;
+			padding: $nav-offset 0 20px 0;
+			z-index: $middle;
+		}
+	}
+}
 
 .#{$module}--detailed {
-	border: 0;
-	height: calc(100vh - 55px);
-	left: 0;
-	margin: 0;
-	padding-bottom: 20px;
-	overflow-x: hidden;
-	overflow-y: scroll;
-	top: $nav-offset;
-	width: 100%;
-
 	.listing__gallery {
 		height: auto;
 	}
@@ -198,16 +293,21 @@ $module: 'listing';
 	}
 }
 
-.#{$module}--contact{
-	border: 0;
-	margin: 0;
-	top: $nav-offset;
-	width: 100%;
+/**
+ *	---------------------
+ *	CONTACT VIEW STYLES
+ *	---------------------
+ */
+.#{$module}--contact {
 
 	.#{$module} {
 
 		&__contact {
 			display: block;
+			position: absolute;
+			bottom: 0;
+			top: $nav-offset;
+			width: 100%;
 		}
 
 		&__nav {
@@ -217,25 +317,8 @@ $module: 'listing';
 			top: 0;
 			left: 0;
 			right: 0;
-			height: 56px;
 			max-width: 768px;
 			margin: 0 auto;
-		}
-
-		&__nav-button {
-			float: left;
-			width: 50%;
-			text-align: center;
-			background-color: $gray-light;
-			color: $gray-dark;
-			padding: 20px;
-			text-transform: uppercase;
-			cursor: pointer;
-
-			&--active {
-				background-color: $orange;
-				color: white;
-			}
 		}
 
 		&__location--full {
@@ -251,16 +334,14 @@ $module: 'listing';
 			display: block;
 		}
 
-		&__details-wrap {
+		&__details-wrap, &__gallery {
 			display: none;
 		}
 
 		&__details--contact {
-			display: block;
-			position: absolute;
-			bottom: 0;
-			width: 100%;
 			background-color: $purple;
+			display: block;
+			width: 100%;
 
 			p {
 				color: white;
