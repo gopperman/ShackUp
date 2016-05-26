@@ -182,18 +182,17 @@ function shackUp() {
 				arrows: false,
 				autoplay: false,
 				speed: 500,
-				complete: function() {
-					gallery.addClass( 'initialized' );
-				},
 				keys: true,               
 				nav: true,               
 				fluid: true
 			});
-					} else {
+			gallery.addClass( 'initialized' );
+		} else {
 			gallery.unslider('initSwipe');
 			gallery.unslider('initKeys');
 			$('.unslider-nav').css( 'display', 'block' );
 		}
+
 	};
 
 	this.registerClickHandlers = function() {
