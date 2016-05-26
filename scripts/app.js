@@ -55,7 +55,6 @@ function shackUp() {
 			var parent = target.parents( '.listing' );
 			parent.toggleClass('listing--detailed listing--contact');
 			shack.navAddActiveState( target );
-			//Todo: unbind click out to card
 		}
 	};
 
@@ -183,13 +182,14 @@ function shackUp() {
 				arrows: false,
 				autoplay: false,
 				speed: 500,
-				complete: function() {},
+				complete: function() {
+					gallery.addClass( 'initialized' );
+				},
 				keys: true,               
 				nav: true,               
 				fluid: true
 			});
-			gallery.addClass( 'initialized' );
-		} else {
+					} else {
 			gallery.unslider('initSwipe');
 			gallery.unslider('initKeys');
 			$('.unslider-nav').css( 'display', 'block' );
