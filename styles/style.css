@@ -35,13 +35,26 @@
 }
 .filters__sale-type-button {
   float: left;
-  width: 50%;
+  width: 100%;
   text-align: center;
   background-color: #e5e5e5;
   color: #A0A09F;
   padding: 5px;
   text-transform: uppercase;
   cursor: pointer;
+}
+.filters__submit-button {
+  float: right;
+  padding: 10px;
+  background-color: #CF6428;
+  border-radius: 5px;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.filters__submit-button:active {
+  opacity: .9;
 }
 .filters__item {
   margin-bottom: 10px;

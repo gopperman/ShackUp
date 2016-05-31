@@ -23,7 +23,6 @@
 
           <div class="filters__sale-type">
             <div data-type="sales" class="filter--active filters__sale-type-button">for sale</div>
-            <div data-type="rentals" class="filters__sale-type-button">for rent</div>
           </div>
 
           <div class="filters__item">
@@ -35,8 +34,8 @@
           <div class="filters__item">
             <div class="filters__header">Price Range</div>
             <div class="filters__options">
-              <select name="min-price" class="filters__price">
-                <option value="any" selected>Min Price</option>
+              <select name="priceMin" class="filters__price">
+                <option value="" selected>Min Price</option>
                 <option value="500">$500</option>
                 <option value="1000">$1,000</option>
                 <option value="2000">$2,000</option>
@@ -47,10 +46,14 @@
                 <option value="300000">$300,000</option>
                 <option value="400000">$400,000</option>
                 <option value="500000">$500,000</option>
+                <option value="600000">$600,000</option>
+                <option value="700000">$700,000</option>
+                <option value="800000">$800,000</option>
+                <option value="900000">$900,000</option>
                 <option value="1000000">$1,000,000</option>
               </select>
-              <select name="max-price" class="filters__price">
-                <option value="any" selected>Max Price</option>
+              <select name="priceMax" class="filters__price">
+                <option value="" selected>Max Price</option>
                 <option value="500">$500</option>
                 <option value="1000">$1,000</option>
                 <option value="2000">$2,000</option>
@@ -61,6 +64,10 @@
                 <option value="300000">$300,000</option>
                 <option value="400000">$400,000</option>
                 <option value="500000">$500,000</option>
+                <option value="600000">$600,000</option>
+                <option value="700000">$700,000</option>
+                <option value="800000">$800,000</option>
+                <option value="900000">$900,000</option>
                 <option value="1000000">$1,000,000</option>
               </select>
             </div>
@@ -72,11 +79,11 @@
               <div class="filters__filter-option">Single Family</div>
               <div class="filters__filter-option">Land</div>
               <div class="filters__filter-option">Commercial</div>
-              <div class="filters__filter-option">Farm/Ranch</div>
-              <div class="filters__filter-option">Condo/Townhouse</div>
-              <div class="filters__filter-option">Multi-family</div>
+              <div class="filters__filter-option">Farm / Ranch</div>
+              <div class="filters__filter-option">Condo / Townhouse</div>
+              <div class="filters__filter-option">Multi Family</div>
               <div class="filters__filter-option">Apartment</div>
-              <div class="filters__filter-option">Mobile/Manufactured</div>
+              <div class="filters__filter-option">Mobile / Manufactured</div>
               <div class="filters__filter-option">Vacation</div>
             </div>
           </div>
@@ -101,6 +108,7 @@
               <li class="filters__filter-option">5+</li>
             </ul>
           </div>
+          <div class="filters__submit-button">find a match</div>
         </form>
       </div>
 
