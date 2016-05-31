@@ -183,20 +183,20 @@ function shackUp() {
 	};
 
 	this.registerClickHandlers = function() {
-		var $body = $('body');
+		var body = $('body');
 		var savedListingNav = $('.listing__nav-button');
 
-		$body.on('click', '.saved__item', this.loadSavedListing);
-		$body.on('click', '.listing__like-button', this.love );
-		$body.on('click', '.listing__pass-button', this.hate );
+		body.on('click', '.saved__item', this.loadSavedListing);
+		body.on('click', '.listing__like-button', this.love );
+		body.on('click', '.listing__pass-button', this.hate );
 
-		$body.on('click', '.listing__close', function() {
+		body.on('click', '.listing__close', function() {
 			$(this).parents('.listing').detach();
 		});
-		$body.on('click', '.listing__nav-button', this.toggleSavedListingState );
+		body.on('click', '.listing__nav-button', this.toggleSavedListingState );
 
 		// Listing magic
-		$body.on('click', '.listing__gallery', function(event) {
+		body.on('click', '.listing__gallery', function(event) {
 			var gallery = $( this );
 			var listing = gallery.parents( '.listing' );
 			if ( ! listing.hasClass( 'listing--saved' ) ) {
@@ -299,8 +299,6 @@ function shackUp() {
 var shack = shack || new shackUp();
 
 $(document).ready( function() {
-	var $body = $('body');
-
 	Number.prototype.formatMoney = function(c, d, t){
 		var n = this, 
 				c = isNaN(c = Math.abs(c)) ? 2 : c, 
@@ -315,7 +313,7 @@ $(document).ready( function() {
 	// Click handlers
 	shack.init();
 
-	$body.on('click', '.nav-menu', function() {
+	$('.nav-menu').click(function() {
 		var menu = $( this );
 		menu.siblings().removeClass('active');
 		menu.toggleClass('active');
@@ -323,7 +321,7 @@ $(document).ready( function() {
 		$( '.overlay' ).fadeToggle( 400, 'linear' );
 	});
 
-	$body.on('click', '.nav-logo', function() {
+	$('.nav-logo').click(function() {
 		var logo = $(this);
 		logo.siblings().removeClass('active');
 		logo.addClass('active');
@@ -333,7 +331,7 @@ $(document).ready( function() {
 		$('.overlay').fadeOut( 400, 'linear');
 	});
 
-	$body.on('click', '.nav-list', function() {
+	$('.nav-list').click(function() {
 		var saved = $( '.saved' );
 		if ( ! saved.hasClass('saved-open') ) {
 			shack.showSaved( { data: shack.savedData } );
@@ -344,13 +342,13 @@ $(document).ready( function() {
 		$( this ).toggleClass ( 'active' );
 	});
 
-	$body.on('click', '.overlay', function( event ) {
+	$('.overlay').click(function(event) {
 		$('.filters').removeClass('filters-open');
 		$('.nav-filters'). removeClass('active');
 		$('.overlay').fadeToggle(200, 'linear');
 	});
 
-	$body.on('click', '.refreshListings', function() {
+	$('.refreshListings').click(function() {
 		shack.resetListings();
 	});
 
@@ -358,7 +356,7 @@ $(document).ready( function() {
 	 * highlights active search form filters on click
 	 * @param event - original click event
 	 */
-	$body.on('click', '.filters__filter-option', function( event ) {
+	$('.filters__filter-option').click(function(event) {
 		var $eventTarget = $( event.target );
 		$eventTarget.siblings( '.filter--active' ).removeClass( 'filter--active' );
 		$eventTarget.toggleClass( 'filter--active' );
@@ -367,9 +365,11 @@ $(document).ready( function() {
 	/**
 	 * submits a search from filter panel then closes panel
 	 */
-	 $body.on('click', '.filters__form', function( event ) {
+	$('.filters__form').submit(function(event) {
 		event.preventDefault();
 		shack.resetListings();
 		$('.nav-menu').click();
 	});
+
+	
 });
