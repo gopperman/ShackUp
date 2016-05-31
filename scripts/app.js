@@ -14,6 +14,13 @@ function shackUp() {
 		shack.addListingsToCardStack();
 	};
 
+	// Converts HTML entitites like &amp in Gabriels data to the real thing
+	this.decodeHTML = function( text ) {
+		var e = document.createElement('div');
+		e.innerHTML = text;
+		return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+	};
+
 	this.love = function() {
 		var listing = $( this ).parents( '.listing' );
 		shack.notify( $('.notification .fa-heart') );
@@ -311,6 +318,9 @@ $(document).ready( function() {
 	shack.init();
 
 	$('.nav-menu').click( function() {
+		var menu = $( this );
+		menu.siblings().removeClass('active');
+		menu.toggleClass('active');
 		$( '.filters' ).toggleClass ( 'filters-open' );
 		$( '.overlay' ).fadeToggle( 400, 'linear' );
 	});
@@ -333,8 +343,9 @@ $(document).ready( function() {
 	});
 
 	$( '.overlay' ).click( function( event ) {
-		$( '.filters' ).removeClass( 'filters-open' );
-		$( '.overlay' ).fadeToggle( 200, 'linear' );
+		$('.filters').removeClass('filters-open');
+		$('.nav-filters'). removeClass('active');
+		$('.overlay').fadeToggle(200, 'linear');
 	});
 
 	$('.refreshListings').click(function() {

@@ -14,6 +14,7 @@ $module: 'filters';
 
 	&-open {
 		left: 0;
+		overflow: scroll;
 	}
 
 	&__sale-type {
@@ -41,7 +42,6 @@ $module: 'filters';
 		float: right;
 		padding: 10px;
 		background-color: $orange;
-		border-radius: 5px;
 		color: $white;
 		text-align: center;
 		font-size: 14px;
