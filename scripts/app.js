@@ -14,6 +14,7 @@ function shackUp() {
 		shack.addListingsToCardStack();
 	};
 
+	// Converts HTML entitites like &amp in Gabriels data to the real thing
 	this.decodeHTML = function( text ) {
 		var e = document.createElement('div');
 		e.innerHTML = text;
@@ -342,9 +343,9 @@ $(document).ready( function() {
 	});
 
 	$( '.overlay' ).click( function( event ) {
-		$( '.filters' ).removeClass( 'filters-open' );
-		$( '.nav-filters' ). removeClass( 'active' );
-		$( '.overlay' ).fadeToggle( 200, 'linear' );
+		$('.filters').removeClass('filters-open');
+		$('.nav-filters'). removeClass('active');
+		$('.overlay').fadeToggle(200, 'linear');
 	});
 
 	$('.refreshListings').click(function() {
