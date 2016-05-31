@@ -14,6 +14,12 @@ function shackUp() {
 		shack.addListingsToCardStack();
 	};
 
+	this.decodeHTML = function( text ) {
+		var e = document.createElement('div');
+		e.innerHTML = text;
+		return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+	};
+
 	this.love = function() {
 		var listing = $( this ).parents( '.listing' );
 		shack.notify( $('.notification .fa-heart') );

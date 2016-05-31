@@ -183,7 +183,7 @@
                 <div class="listing__pass-button"><i class="fa fa-times listing__button-icon"></i></div>
               </div>
 
-              <p class="listing__description"><%- listItem.description.CommentsLong %></p>
+              <p class="listing__description"><%- shack.decodeHTML(listItem.description.CommentsLong) %></p>
             </div>
             
             <div class="listing__contact">
