@@ -11,6 +11,7 @@ function shackUp() {
 	this.init = function() {
 		this.currentPagination = 0;
 		this.totalPages = 1; // Assume 1 at default, override with each request.
+		shack.registerClickHandlers();
 		shack.addListingsToCardStack();
 	};
 
@@ -182,24 +183,20 @@ function shackUp() {
 	};
 
 	this.registerClickHandlers = function() {
-		var love = $( '.listing__like-button' );
-		var hate = $( '.listing__pass-button' );
-		var closeListing = $( '.listing__close');
-		var savedListingNav = $( '.listing__nav-button' );
+		var body = $('body');
+		var savedListingNav = $('.listing__nav-button');
 
-		$('body').on( 'click', '.saved__item', this.loadSavedListing );
-		
-		love.click( this.love );
-		hate.click( this.hate );
+		body.on('click', '.saved__item', this.loadSavedListing);
+		body.on('click', '.listing__like-button', this.love );
+		body.on('click', '.listing__pass-button', this.hate );
 
-		closeListing.click( function() {
-			$( this ).parents( '.listing' ).detach();
+		body.on('click', '.listing__close', function() {
+			$(this).parents('.listing').detach();
 		});
-
-		savedListingNav.click( this.toggleSavedListingState );
+		body.on('click', '.listing__nav-button', this.toggleSavedListingState );
 
 		// Listing magic
-		$('.listing__gallery').click( function( event ) {
+		body.on('click', '.listing__gallery', function(event) {
 			var gallery = $( this );
 			var listing = gallery.parents( '.listing' );
 			if ( ! listing.hasClass( 'listing--saved' ) ) {
@@ -295,7 +292,6 @@ function shackUp() {
 		// Concatenate the current data to the currentItems cache of data
 		shack.currentItems = shack.currentItems.concat(jqXHR.data.listings);
 		shack.showListings( { data : jqXHR.data.listings } );
-		shack.registerClickHandlers();
 		shack.initSwipe( $('.listing').last() );
 	};
 }
@@ -303,6 +299,8 @@ function shackUp() {
 var shack = shack || new shackUp();
 
 $(document).ready( function() {
+	var body = $('body');
+
 	Number.prototype.formatMoney = function(c, d, t){
 		var n = this, 
 				c = isNaN(c = Math.abs(c)) ? 2 : c, 
@@ -317,7 +315,7 @@ $(document).ready( function() {
 	// Click handlers
 	shack.init();
 
-	$('.nav-menu').click( function() {
+	body.on('click', '.nav-menu', function() {
 		var menu = $( this );
 		menu.siblings().removeClass('active');
 		menu.toggleClass('active');
@@ -325,10 +323,14 @@ $(document).ready( function() {
 		$( '.overlay' ).fadeToggle( 400, 'linear' );
 	});
 
-	$('.nav-logo').click( function() {
-		$( '.panel-open' ).removeClass('panel-open' );
-		$( '.filters-open' ).removeClass('filters-open' );
-		$( '.overlay' ).fadeOut( 400, 'linear' );
+	body.on('click', '.nav-logo', function() {
+		var logo = $(this);
+		logo.siblings().removeClass('active');
+		logo.addClass('active');
+		$('.panel-open').removeClass('panel-open');
+		$('.saved-open').removeClass('saved-open');
+		$('.filters-open').removeClass('filters-open');
+		$('.overlay').fadeOut( 400, 'linear');
 	});
 
 	$( '.nav-list' ).click( function() {
