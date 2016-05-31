@@ -293,7 +293,6 @@ function shackUp() {
 		shack.totalPages = jqXHR.data.totalPages;
 		// Concatenate the current data to the currentItems cache of data
 		shack.currentItems = shack.currentItems.concat(jqXHR.data.listings);
-		console.log(shack.currentItems);
 		shack.showListings( { data : jqXHR.data.listings } );
 		shack.registerClickHandlers();
 		shack.initSwipe( $('.listing').last() );
