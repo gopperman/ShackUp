@@ -142,7 +142,9 @@ function shackUp() {
 			bathrooms: $('.bath-options .filter--active')
 		};
 
+		// get standard form element values
 		queryString = this.searchForm.serialize();
+		// get non-standard form element values
 		_.each( gabrielsParams, function( param ) {
 			if ( paramMap[ param ].length ) { // if there is a value for the current filter
 				queryString += '&' + param + '=' + encodeURIComponent( paramMap[ param ][0].innerText );
@@ -352,7 +354,8 @@ $(document).ready( function() {
 	/**
 	 * submits a search from filter panel then closes panel
 	 */
-	$( '.filters__submit-button' ).click( function() {
+	$( '.filters__form' ).submit( function( event ) {
+		event.preventDefault();
 		shack.resetListings();
 		$('.nav-menu').click();
 	});

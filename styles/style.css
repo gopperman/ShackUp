@@ -50,11 +50,10 @@
   border-radius: 5px;
   color: #fff;
   text-align: center;
+  font-size: 14px;
   text-transform: uppercase;
   cursor: pointer;
-}
-.filters__submit-button:active {
-  opacity: .9;
+  border: none;
 }
 .filters__item {
   margin-bottom: 10px;

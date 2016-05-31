@@ -44,12 +44,10 @@ $module: 'filters';
 		border-radius: 5px;
 		color: $white;
 		text-align: center;
+		font-size: 14px;
 		text-transform: uppercase;
 		cursor: pointer;
-
-		&:active {
-			opacity: .9;
-		}
+		border: none;
 	}
 
 	&__item {
