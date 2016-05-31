@@ -333,7 +333,7 @@ $(document).ready( function() {
 		$('.overlay').fadeOut( 400, 'linear');
 	});
 
-	$( '.nav-list' ).click( function() {
+	body.on('click', '.nav-list', function() {
 		var saved = $( '.saved' );
 		if ( ! saved.hasClass('saved-open') ) {
 			shack.showSaved( { data: shack.savedData } );
@@ -344,13 +344,13 @@ $(document).ready( function() {
 		$( this ).toggleClass ( 'active' );
 	});
 
-	$( '.overlay' ).click( function( event ) {
+	body.on('click', '.overlay', function( event ) {
 		$('.filters').removeClass('filters-open');
 		$('.nav-filters'). removeClass('active');
 		$('.overlay').fadeToggle(200, 'linear');
 	});
 
-	$('.refreshListings').click(function() {
+	body.on('click', '.refreshListings', function() {
 		shack.resetListings();
 	});
 
@@ -358,7 +358,7 @@ $(document).ready( function() {
 	 * highlights active search form filters on click
 	 * @param event - original click event
 	 */
-	$( '.filters__filter-option' ).click( function( event ) {
+	body.on('click', '.filters__filter-option', function( event ) {
 		var $eventTarget = $( event.target );
 		$eventTarget.siblings( '.filter--active' ).removeClass( 'filter--active' );
 		$eventTarget.toggleClass( 'filter--active' );
@@ -367,11 +367,9 @@ $(document).ready( function() {
 	/**
 	 * submits a search from filter panel then closes panel
 	 */
-	$( '.filters__form' ).submit( function( event ) {
+	 body.on('click', '.filters__form', function( event ) {
 		event.preventDefault();
 		shack.resetListings();
 		$('.nav-menu').click();
 	});
-
-	
 });
