@@ -28,13 +28,26 @@ $module: 'filters';
 
 	&__sale-type-button {
 		float: left;
-		width: 50%;
+		width: 100%;
 		text-align: center;
 		background-color: $gray-light;
 		color: $gray-dark;
 		padding: 5px;
 		text-transform: uppercase;
 		cursor: pointer;
+	}
+
+	&__submit-button {
+		float: right;
+		padding: 10px;
+		background-color: $orange;
+		border-radius: 5px;
+		color: $white;
+		text-align: center;
+		font-size: 14px;
+		text-transform: uppercase;
+		cursor: pointer;
+		border: none;
 	}
 
 	&__item {

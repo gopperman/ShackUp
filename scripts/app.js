@@ -134,10 +134,7 @@ function shackUp() {
 	 * @return string - full query string for Gabriels request
 	 *
 	 */
-	this.getQuery = function( event ) {
-		event.preventDefault();
-		var self = this;
-		var saleType = $('.filters__sale-type .filter--active').data('type');
+	this.getQuery = function() {
 		var gabrielsParams = [ 'propertyType', 'bedrooms', 'bathrooms' ];
 		var paramMap = {
 			propertyType: $('.prop-type-options .filter--active'),
@@ -145,33 +142,15 @@ function shackUp() {
 			bathrooms: $('.bath-options .filter--active')
 		};
 
-		queryString = this.searchForm.serialize() + '&channel=' + saleType;
-
+		// get standard form element values
+		queryString = this.searchForm.serialize();
+		// get non-standard form element values
 		_.each( gabrielsParams, function( param ) {
-			queryString += '&' + param + '=' + self.buildQueryString( paramMap[ param ] );
+			if ( paramMap[ param ].length ) { // if there is a value for the current filter
+				queryString += '&' + param + '=' + encodeURIComponent( paramMap[ param ][0].innerText );
+			}
 		});
-
 		return queryString;
-	};
-
-	/**
-	 * builds complete query string for Gabriels request
-	 *
-	 * @param array - array of values for a single filter
-	 * @return string - string of values of a filter
-	 *
-	 */
-	this.buildQueryString = function( filter ) {
-		var filterValues = _.map( filter, function( filterVal ) {
-			return encodeURIComponent( filterVal.innerText );
-		});
-		return filterValues;
-	};
-
-	this.setSaleType = function( event ) {
-		var $eventTarget = $( event.target );
-		$( '.filters__sale-type-button' ).removeClass( 'filter--active' );
-		$eventTarget.addClass( 'filter--active' );
 	};
 
 	// Starts up a gallery
@@ -200,8 +179,6 @@ function shackUp() {
 		var hate = $( '.listing__pass-button' );
 		var closeListing = $( '.listing__close');
 		var savedListingNav = $( '.listing__nav-button' );
-		var searchFilter = $( '.filters__filter-option' );
-		var saleType = $( '.filters__sale-type-button' );
 
 		$('body').on( 'click', '.saved__item', this.loadSavedListing );
 		
@@ -213,13 +190,6 @@ function shackUp() {
 		});
 
 		savedListingNav.click( this.toggleSavedListingState );
-		saleType.click( this.setSaleType );
-		searchFilter.click( function( event ) {
-			var $eventTarget = $( event.target );
-			$eventTarget.siblings( '.filter--active' ).removeClass( 'filter--active' );
-			$eventTarget.toggleClass( 'filter--active' );
-		});
-		this.searchForm.submit( this.getQuery.bind( this ) );
 
 		// Listing magic
 		$('.listing__gallery').click( function( event ) {
@@ -254,6 +224,8 @@ function shackUp() {
 	// Reset the pagination to zero and start requesting again
 	this.resetListings = function() {
 		shack.currentPagination = 0;
+		$( '.listing' ).remove();
+		shack.currentItems = [];
 		shack.addListingsToCardStack();
 		$('.error__loading').show();
 	};
@@ -295,8 +267,9 @@ function shackUp() {
 	 * Get listings
 	 * @return jqXHR results
 	 */
-	this.getListings = function( pagination, params ) {
-		var requestURL = 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&locationsSEOPath=somerville-ma-usa&channel=sales';
+	this.getListings = function( pagination ) {
+		var queryParams = this.getQuery();
+		var requestURL = 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&channel=sales&' + queryParams;
 		if ( pagination ) {
 			requestURL += '&results_page=' + pagination;
 		}
@@ -306,7 +279,6 @@ function shackUp() {
 			cache: false,
 			dataType: 'json',
 		});
-
 		return $request;
 	};
 
@@ -368,5 +340,25 @@ $(document).ready( function() {
 	$('.refreshListings').click(function() {
 		shack.resetListings();
 	});
+
+	/**
+	 * highlights active search form filters on click
+	 * @param event - original click event
+	 */
+	$( '.filters__filter-option' ).click( function( event ) {
+		var $eventTarget = $( event.target );
+		$eventTarget.siblings( '.filter--active' ).removeClass( 'filter--active' );
+		$eventTarget.toggleClass( 'filter--active' );
+	});
+
+	/**
+	 * submits a search from filter panel then closes panel
+	 */
+	$( '.filters__form' ).submit( function( event ) {
+		event.preventDefault();
+		shack.resetListings();
+		$('.nav-menu').click();
+	});
+
 	
 });
