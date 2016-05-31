@@ -312,6 +312,9 @@ $(document).ready( function() {
 	shack.init();
 
 	$('.nav-menu').click( function() {
+		var menu = $( this );
+		menu.siblings().removeClass('active');
+		menu.toggleClass('active');
 		$( '.filters' ).toggleClass ( 'filters-open' );
 		$( '.overlay' ).fadeToggle( 400, 'linear' );
 	});
@@ -335,6 +338,7 @@ $(document).ready( function() {
 
 	$( '.overlay' ).click( function( event ) {
 		$( '.filters' ).removeClass( 'filters-open' );
+		$( '.nav-filters' ). removeClass( 'active' );
 		$( '.overlay' ).fadeToggle( 200, 'linear' );
 	});
 

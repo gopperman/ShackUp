@@ -26,6 +26,7 @@ $module: 'nav';
 		
 		&.active {
 			border-bottom: 4px solid $orange;
+			padding-bottom: 9px;
 			transition: all, .1s
 		}
 	}
