@@ -248,7 +248,6 @@ function shackUp() {
 		var $eventTarget = $( event.target );
 		var listingID = $eventTarget.attr('data-id') || $eventTarget.parents('.saved__item').attr('data-id');
 		var listing = _.findWhere( shack.saved, { id: listingID });
-		$( '.container' ).find('.listing').remove();
 		setTimeout( function() {
 			$( 'script.listing-template' ).after( listing.markup.addClass('listing--detailed').css({'opacity':'1', 'left':'0'}) ).fadeIn();
 			shack.galleryInit( listing.markup.find( '.listing__gallery' ) );
