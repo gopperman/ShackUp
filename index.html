@@ -132,7 +132,7 @@
           <div class="listing__nav">
             <a class="listing__close"><span class="listing__close-arrow">&lt;</span> <img class="listing__close-thumbnail" src="<%- listItem.photos[0].replace(/&amp;/g, '&') %>&H=60" /></a>
             <div class="listing__nav-info">
-              <span class="listing__nav-address"><%- listItem.address.AddrDisplay %> • <%- listItem.address.AddrNeighborhood + ', ' + listItem.address.AddrStateAbbr %></span>
+              <span class="listing__nav-address"><%- listItem.address.AddrDisplay %> • <%- listItem.address.AddrCity + ', ' + listItem.address.AddrStateAbbr %></span>
               <div class="listing__nav-links">
                 <a class="listing__nav-button listing__nav-button--active listing__nav-open-about">about</a>
                 <a class="listing__nav-button listing__nav-open-contact">contact</a>
@@ -153,7 +153,7 @@
 
                 <div class="listing__details-lower">
                   <p class="listing__location listing__location--full">
-                  <%- listItem.address.AddrDisplay %> • <%- listItem.address.AddrNeighborhood + ', ' + listItem.address.AddrStateAbbr %></p>
+                  <%- listItem.address.AddrDisplay %> • <%- listItem.address.AddrCity+ ', ' + listItem.address.AddrStateAbbr %></p>
                 </div>
               </div>
             </div>
@@ -165,8 +165,8 @@
                 <p class="listing__price">$<%- parseInt(listItem.price.Price).formatMoney(0) %></p>
 
                 <div class="listing__details-lower">
-                  <p class="listing__location listing__location--short"><%- listItem.propertyType[0] %> • <%- listItem.address.AddrNeighborhood %></p>
-                  <p class="listing__location listing__location--full"><%- listItem.address.AddrDisplay %> • <%- listItem.address.AddrNeighborhood + ', ' + listItem.address.AddrStateAbbr %></p>
+                  <p class="listing__location listing__location--short"><%- listItem.propertyType[0] %> • <%- listItem.address.AddrCity %></p>
+                  <p class="listing__location listing__location--full"><%- listItem.address.AddrDisplay %> • <%- listItem.address.AddrCity + ', ' + listItem.address.AddrStateAbbr %></p>
                 </div>
               </div>
 
@@ -218,7 +218,7 @@
     '$' + listItem.price.Price/1000000 + 'm' : '$' + listItem.price.Price/1000 + 'k' %>
               </p>
               <p class="saved__location">
-                <%- listItem.address.AddrNeighborhood %>
+                <%- listItem.address.AddrCity %>
               </p>
             </li>
           <% }); %>
