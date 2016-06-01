@@ -1,7 +1,7 @@
 $module: 'error';
 
 .#{$module} {
-	&__outOfListings {
+	&__emptySavedList, &__outOfListings {
 		color: $gray-dark;
 		margin: 0 5%;
 		text-align: center;
@@ -19,20 +19,22 @@ $module: 'error';
 			font-size: 9em;
 			padding: 10px;
 		}
+	}
 
+	&__outOfListings {
 
-@-webkit-keyframes rotating {
-    from{
-        -webkit-transform: rotate(0deg);
-    }
-    to{
-        -webkit-transform: rotate(360deg);
-    }
-}
+		@-webkit-keyframes rotating {
+		    from {
+		        -webkit-transform: rotate(0deg);
+		    }
+		    to {
+		        -webkit-transform: rotate(360deg);
+		    }
+		}
 
-.rotating {
-    -webkit-animation: rotating 2s linear infinite;
-}
+		.rotating {
+		    -webkit-animation: rotating 2s linear infinite;
+		}
 
 		a {
 			color: $gray-dark;
