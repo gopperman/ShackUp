@@ -277,6 +277,7 @@ function shackUp() {
 			} else if (listing.address.AddrCounty) {
 				listing.city = listing.address.AddrCounty;
 			}
+			return listing;
 		});
 	};
 
