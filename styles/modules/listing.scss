@@ -151,13 +151,20 @@ $module: 'listing';
 	z-index: $space;
 
 	.#{$module} {
+		&__nav-container {
+			display: block;
+			max-width: 768px;
+			position: relative;
+			margin: 0 auto;
+			padding: 4px 10px;
+		}
+
 		&__nav {
 			background: $purple;
 			box-sizing: border-box;
 			display: block;
 			height: $nav-offset;
 			overflow: hidden;
-			padding: 4px 10px;
 			z-index: $space;
 			position: fixed;
 			left: 0;
@@ -207,6 +214,7 @@ $module: 'listing';
  */
 .#{$module}--detailed, .#{$module}--saved {
 	border: 0;
+	border-radius: 0;
 	height: 100vh;
 	left: 0;
 	top: 0;

@@ -258,6 +258,9 @@ function shackUp() {
 	// Add listing thumbnails/descriptions to saved listing menu
 	this.showSaved = function(data) {
 		$('.saved__item').detach(); // Remove old ones
+		if (! _.isEmpty(data)) {
+			$('.error__emptySavedList').remove();
+		}
 		var template = _.template(
 			$( "script.saved-listing-template" ).html()
 		);
@@ -277,6 +280,7 @@ function shackUp() {
 			} else if (listing.address.AddrCounty) {
 				listing.city = listing.address.AddrCounty;
 			}
+			return listing;
 		});
 	};
 
