@@ -270,12 +270,14 @@ function shackUp() {
 
 	this.sanitizeListings = function(data) {
 		return _.compact(_.map(data.listings, function(listing) {
+			// exclude listings w/o images
+			if (!listing.photos) { return; }
+
 			listing.city = '';
 			listing.agentName = 'Agent Contact';
 			listing.agentPhone = '';
 			listing.agentEmail = '';
 			listing.agentPhoto = 'http://sunfieldfarm.org/wp-content/uploads/2014/02/profile-placeholder.png';
-
 
 			// listing city
 			if (listing.address.AddrCity) {
@@ -284,7 +286,7 @@ function shackUp() {
 				listing.city = listing.address.AddrCounty;
 			}
 
-			// listing agent phone + photo
+			// listing agent info
 			if (listing.agents[0]) {
 				if (listing.agents[0].phones) {
 					listing.agentPhone = listing.agents[0].phones[0];
@@ -300,10 +302,7 @@ function shackUp() {
 				}
 			}
 
-			// exclude listings w/o images
-			if (listing.photos) {
-				return listing;
-			}
+			return listing;
 		}));
 	};
 
