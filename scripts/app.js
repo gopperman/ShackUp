@@ -292,7 +292,7 @@ function shackUp() {
 					listing.agentPhone = listing.agents[0].phones[0];
 				}
 				if (listing.agents[0].photo) {
-					listing.agentPhoto = listing.agents[0].photo;
+					listing.agentPhoto = shack.decodeHTML(listing.agents[0].photo);
 				}
 				if ( listing.agents[0].name ) {
 					listing.agentName = listing.agents[0].name;
