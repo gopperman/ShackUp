@@ -102,7 +102,7 @@
               <li class="filters__filter-option">5+</li>
             </ul>
           </div>
-          <input class="filters__submit-button" type="submit" value="find a match">
+          <input class="filters__submit-button" type="submit" value="Search">
         </form>
       </div>
 
@@ -172,8 +172,7 @@
 
               <div class="listing__details-bar">
                 <ul class="listing__details-bar-items">
-                  <!-- #TODO: Make this real -->
-                  <li><i class="fa fa-map-marker"></i> 3 miles away</li> 
+                  <li><i class="fa fa-th"></i> <%- listItem.description.SqFeetInteriorDisplay %> sq ft</li> 
                   <li><i class="fa fa-home"></i> <%- listItem.propertyType[0] %></li>
                   <li><i class="fa fa-star"></i> <%- listItem.description.Bedroom %> beds • <%- listItem.description.BathsFull %> baths</li>
                 </ul>
@@ -184,7 +183,7 @@
                 <div class="listing__pass-button"><i class="fa fa-times listing__button-icon"></i></div>
               </div>
 
-              <p class="listing__description"><%- listItem.description.CommentsLong %></p>
+              <p class="listing__description"><%- shack.decodeHTML(listItem.description.CommentsLong) %></p>
             </div>
             
             <div class="listing__contact">

@@ -11,7 +11,15 @@ function shackUp() {
 	this.init = function() {
 		this.currentPagination = 0;
 		this.totalPages = 1; // Assume 1 at default, override with each request.
+		shack.registerClickHandlers();
 		shack.addListingsToCardStack();
+	};
+
+	// Converts HTML entitites like &amp in Gabriels data to the real thing
+	this.decodeHTML = function( text ) {
+		var e = document.createElement('div');
+		e.innerHTML = text;
+		return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
 	};
 
 	this.love = function() {
@@ -175,24 +183,20 @@ function shackUp() {
 	};
 
 	this.registerClickHandlers = function() {
-		var love = $( '.listing__like-button' );
-		var hate = $( '.listing__pass-button' );
-		var closeListing = $( '.listing__close');
-		var savedListingNav = $( '.listing__nav-button' );
+		var body = $('body');
+		var savedListingNav = $('.listing__nav-button');
 
-		$('body').on( 'click', '.saved__item', this.loadSavedListing );
-		
-		love.click( this.love );
-		hate.click( this.hate );
+		body.on('click', '.saved__item', this.loadSavedListing);
+		body.on('click', '.listing__like-button', this.love );
+		body.on('click', '.listing__pass-button', this.hate );
 
-		closeListing.click( function() {
-			$( this ).parents( '.listing' ).detach();
+		body.on('click', '.listing__close', function() {
+			$(this).parents('.listing').detach();
 		});
-
-		savedListingNav.click( this.toggleSavedListingState );
+		body.on('click', '.listing__nav-button', this.toggleSavedListingState );
 
 		// Listing magic
-		$('.listing__gallery').click( function( event ) {
+		body.on('click', '.listing__gallery', function(event) {
 			var gallery = $( this );
 			var listing = gallery.parents( '.listing' );
 			if ( ! listing.hasClass( 'listing--saved' ) ) {
@@ -303,7 +307,6 @@ function shackUp() {
 		// Concatenate the current data to the currentItems cache of data
 		shack.currentItems = shack.currentItems.concat(sanitizedListings);
 		shack.showListings( { data : sanitizedListings } );
-		shack.registerClickHandlers();
 		shack.initSwipe( $('.listing').last() );
 	};
 }
@@ -325,18 +328,25 @@ $(document).ready( function() {
 	// Click handlers
 	shack.init();
 
-	$('.nav-menu').click( function() {
+	$('.nav-menu').click(function() {
+		var menu = $( this );
+		menu.siblings().removeClass('active');
+		menu.toggleClass('active');
 		$( '.filters' ).toggleClass ( 'filters-open' );
 		$( '.overlay' ).fadeToggle( 400, 'linear' );
 	});
 
-	$('.nav-logo').click( function() {
-		$( '.panel-open' ).removeClass('panel-open' );
-		$( '.filters-open' ).removeClass('filters-open' );
-		$( '.overlay' ).fadeOut( 400, 'linear' );
+	$('.nav-logo').click(function() {
+		var logo = $(this);
+		logo.siblings().removeClass('active');
+		logo.addClass('active');
+		$('.panel-open').removeClass('panel-open');
+		$('.saved-open').removeClass('saved-open');
+		$('.filters-open').removeClass('filters-open');
+		$('.overlay').fadeOut( 400, 'linear');
 	});
 
-	$( '.nav-list' ).click( function() {
+	$('.nav-list').click(function() {
 		var saved = $( '.saved' );
 		if ( ! saved.hasClass('saved-open') ) {
 			shack.showSaved( { data: shack.savedData } );
@@ -347,9 +357,10 @@ $(document).ready( function() {
 		$( this ).toggleClass ( 'active' );
 	});
 
-	$( '.overlay' ).click( function( event ) {
-		$( '.filters' ).removeClass( 'filters-open' );
-		$( '.overlay' ).fadeToggle( 200, 'linear' );
+	$('.overlay').click(function(event) {
+		$('.filters').removeClass('filters-open');
+		$('.nav-filters'). removeClass('active');
+		$('.overlay').fadeToggle(200, 'linear');
 	});
 
 	$('.refreshListings').click(function() {
@@ -360,7 +371,7 @@ $(document).ready( function() {
 	 * highlights active search form filters on click
 	 * @param event - original click event
 	 */
-	$( '.filters__filter-option' ).click( function( event ) {
+	$('.filters__filter-option').click(function(event) {
 		var $eventTarget = $( event.target );
 		$eventTarget.siblings( '.filter--active' ).removeClass( 'filter--active' );
 		$eventTarget.toggleClass( 'filter--active' );
@@ -369,7 +380,7 @@ $(document).ready( function() {
 	/**
 	 * submits a search from filter panel then closes panel
 	 */
-	$( '.filters__form' ).submit( function( event ) {
+	$('.filters__form').submit(function(event) {
 		event.preventDefault();
 		shack.resetListings();
 		$('.nav-menu').click();

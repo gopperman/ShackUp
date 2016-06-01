@@ -23,6 +23,7 @@
 }
 .filters-open {
   left: 0;
+  overflow: scroll;
 }
 .filters__sale-type {
   position: relative;
@@ -47,7 +48,6 @@
   float: right;
   padding: 10px;
   background-color: #CF6428;
-  border-radius: 5px;
   color: #fff;
   text-align: center;
   font-size: 14px;
@@ -218,6 +218,7 @@
 }
 .nav li.active {
   border-bottom: 4px solid #CF6428;
+  padding-bottom: 9px;
   transition: all, 0.1s;
 }
 .nav-menu {
