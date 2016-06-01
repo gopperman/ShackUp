@@ -211,20 +211,27 @@
         <ul class="saved__list">
         <!-- BEGIN: Underscore Template Definition. -->
           <script type="text/template" class="saved-listing-template">
-          <% _.each( data, function( listItem ){ %>
-            <li class="saved__item" data-id="<%- listItem.id %>">
-              <div class="saved__img-wrap">
-                <img src="<%- listItem.photos[0].replace(/&amp;/g, '&') %>" alt="" class="saved__img">
-              </div>
-              <p class="saved__price">
-                <%- ( listItem.price.Price.toString().length > 6 ) ?
-    '$' + listItem.price.Price/1000000 + 'm' : '$' + listItem.price.Price/1000 + 'k' %>
-              </p>
-              <p class="saved__location">
-                <%- listItem.city %>
-              </p>
-            </li>
-          <% }); %>
+          <% if (_.isEmpty(data)) { %>
+            <div class="error__emptySavedList">
+              <p><i class="fa fa-heart-o"></i></p>
+              <p>You haven't saved any houses yet. Get swiping! </p>
+            </div>
+          <% } else { 
+            _.each( data, function( listItem ){ %>
+              <li class="saved__item" data-id="<%- listItem.id %>">
+                <div class="saved__img-wrap">
+                  <img src="<%- listItem.photos[0].replace(/&amp;/g, '&') %>" alt="" class="saved__img">
+                </div>
+                <p class="saved__price">
+                  <%- ( listItem.price.Price.toString().length > 6 ) ?
+      '$' + listItem.price.Price/1000000 + 'm' : '$' + listItem.price.Price/1000 + 'k' %>
+                </p>
+                <p class="saved__location">
+                  <%- listItem.city %>
+                </p>
+              </li>
+            <% }); 
+          } %>
         </ul>
         </script>
       </div>
