@@ -258,6 +258,9 @@ function shackUp() {
 	// Add listing thumbnails/descriptions to saved listing menu
 	this.showSaved = function(data) {
 		$('.saved__item').detach(); // Remove old ones
+		if (! _.isEmpty(data)) {
+			$('.error__emptySavedList').remove();
+		}
 		var template = _.template(
 			$( "script.saved-listing-template" ).html()
 		);
@@ -269,16 +272,41 @@ function shackUp() {
 
 
 	this.sanitizeListings = function(data) {
-		return _.map(data.listings, function(listing) {
-			listing.city = '';
+		return _.compact(_.map(data.listings, function(listing) {
+			// exclude listings w/o images
+			if (!listing.photos) { return; }
 
+			listing.city = '';
+			listing.agentName = 'Agent Contact';
+			listing.agentPhone = '';
+			listing.agentEmail = '';
+			listing.agentPhoto = 'http://sunfieldfarm.org/wp-content/uploads/2014/02/profile-placeholder.png';
+
+			// listing city
 			if (listing.address.AddrCity) {
 				listing.city = listing.address.AddrCity;
 			} else if (listing.address.AddrCounty) {
 				listing.city = listing.address.AddrCounty;
 			}
+
+			// listing agent info
+			if (listing.agents[0]) {
+				if (listing.agents[0].phones) {
+					listing.agentPhone = listing.agents[0].phones[0];
+				}
+				if (listing.agents[0].photo) {
+					listing.agentPhoto = shack.decodeHTML(listing.agents[0].photo);
+				}
+				if ( listing.agents[0].name ) {
+					listing.agentName = listing.agents[0].name;
+				}
+				if ( listing.agents[0].email ) {
+					listing.agentEmail = listing.agents[0].email;
+				}
+			}
+
 			return listing;
-		});
+		}));
 	};
 
 	/**

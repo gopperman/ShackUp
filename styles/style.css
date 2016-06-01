@@ -194,19 +194,26 @@
 
 /** Navigation **/
 .nav {
-  background: #2F225F;
   color: #fff;
   font-size: 1.6em;
   left: 0;
   list-style-type: none;
   margin: 0;
-  min-height: 58px;
   padding: 0px 20px;
   position: fixed;
   text-align: center;
   right: 0;
   top: 0;
   z-index: 75;
+}
+.nav__container {
+  background: #2F225F;
+  display: block;
+  margin: 0 auto;
+  max-width: 768px;
+  min-height: 58px;
+  position: relative;
+  width: 100%;
 }
 .nav li {
   display: inline-block;
@@ -374,13 +381,19 @@
 .listing--saved {
   z-index: 99;
 }
+.listing--saved .listing__nav-container {
+  display: block;
+  max-width: 768px;
+  position: relative;
+  margin: 0 auto;
+  padding: 4px 10px;
+}
 .listing--saved .listing__nav {
   background: #2F225F;
   box-sizing: border-box;
   display: block;
   height: 59px;
   overflow: hidden;
-  padding: 4px 10px;
   z-index: 99;
   position: fixed;
   left: 0;
@@ -424,6 +437,7 @@
  */
 .listing--detailed, .listing--saved {
   border: 0;
+  border-radius: 0;
   height: 100vh;
   left: 0;
   top: 0;
@@ -779,7 +793,7 @@
 }
 
 /** Status messages **/
-.error__outOfListings {
+.error__emptySavedList, .error__outOfListings {
   color: #A0A09F;
   margin: 0 5%;
   text-align: center;
@@ -788,11 +802,11 @@
   width: 90%;
   background: white;
 }
-.error__outOfListings .fa {
+.error__emptySavedList .fa, .error__outOfListings .fa {
   font-size: 10em;
   color: #CF6428;
 }
-.error__outOfListings .fa-refresh {
+.error__emptySavedList .fa-refresh, .error__outOfListings .fa-refresh {
   font-size: 9em;
   padding: 10px;
 }
@@ -887,7 +901,7 @@ body {
   right: 0;
   background: rgba(0, 0, 0, 0.7);
   display: none;
-  top: 59px -1;
+  top: 58px;
   z-index: 75;
 }
 

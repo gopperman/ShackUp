@@ -1,19 +1,27 @@
 $module: 'nav';
 
 .#{$module} {
-	background: $purple;
 	color: $white;
 	font-size: $font-lg;
 	left: 0;
 	list-style-type: none;
 	margin: 0;
-	min-height: $nav-offset - 1;
 	padding: 0px 20px;
 	position: fixed;
 	text-align: center;
 	right: 0;
 	top: 0;
 	z-index: $high;
+
+	&__container {
+		background: $purple;
+		display: block;
+		margin: 0 auto;
+		max-width: 768px;
+		min-height: $nav-offset - 1;
+		position: relative;
+		width: 100%;
+	}
 
 	li {
 		display: inline-block;

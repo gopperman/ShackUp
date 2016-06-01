@@ -13,11 +13,13 @@
   </head>
   <body>
     <div class="container">
-      <ul class="nav">
-        <li class="nav-menu nav-button"><i class="fa fa-bars"></i>
-        <li class="nav-logo active"><img src="img/ShackUp_Logo.png" alt="Shack Up" />
-        <li class="nav-list nav-button"><i class="fa fa-commenting"></i>
-      </ul>
+      <div class="nav">
+        <ul class="nav__container">
+          <li class="nav-menu nav-button"><i class="fa fa-bars"></i>
+          <li class="nav-logo active"><img src="img/ShackUp_Logo.png" alt="Shack Up" />
+          <li class="nav-list nav-button"><i class="fa fa-commenting"></i>
+        </ul>
+      </div>
       <div class="filters">
         <form class="filters-container filters__form">
 
@@ -130,12 +132,14 @@
       <% _.each( data, function( listItem ){ %>
         <div class="listing" data-id="<%- listItem.id %>">
           <div class="listing__nav">
-            <a class="listing__close"><span class="listing__close-arrow">&lt;</span> <img class="listing__close-thumbnail" src="<%- listItem.photos[0].replace(/&amp;/g, '&') %>&H=60" /></a>
-            <div class="listing__nav-info">
-              <span class="listing__nav-address"><%- listItem.address.AddrDisplay %> • <%- listItem.city + ', ' + listItem.address.AddrStateAbbr %></span>
-              <div class="listing__nav-links">
-                <a class="listing__nav-button listing__nav-button--active listing__nav-open-about">about</a>
-                <a class="listing__nav-button listing__nav-open-contact">contact</a>
+            <div class="listing__nav-container">
+              <a class="listing__close"><span class="listing__close-arrow">&lt;</span> <img class="listing__close-thumbnail" src="<%- listItem.photos[0].replace(/&amp;/g, '&') %>&H=60" /></a>
+              <div class="listing__nav-info">
+                <span class="listing__nav-address"><%- listItem.address.AddrDisplay %> • <%- listItem.city + ', ' + listItem.address.AddrStateAbbr %></span>
+                <div class="listing__nav-links">
+                  <a class="listing__nav-button listing__nav-button--active listing__nav-open-about">about</a>
+                  <a class="listing__nav-button listing__nav-open-contact">contact</a>
+                </div>
               </div>
             </div>
           </div>
@@ -207,20 +211,27 @@
         <ul class="saved__list">
         <!-- BEGIN: Underscore Template Definition. -->
           <script type="text/template" class="saved-listing-template">
-          <% _.each( data, function( listItem ){ %>
-            <li class="saved__item" data-id="<%- listItem.id %>">
-              <div class="saved__img-wrap">
-                <img src="<%- listItem.photos[0].replace(/&amp;/g, '&') %>" alt="" class="saved__img">
-              </div>
-              <p class="saved__price">
-                <%- ( listItem.price.Price.toString().length > 6 ) ?
-    '$' + listItem.price.Price/1000000 + 'm' : '$' + listItem.price.Price/1000 + 'k' %>
-              </p>
-              <p class="saved__location">
-                <%- listItem.city %>
-              </p>
-            </li>
-          <% }); %>
+          <% if (_.isEmpty(data)) { %>
+            <div class="error__emptySavedList">
+              <p><i class="fa fa-heart-o"></i></p>
+              <p>You haven't saved any houses yet. Get swiping! </p>
+            </div>
+          <% } else { 
+            _.each( data, function( listItem ){ %>
+              <li class="saved__item" data-id="<%- listItem.id %>">
+                <div class="saved__img-wrap">
+                  <img src="<%- listItem.photos[0].replace(/&amp;/g, '&') %>" alt="" class="saved__img">
+                </div>
+                <p class="saved__price">
+                  <%- ( listItem.price.Price.toString().length > 6 ) ?
+      '$' + listItem.price.Price/1000000 + 'm' : '$' + listItem.price.Price/1000 + 'k' %>
+                </p>
+                <p class="saved__location">
+                  <%- listItem.city %>
+                </p>
+              </li>
+            <% }); 
+          } %>
         </ul>
         </script>
       </div>
