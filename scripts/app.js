@@ -267,6 +267,19 @@ function shackUp() {
 		);
 	};
 
+
+	this.sanitizeListings = function(data) {
+		return _.map(data.listings, function(listing) {
+			listing.city = '';
+
+			if (listing.address.AddrCity) {
+				listing.city = listing.address.AddrCity;
+			} else if (listing.address.AddrCounty) {
+				listing.city = listing.address.AddrCounty;
+			}
+		});
+	};
+
 	/**
 	 * Get listings
 	 * @return jqXHR results
@@ -287,11 +300,13 @@ function shackUp() {
 	};
 
 	this.displayListings = function( jqXHR ) {
+		// filter/adjustment listing data for template
+		var sanitizedListings = shack.sanitizeListings(jqXHR.data);
 		// Set total pages so that other requests don't ask for more data when there is none.
 		shack.totalPages = jqXHR.data.totalPages;
 		// Concatenate the current data to the currentItems cache of data
-		shack.currentItems = shack.currentItems.concat(jqXHR.data.listings);
-		shack.showListings( { data : jqXHR.data.listings } );
+		shack.currentItems = shack.currentItems.concat(sanitizedListings);
+		shack.showListings( { data : sanitizedListings } );
 		shack.initSwipe( $('.listing').last() );
 	};
 }
