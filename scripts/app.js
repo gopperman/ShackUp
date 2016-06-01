@@ -331,6 +331,7 @@ function shackUp() {
 	this.displayListings = function( jqXHR ) {
 		// filter/adjustment listing data for template
 		var sanitizedListings = shack.sanitizeListings(jqXHR.data);
+
 		// Set total pages so that other requests don't ask for more data when there is none.
 		shack.totalPages = jqXHR.data.totalPages;
 		// Concatenate the current data to the currentItems cache of data
