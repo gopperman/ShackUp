@@ -6,7 +6,6 @@ $module: 'nav';
 	left: 0;
 	list-style-type: none;
 	margin: 0;
-	padding: 0px 20px;
 	position: fixed;
 	text-align: center;
 	right: 0;
@@ -19,6 +18,7 @@ $module: 'nav';
 		margin: 0 auto;
 		max-width: 768px;
 		min-height: $nav-offset - 1;
+		padding: 0px 20px;
 		position: relative;
 		width: 100%;
 	}

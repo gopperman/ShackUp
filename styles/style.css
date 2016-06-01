@@ -199,7 +199,6 @@
   left: 0;
   list-style-type: none;
   margin: 0;
-  padding: 0px 20px;
   position: fixed;
   text-align: center;
   right: 0;
@@ -212,6 +211,7 @@
   margin: 0 auto;
   max-width: 768px;
   min-height: 58px;
+  padding: 0px 20px;
   position: relative;
   width: 100%;
 }
