@@ -28,6 +28,13 @@
           </div>
 
           <div class="filters__item">
+            <div class="filters__header">Location</div>
+            <div class="filters__options">
+              <input class="filters__zipcode" type="text" placeholder="enter city or zipcode">
+            </div>
+          </div>
+
+          <div class="filters__item">
             <div class="filters__header">Price Range</div>
             <div class="filters__options">
               <select name="priceMin" class="filters__price">
@@ -192,13 +199,18 @@
             
             <div class="listing__contact">
               <div class="listing__agent-image-wrap">
-                <img class="listing__agent-image" src="<%- listItem.agents[0].photo %>" alt="">
+                <img class="listing__agent-image" src="<%- listItem.agentPhoto %>" alt="">
               </div>
-              <p class="listing__agent-name"><%- listItem.agents[0].name %></p>
+              <p class="listing__agent-name"><%- listItem.agentName %></p>
               <div class="listing__agency"><%- listItem.contact.AdvertiserName %></div>
               <ul class="listing__agent-contacts">
-                <li class="listing__agent-contact"><a href="mailto:<%- listItem.agents[0].email %>"><i class="fa fa-envelope listing__envelope-icon"></i></a></li>
-                <li class="listing__agent-contact"><a href="tel:1234567890"><i class="fa fa-mobile listing__phone-icon"></i></a></li>
+                <% if (listItem.agentEmail.length) { %>
+                  <li class="listing__agent-contact"><a href="mailto:<%- listItem.agentEmail %>"><i class="fa fa-envelope listing__envelope-icon"></i></a></li>
+                <% } %>
+
+                <% if (listItem.agentPhone.length) { %>
+                  <li class="listing__agent-contact"><a href="tel:<%- listItem.agentPhone %>"><i class="fa fa-mobile listing__phone-icon"></i></a></li>
+                <% } %>
               </ul>
             </div>
           </div>
