@@ -7,7 +7,7 @@ function shackUp() {
 	this.queue = listings;
 	this.currentItems = [];
 	this.searchForm = $( '.filters__form' );
-	this.queryString = '';
+	this.queryString = 'priceMax=500000';
 
 	this.init = function() {
 		this.currentPagination = 0;
