@@ -7,6 +7,7 @@ function shackUp() {
 	this.queue = listings;
 	this.currentItems = [];
 	this.searchForm = $( '.filters__form' );
+	this.queryString = '';
 
 	this.init = function() {
 		this.currentPagination = 0;
@@ -136,14 +137,11 @@ function shackUp() {
 	};
 
 	/**
-	 * parses search filters form, necessary for non-HTML form elements
-	 *
-	 * @param event - original submit event
-	 * @return string - full query string for Gabriels request
-	 *
+	 * parses search form + updates query for use in addListingsToCardStack
 	 */
 	this.getQuery = function() {
 		var gabrielsParams = [ 'propertyType', 'bedrooms', 'bathrooms' ];
+		var location = $('.filters__zipcode').val().replace(' ', '');
 		var paramMap = {
 			propertyType: $('.prop-type-options .filter--active'),
 			bedrooms: $('.bed-options .filter--active'),
@@ -151,14 +149,17 @@ function shackUp() {
 		};
 
 		// get standard form element values
-		queryString = this.searchForm.serialize();
+		var queryString = this.searchForm.serialize();
+		// apply user location (zip | city) as keyword
+		queryString += '&keyword=' + location;
 		// get non-standard form element values
 		_.each( gabrielsParams, function( param ) {
 			if ( paramMap[ param ].length ) { // if there is a value for the current filter
 				queryString += '&' + param + '=' + encodeURIComponent( paramMap[ param ][0].innerText );
 			}
 		});
-		return queryString;
+		shack.queryString = queryString;
+		shack.addListingsToCardStack();
 	};
 
 	// Starts up a gallery
@@ -216,10 +217,10 @@ function shackUp() {
 
 	// Add listings to the card stack
 	this.addListingsToCardStack = function() {
-		if ( shack.currentPagination < shack.totalPages ) {
+		if (shack.currentPagination < shack.totalPages) {
 			shack.currentPagination++;
-			var listings = shack.getListings( shack.currentPagination );
-			listings.success( shack.displayListings );	
+			var listings = shack.getListings(shack.currentPagination, shack.queryString);
+			listings.success(shack.displayListings);
 		} else {
 			$('.error__loading').hide();
 		}
@@ -228,9 +229,10 @@ function shackUp() {
 	// Reset the pagination to zero and start requesting again
 	this.resetListings = function() {
 		shack.currentPagination = 0;
+		shack.totalPages = 1;
 		$( '.listing' ).remove();
 		shack.currentItems = [];
-		shack.addListingsToCardStack();
+		shack.getQuery();
 		$('.error__loading').show();
 	};
 
@@ -279,7 +281,7 @@ function shackUp() {
 			listing.agentName = 'Agent Contact';
 			listing.agentPhone = '';
 			listing.agentEmail = '';
-			listing.agentPhoto = 'http://sunfieldfarm.org/wp-content/uploads/2014/02/profile-placeholder.png';
+			listing.agentPhoto = './img/profile-placeholder.png';
 
 			// listing city
 			if (listing.address.AddrCity) {
@@ -312,9 +314,8 @@ function shackUp() {
 	 * Get listings
 	 * @return jqXHR results
 	 */
-	this.getListings = function( pagination ) {
-		var queryParams = this.getQuery();
-		var requestURL = 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&channel=sales&' + queryParams;
+	this.getListings = function( pagination, queryString ) {
+		var requestURL = 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&channel=sales&' + queryString;
 		if ( pagination ) {
 			requestURL += '&results_page=' + pagination;
 		}
@@ -332,10 +333,18 @@ function shackUp() {
 		var sanitizedListings = shack.sanitizeListings(jqXHR.data);
 		// Set total pages so that other requests don't ask for more data when there is none.
 		shack.totalPages = jqXHR.data.totalPages;
-		// Concatenate the current data to the currentItems cache of data
-		shack.currentItems = shack.currentItems.concat(sanitizedListings);
-		shack.showListings( { data : sanitizedListings } );
-		shack.initSwipe( $('.listing').last() );
+
+		if ( sanitizedListings.length ) {
+			// Concatenate the current data to the currentItems cache of data
+			shack.currentItems = shack.currentItems.concat(sanitizedListings);
+			shack.showListings( { data : sanitizedListings } );
+			shack.initSwipe( $('.listing').last() );
+		} else {
+			// show "no results" page here
+			$('.error__loading').hide();
+			$('.error__no-results').show();
+			return;
+		}
 	};
 }
 

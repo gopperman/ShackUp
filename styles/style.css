@@ -74,7 +74,7 @@
   color: #A0A09F;
   margin-bottom: 10px;
 }
-.filters__location {
+.filters__zipcode {
   width: 100%;
   padding: 5px;
   border-radius: 3px;
@@ -809,6 +809,10 @@
 .error__emptySavedList .fa-refresh, .error__outOfListings .fa-refresh {
   font-size: 9em;
   padding: 10px;
+}
+.error__no-results {
+  display: none;
+  bottom: 0;
 }
 @-webkit-keyframes rotating {
   from {
