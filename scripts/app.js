@@ -342,7 +342,7 @@ function shackUp() {
 		} else {
 			// show "no results" page here
 			$('.error__loading').hide();
-			alert('no listings match your search, please try again');
+			$('.error__no-results').show();
 			return;
 		}
 	};

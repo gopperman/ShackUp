@@ -810,6 +810,10 @@
   font-size: 9em;
   padding: 10px;
 }
+.error__no-results {
+  display: none;
+  bottom: 0;
+}
 @-webkit-keyframes rotating {
   from {
     -webkit-transform: rotate(0deg);

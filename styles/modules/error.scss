@@ -21,6 +21,11 @@ $module: 'error';
 		}
 	}
 
+	&__no-results {
+		display: none;
+		bottom: 0;
+	}
+
 	&__outOfListings {
 
 		@-webkit-keyframes rotating {
