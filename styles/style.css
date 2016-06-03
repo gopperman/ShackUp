@@ -443,6 +443,8 @@
   top: 0;
   margin: 0;
   width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 .listing--detailed .listing__viewport, .listing--saved .listing__viewport {
   position: absolute;
@@ -451,8 +453,6 @@
   top: 0;
   height: 100%;
   width: 100%;
-  overflow-x: hidden;
-  overflow-y: scroll;
   padding: 59px 0 20px 0;
   z-index: 50;
 }
@@ -479,7 +479,7 @@
   border-bottom: 1px solid #e5e5e5;
 }
 .listing--detailed .listing__details-wrap {
-  padding: 0 15px;
+  padding: 0 15px 15px;
 }
 .listing--detailed .listing__price {
   border-bottom: none;
