@@ -229,8 +229,6 @@ $module: 'listing';
 			top: 0;
 			height: 100%;
 			width: 100%;
-			overflow-x: hidden;
-			overflow-y: scroll;
 			padding: $nav-offset 0 20px 0;
 			z-index: $middle;
 		}
@@ -238,6 +236,9 @@ $module: 'listing';
 }
 
 .#{$module}--detailed {
+	overflow-y: scroll;
+	overflow-x: hidden;
+
 	.listing__gallery {
 		height: auto;
 	}
@@ -263,7 +264,7 @@ $module: 'listing';
 			border-bottom: 1px solid $gray-light;
 
 			&-wrap {
-				padding: 0 15px;
+				padding: 0 15px 15px;
 			}
 		}
 
