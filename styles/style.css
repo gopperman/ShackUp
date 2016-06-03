@@ -443,6 +443,8 @@
   top: 0;
   margin: 0;
   width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 .listing--detailed .listing__viewport, .listing--saved .listing__viewport {
   position: absolute;
@@ -455,10 +457,6 @@
   z-index: 50;
 }
 
-.listing--detailed {
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
 .listing--detailed .listing__gallery {
   height: auto;
 }

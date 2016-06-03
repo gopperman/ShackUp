@@ -220,6 +220,8 @@ $module: 'listing';
 	top: 0;
 	margin: 0;
 	width: 100%;
+	overflow-y: scroll;
+	overflow-x: hidden;
 	
 	.#{$module} {
 		&__viewport {
@@ -236,8 +238,6 @@ $module: 'listing';
 }
 
 .#{$module}--detailed {
-	overflow-y: scroll;
-	overflow-x: hidden;
 
 	.listing__gallery {
 		height: auto;
