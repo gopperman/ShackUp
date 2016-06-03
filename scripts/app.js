@@ -315,7 +315,7 @@ function shackUp() {
 	 */
 	this.getListings = function( pagination ) {
 		var queryParams = this.getQuery();
-		var requestURL = 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&channel=sales&' + queryParams;
+		var requestURL = apiHost + '/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&channel=sales&' + queryParams;
 		if ( pagination ) {
 			requestURL += '&results_page=' + pagination;
 		}

@@ -1,0 +1,2 @@
+//Move this to the scripts folder as conf.js
+var apiHost = 'http://shack-up.co';
