@@ -405,10 +405,12 @@
   float: left;
   height: 55px;
   position: relative;
-  width: 75%;
+  width: calc(100% - 100px);
 }
 .listing--saved .listing__nav-address {
   font-size: .9em;
+  max-height: 1.2em;
+  overflow: hidden;
   position: absolute;
   top: 4px;
 }
