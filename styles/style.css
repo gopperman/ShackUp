@@ -264,7 +264,6 @@
   height: auto;
   border-radius: 8px;
   border: 2px solid #e5e5e5;
-  overflow: hidden;
 }
 .listing__nav {
   display: none;
@@ -436,22 +435,15 @@
  *	---------------------
  */
 .listing--detailed, .listing--saved {
+  position: relative;
   border: 0;
   border-radius: 0;
-  height: 100vh;
   left: 0;
   top: 0;
   margin: 0;
   width: 100%;
-  overflow-y: scroll;
-  overflow-x: hidden;
 }
 .listing--detailed .listing__viewport, .listing--saved .listing__viewport {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  top: 0;
-  height: 100%;
   width: 100%;
   padding: 59px 0 20px 0;
   z-index: 50;
@@ -550,6 +542,9 @@
 }
 .listing--contact .listing__details--contact p {
   color: white;
+}
+.listing--contact .listing__viewport {
+  height: 100vh;
 }
 
 .listing__gallery {
@@ -885,7 +880,8 @@ body {
   height: 100%;
   height: 100vh;
   max-width: 768px;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: scroll;
   position: relative;
   width: 100%;
 }
