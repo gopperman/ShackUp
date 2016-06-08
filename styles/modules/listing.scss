@@ -176,11 +176,13 @@ $module: 'listing';
 				float: left;
 				height: 55px;
 				position: relative;
-				width: 70%;
+				width: calc(100% - 100px);
 			}
 
 			&-address {
 				font-size: .9em; // Needs to be just a tad smaller than our defaults
+				max-height: 1.2em;
+				overflow: hidden;
 				position: absolute;
 				top: 4px;
 			}

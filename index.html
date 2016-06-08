@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
 
     <title>Shack Up</title>
     <meta name="description" content="Get with your new home. Hot open houses, down-to-furnish in your area!" />
@@ -148,7 +148,7 @@
             <div class="listing__nav-container">
               <a class="listing__close"><span class="listing__close-arrow">&lt;</span> <img class="listing__close-thumbnail" src="<%- listItem.photos[0].replace(/&amp;/g, '&') %>&H=60" /></a>
               <div class="listing__nav-info">
-                <span class="listing__nav-address"><%- listItem.address.AddrDisplay %> • <%- listItem.city + ', ' + listItem.address.AddrStateAbbr %></span>
+                <span class="listing__nav-address"><%- listItem.address.AddrDisplay %></span>
                 <div class="listing__nav-links">
                   <a class="listing__nav-button listing__nav-button--active listing__nav-open-about">about</a>
                   <a class="listing__nav-button listing__nav-open-contact">contact</a>

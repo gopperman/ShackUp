@@ -7,7 +7,7 @@ function shackUp() {
 	this.queue = listings;
 	this.currentItems = [];
 	this.searchForm = $( '.filters__form' );
-	this.queryString = '';
+	this.queryString = 'priceMax=500000';
 
 	this.init = function() {
 		this.currentPagination = 0;
@@ -319,7 +319,7 @@ function shackUp() {
 	 * @return jqXHR results
 	 */
 	this.getListings = function( pagination, queryString ) {
-		var requestURL = 'http://realestate--bdc-3708.dev.wordpress.boston.com/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&channel=sales&' + queryString;
+		var requestURL = apiHost + '/wp-admin/admin-ajax.php?action=gabriels_boston_listings&method=getListings&channel=sales&' + queryString;
 		if ( pagination ) {
 			requestURL += '&results_page=' + pagination;
 		}
@@ -368,39 +368,53 @@ $(document).ready( function() {
 	// Click handlers
 	shack.init();
 
+	//TODO: Find a place for all this state stuff
+	var closeFilters = function() {
+		$('.filters-open').removeClass('filters-open');
+		$('.overlay').fadeOut( 400, 'linear');
+	};
+
+	var closeList = function() {
+		$('.saved-open').removeClass('saved-open');
+	};
+
 	$('.nav-menu').click(function() {
 		var menu = $( this );
-		menu.siblings().removeClass('active');
-		menu.toggleClass('active');
-		$( '.filters' ).toggleClass ( 'filters-open' );
-		$( '.overlay' ).fadeToggle( 400, 'linear' );
+		if (menu.hasClass('active')) {
+			$('.nav-logo').trigger('click');
+		} else {
+			menu.siblings().removeClass('active');
+			closeList();
+			menu.toggleClass('active');
+			$( '.filters' ).toggleClass ( 'filters-open' );
+			$( '.overlay' ).fadeToggle( 400, 'linear' );
+		}
 	});
 
 	$('.nav-logo').click(function() {
 		var logo = $(this);
 		logo.siblings().removeClass('active');
 		logo.addClass('active');
-		$('.panel-open').removeClass('panel-open');
-		$('.saved-open').removeClass('saved-open');
-		$('.filters-open').removeClass('filters-open');
-		$('.overlay').fadeOut( 400, 'linear');
+		closeList();
+		closeFilters();
 	});
 
 	$('.nav-list').click(function() {
-		var saved = $( '.saved' );
+		var navList = $(this);
+		var saved = $('.saved');
 		if ( ! saved.hasClass('saved-open') ) {
-			shack.showSaved( { data: shack.savedData } );
+			shack.showSaved({ data: shack.savedData });
+			navList.siblings().removeClass('active');
+			navList.addClass('active');
+			saved.toggleClass('saved-open');
+		} else {
+			$('.nav-logo').trigger('click');
 		}
-		saved.toggleClass ( 'saved-open' );
-		$( '.container' ).toggleClass( 'panel-open' );
-		$( '.nav-logo' ).toggleClass( 'active' );
-		$( this ).toggleClass ( 'active' );
+		closeFilters();
 	});
 
 	$('.overlay').click(function(event) {
-		$('.filters').removeClass('filters-open');
-		$('.nav-filters'). removeClass('active');
-		$('.overlay').fadeToggle(200, 'linear');
+		$('.nav-logo').trigger('click');
 	});
 
 	$('.refreshListings').click(function() {
