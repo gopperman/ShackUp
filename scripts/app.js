@@ -254,7 +254,8 @@ function shackUp() {
 		var listing = _.findWhere( shack.saved, { id: listingID });
 		setTimeout( function() {
 			$( 'script.listing-template' ).after( listing.markup.addClass('listing--detailed').css({'opacity':'1', 'left':'0'}) ).fadeIn();
-			$('.container').removeClass('panel-open'); // don't need this
+			$('.container').removeClass('panel-open'); // we want the overflow
+			$('.listing--saved').unbind();
 			shack.galleryInit( listing.markup.find( '.listing__gallery' ) );
 		}, 100);
 	};
