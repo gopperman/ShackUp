@@ -193,6 +193,7 @@ function shackUp() {
 
 		body.on('click', '.listing__close', function() {
 			$(this).parents('.listing').detach();
+			$('.listing--detailed').show();
 		});
 		body.on('click', '.listing__nav-button', this.toggleSavedListingState );
 
@@ -258,6 +259,7 @@ function shackUp() {
 			$('.listing--saved').unbind();
 			shack.galleryInit( listing.markup.find( '.listing__gallery' ) );
 		}, 100);
+		$('.listing--detailed').last().hide();
 	};
 
 	// Add listing thumbnails/descriptions to saved listing menu
