@@ -171,7 +171,7 @@ function shackUp() {
 				autoplay: false,
 				speed: 500,
 				keys: true,               
-				nav: true,               
+				nav: true,
 				fluid: true
 			});
 			gallery.addClass( 'initialized' );
@@ -206,9 +206,11 @@ function shackUp() {
 					listing.removeClass('listing--detailed listing--contact');
 					gallery.unslider('destroySwipe');
 					gallery.unslider('destroyKeys');
+					shack.initSwipe( $('.listing').last() ); // restore unslider swiping for love/hate
 					$('.unslider-nav').css( 'display', 'none');
 				} else {
 					listing.addClass( 'listing--detailed' );
+					listing.unbind(); // unbind unslider swiping in detailed view to allow vertical scrolling
 					shack.galleryInit( gallery );
 				}
 			}
@@ -252,6 +254,8 @@ function shackUp() {
 		var listing = _.findWhere( shack.saved, { id: listingID });
 		setTimeout( function() {
 			$( 'script.listing-template' ).after( listing.markup.addClass('listing--detailed').css({'opacity':'1', 'left':'0'}) ).fadeIn();
+			$('.container').removeClass('panel-open'); // we want the overflow
+			$('.listing--saved').unbind();
 			shack.galleryInit( listing.markup.find( '.listing__gallery' ) );
 		}, 100);
 	};
@@ -343,7 +347,6 @@ function shackUp() {
 			// show "no results" page here
 			$('.error__loading').hide();
 			$('.error__no-results').show();
-			return;
 		}
 	};
 }
