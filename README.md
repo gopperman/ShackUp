@@ -9,3 +9,6 @@ A neat little app that is a proof of concept for a swipe left/right type real es
 ## Can I check this out?
 Sadly, no - you would need an API that is not publicly accessible to run this proof of concept. Feel free to mock some data, though!
 
+## Contributors:
+Design: Kelsey Kronmiller
+Development: Greg Opperman, Ethan Gould, Connor MacDonald
